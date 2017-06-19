@@ -9,6 +9,10 @@ package View;
  *
  * @author cault
  */
-public interface Observateur {
-    public void click(Message message);
+public class Message {
+    
+    public TypesMessages type;
+    
+    
+    
 }
