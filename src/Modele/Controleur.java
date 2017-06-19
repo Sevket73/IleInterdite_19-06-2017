@@ -115,7 +115,11 @@ public class Controleur {
                 if (action.equals("deplacer")) {
                     ArrayList<Tuiles> tuilesAdj = new ArrayList();
                     tuilesAdj= j.deplacementPossible(g);
-                    System.out.println("Où souhaitez-vous aller ?");
+                   
+                    System.out.println("Où souhaitez-vous aller ?"); 
+                    for ( Tuiles t : tuilesAdj){
+                        System.out.println(t.getNom()+t+"test");
+                    }
                     System.out.println();
                     for (Tuiles t : tuilesAdj){
                         System.out.println(t.getNom());

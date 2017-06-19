@@ -26,7 +26,7 @@ public class Plongeur extends Aventurier {
         ArrayList<Tuiles> tuilesTest = new ArrayList();
 
         tuilesTest=g.getTuilesAdjacentes(positionCourante); 
-        while (!tuilesTest.isEmpty()) {
+
             for (Tuiles t : tuilesTest) {
                 if (t.getEtat() == Assechee) {
                     tuilesAdj.add(t);
@@ -41,7 +41,7 @@ public class Plongeur extends Aventurier {
             }
             
 
-        }
+        
         return tuilesAdj;
 }        
 }
