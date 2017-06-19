@@ -17,7 +17,7 @@ public class Grille {
     private HashMap<Integer,Tuiles> aze = new HashMap();
 
     
-    public void Grille() {
+    public Grille() {
         aze = new HashMap<Integer,Tuiles>();
 
     }
@@ -98,7 +98,13 @@ public class Grille {
     public ArrayList<Tuiles> tuilesAssechables() {
         ArrayList<Tuiles> tuilesAssechables =  new ArrayList<>();
         ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
-        tuiles Adj = this.getTuilesAdjacentes(tuilesAdj)
+        Tuiles Adj;
+        Adj = this.getTuilesAdjacentes(tuilesAdj);
+        return null;
+    }
+
+    private Tuiles getTuilesAdjacentes(ArrayList<Tuiles> tuilesAdj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

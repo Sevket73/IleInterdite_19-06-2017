@@ -12,6 +12,8 @@ import java.awt.Font;
 
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -145,8 +147,20 @@ public class VueMenu extends javax.swing.JFrame {
             @Override
             public void mouseExited(MouseEvent me) {
             }
+            
+            
         });
         
+        go.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                Message m = new Message();
+                m.type = TypesMessages.GRID;
+                
+                observateur.click(m);
+
+            }
+        });
         
     }
     

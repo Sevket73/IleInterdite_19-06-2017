@@ -16,8 +16,10 @@ import static Grille.Etat.Inondee;
 import View.Message;
 import View.Observateur;
 import View.TypesMessages;
+import View.VueGrille;
 import View.VueMenu;
 import View.VueRules;
+import View.VueStatue;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
@@ -35,6 +37,8 @@ public class Controleur implements Observateur{
     
     private VueMenu vueMenu;
     private VueRules vueRules;
+    private VueGrille vueGrille;
+    private VueStatue vueStatue;
     
     private Observateur observateur;
     private Message message = new Message();
@@ -56,6 +60,12 @@ public class Controleur implements Observateur{
         vueRules = new VueRules();
         vueRules.setObservateur(this);
         
+        vueGrille = new VueGrille();
+        vueGrille.setObservateur(this);
+        
+        vueStatue = new VueStatue();
+        vueStatue.setObservateur(this);
+        
         message.type = TypesMessages.MENU;
         this.click(message);
         
@@ -69,7 +79,7 @@ public class Controleur implements Observateur{
         this.joueurs.add(new Aventurier(nomJoueurs.get(1), true, 3, Couleur.Bleu));
         this.joueurs.add(new Aventurier(nomJoueurs.get(2), true, 3, Couleur.Rouge));
         this.joueurs.add(new Aventurier(nomJoueurs.get(3), true, 3, Couleur.Noir));
-        this.joueurs.add(new Aventurier(nomJoueurs.get(4), true, 3, Couleur.Jaune));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(0), true, 3, Couleur.Jaune));
     }
    
     private String listeTuile[]= {"","","LePontDesAbimes","LaPorteDeBronze","","",
@@ -169,6 +179,8 @@ public class Controleur implements Observateur{
     @Override
     public void click(Message message) {
         
+        Grille grille = new Grille();
+        
         switch (message.type) {
             case RULES : 
                 vueRules.afficher();
@@ -180,6 +192,13 @@ public class Controleur implements Observateur{
                 break;
             case GRID :
                 initJoueurs();
+                this.creerGrille(grille);
+                grille.getAze();
+                
+                vueGrille.afficher();
+                vueStatue.afficher();
+                vueMenu.fermer();
+                
                 
         }
     }
