@@ -156,65 +156,7 @@ public class Aventurier {
                 continue;
             }
         }
-    }    
-        
-        
-        
-        
-        
-        /*System.out.println("Où souhaitez-vous aller? (haut/bas/gauche/droite)");
-        String direction;
-        Scanner repDir = new Scanner(System.in);
-        direction = repDir.nextLine();
-        int c;
-        int l;
-        switch (direction){
-            case "haut":
-                
-                c = this.getPositionCourante().getCoordonnée().getColonne();
-                l = this.getPositionCourante().getCoordonnée().getLigne()-1;
-                
-                if (g.getTuiles(l*6+c).getEtat() == Etat.coulee) {
-                    System.out.println("Vous ne pouvez pas allez sur la tuile " + g.getNomTuiles(l, c) + " elle est coulee !");
-                } else {
-                    this.setPositionCourante(c,l);
-                    System.out.println("Vous êtes maintenant sur la tuile : " + g.getNomTuiles(l,c));
-                }
-                break ; 
-            case "bas":
-                c = this.getPositionCourante().getCoordonnée().getColonne();
-                l = this.getPositionCourante().getCoordonnée().getLigne()+1;
-                
-                if (g.getTuiles(l*6+c).getEtat() == Etat.coulee) {
-                    System.out.println("Vous ne pouvez pas allez sur la tuile " + g.getNomTuiles(l, c) + " elle est coulee !");
-                } else {
-                    this.setPositionCourante(c,l);
-                    System.out.println("Vous êtes maintenant sur la tuile : " + g.getNomTuiles(l,c));
-                }
-                break ;
-            case"gauche":
-                c = this.getPositionCourante().getCoordonnée().getColonne()-1;
-                l = this.getPositionCourante().getCoordonnée().getLigne();
-                
-                if (g.getTuiles(l*6+c).getEtat() == Etat.coulee) {
-                    System.out.println("Vous ne pouvez pas allez sur la tuile " + g.getNomTuiles(l, c) + " elle est coulee !");
-                } else {
-                    this.setPositionCourante(c,l);
-                    System.out.println("Vous êtes maintenant sur la tuile : " + g.getNomTuiles(l,c));
-                }
-                break ;
-                
-            case "droite":
-                c = this.getPositionCourante().getCoordonnée().getColonne()+1;
-                l = this.getPositionCourante().getCoordonnée().getLigne();
-                
-                if (g.getTuiles(l*6+c).getEtat() == Etat.coulee) {
-                    System.out.println("Vous ne pouvez pas allez sur la tuile " + g.getNomTuiles(l, c) + " elle est coulee !");
-                } else {
-                    this.setPositionCourante(c,l);
-                    System.out.println("Vous êtes maintenant sur la tuile : " + g.getNomTuiles(l,c));
-                }
-                break ;*/
+    }
     
     public void seDeplacer(Tuiles t) {
         this.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
