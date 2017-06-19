@@ -152,7 +152,7 @@ public class Aventurier {
         String dep;
         dep = repDep.nextLine();
         for (Tuiles t : tuilesAdj) {
-            if (t.getNom() == dep) {
+            if (dep.equals(t.getNom())) {
                 this.seDeplacer(t);
             } else {
                 continue;
@@ -162,78 +162,52 @@ public class Aventurier {
     
     public void seDeplacer(Tuiles t) {
         this.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
+        System.out.println("Vous êtes maintenant sur la tuile :" + t.getNom());
     }
                 
-        
-    
-    public void assechement(Grille g){
-
-                
-        System.out.println("Quelle tuile voulez-vous assecher? (haut/bas/gauche/droite/centre)");
-        String direction;
-        Scanner repDir = new Scanner(System.in);
-        direction= repDir.nextLine();
-        int c;
-        int l;
-        
-        switch (direction){
-            case "haut":
-                c =this.getPositionCourante().getCoordonnée().getColonne();
-                l =this.getPositionCourante().getCoordonnée().getLigne()-1;
-                if (g.getTuiles(l*6+c).getEtat() == Inondee) {
-                    g.getTuiles(l*6+c).changerEtat(Assechee);
-                    System.out.println("La tuile " + g.getNomTuiles(this.getPositionCourante().getCoordonnée().getLigne(),this.getPositionCourante().getCoordonnée().getColonne()) + " est maintenant assecher!");
-                } else {
-                    System.out.println("Cette tuile est " + g.getTuiles(l*6+c).getEtat().toString() + ", vous ne pouvez pas l'assecher !");
-                }
-                break ; 
-            case "bas":
-                c =this.getPositionCourante().getCoordonnée().getColonne();
-                l =this.getPositionCourante().getCoordonnée().getLigne()+1;
-                if (g.getTuiles(l*6+c).getEtat() == Inondee) {
-                    g.getTuiles(l*6+c).changerEtat(Assechee); 
-                    System.out.println("La tuile " + g.getNomTuiles(this.getPositionCourante().getCoordonnée().getLigne(),this.getPositionCourante().getCoordonnée().getColonne()) + " est maintenant assecher!");
-                } else {
-                    System.out.println("Cette tuile est " + g.getTuiles(l*6+c).getEtat() + ", vous ne pouvez pas l'assecher !");
-                }
-                
-                
-                break;
-            case"gauche":
-                c =this.getPositionCourante().getCoordonnée().getColonne()-1;
-                l =this.getPositionCourante().getCoordonnée().getLigne();
-                if (g.getTuiles(l*6+c).getEtat() == Inondee) {
-                    g.getTuiles(l*6+c).changerEtat(Assechee);
-                    System.out.println("La tuile " + g.getNomTuiles(this.getPositionCourante().getCoordonnée().getLigne(),this.getPositionCourante().getCoordonnée().getColonne()) + " est maintenant assecher!");
-                } else {
-                    System.out.println("Cette tuile est " + g.getTuiles(l*6+c).getEtat() + ", vous ne pouvez pas l'assecher !");
-                }
-
-                break;
-            case "droite":
-                c =this.getPositionCourante().getCoordonnée().getColonne()+1;
-                l =this.getPositionCourante().getCoordonnée().getLigne();
-                if (g.getTuiles(l*6+c).getEtat() == Inondee) {
-                    g.getTuiles(l*6+c).changerEtat(Assechee); 
-                    System.out.println("La tuile " + g.getNomTuiles(this.getPositionCourante().getCoordonnée().getLigne(),this.getPositionCourante().getCoordonnée().getColonne()) + " est maintenant assecher!");
-                } else {
-                    System.out.println("Cette tuile est " + g.getTuiles(l*6+c).getEtat() + ", vous ne pouvez pas l'assecher !");
-                }
-
-                break;
-            case "centre":
-               c =this.getPositionCourante().getCoordonnée().getColonne();
-                l =this.getPositionCourante().getCoordonnée().getLigne();
-                if (g.getTuiles(l*6+c).getEtat() == Inondee) {
-                    g.getTuiles(l*6+c).changerEtat(Assechee); 
-                    System.out.println("La tuile " + g.getNomTuiles(this.getPositionCourante().getCoordonnée().getLigne(),this.getPositionCourante().getCoordonnée().getColonne()) + " est maintenant assecher!");
-                } else {
-                    System.out.println("Cette tuile est " + g.getTuiles(l*6+c).getEtat() + ", vous ne pouvez pas l'assecher !");
-                }
-                break; 
+    public ArrayList<Tuiles> tuilesAssechables(Grille g){
+        ArrayList<Tuiles> tuilesAssechables = new ArrayList<>();
+        ArrayList<Tuiles> suppr = new ArrayList<>();
+        tuilesAssechables = g.getTuilesAdjacentes(positionCourante);
+        tuilesAssechables.add(positionCourante);
+        for (Tuiles t : tuilesAssechables) {
+            if (t.getEtat() == Etat.Assechee || t.getEtat() == Etat.coulee) {
+                suppr.add(t);
+            } 
         }
-            
+        tuilesAssechables.removeAll(suppr);
+
+        return tuilesAssechables;
+        
     }
+    
+    public void assechement(Grille g){ // probleme re tester !!
+        ArrayList<Tuiles> tuilesAssechables = new ArrayList<>();
+        tuilesAssechables = this.tuilesAssechables(g);
+        System.out.println("Quelle tuile souhaitez vous assecher ?");
+        for (Tuiles t : tuilesAssechables) {
+            System.out.println(t.getNom());
+        }
+        Scanner repAss = new Scanner(System.in);
+        String ass;
+        ass = repAss.nextLine();
+        for (Tuiles t : tuilesAssechables) {
+            if (ass.equals(t.getNom())) {
+                this.assecher(t);
+            } else {
+                continue;
+            }
+        }
+        
+ 
+    }
+    
+    public void assecher(Tuiles t) {
+        t.changerEtat(Etat.Assechee);
+        System.out.println("La tuile " + t.getNom() + " est maintenant assechee!");
+    }
+            
+    
     public ArrayList<Tuiles> getTuilesDiag(Grille g,Tuiles positionCourante){
         ArrayList<Tuiles>tuilesDiag = new ArrayList();
         int l = positionCourante.getCoordonnée().getLigne();

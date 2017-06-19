@@ -101,6 +101,6 @@ public class Grille {
         tuiles Adj = this.getTuilesAdjacentes(tuilesAdj)
     }
 */
-}
+    }
 
-    
+

@@ -6,7 +6,6 @@
 package View;
 
 import Utile.Pion;
-import Utile.aMessage;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,6 +14,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javafx.scene.paint.Color;
 import javax.swing.Action;
 
@@ -38,7 +38,8 @@ public class VueMenu extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    private aMessage message;
+    
+    private Observateur observateur;
     
     private final JFrame window;
     private final JPanel mainPanel;
@@ -61,8 +62,7 @@ public class VueMenu extends javax.swing.JFrame {
     
     public VueMenu() {
         this.window = new JFrame();
-        window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        window.setSize(400, 300);
+        
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width/2-window.getSize().width/2,dim.height/2-window.getSize().height/2);
         
@@ -119,13 +119,15 @@ public class VueMenu extends javax.swing.JFrame {
             
             
         
-        this.window.repaint();
-        window.setVisible(true);
+            
         
         rules.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                    message.RULES();
+                Message m = new Message();
+                m.type = TypesMessages.RULES;
+                
+                observateur.click(m);
             }
 
             @Override
@@ -144,17 +146,38 @@ public class VueMenu extends javax.swing.JFrame {
             public void mouseExited(MouseEvent me) {
             }
         });
+        
+        
     }
     
     
-    public static void main(String[] args) {
-        
-        VueMenu debutJeu;
-        debutJeu = new VueMenu();
-        debutJeu.repaint();
-        
-        
+//    public static void main(String[] args) {
+//        
+//       // VueMenu debutJeu = new VueMenu();
+//        
+//        
+//    }
+
+    public ArrayList getJoueur() {
+        ArrayList<String> joueurs = new ArrayList<>();
+        joueurs.add(this.joueur1.getText());
+        joueurs.add(this.joueur2.getText());
+        joueurs.add(this.joueur3.getText());
+        joueurs.add(this.joueur4.getText());
+        return joueurs;
+    }
+    public void setObservateur(Observateur  observateur){
+        this.observateur = observateur;
     }
 
+    public void afficher(){
+        window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        window.setSize(400, 300);
+        window.setVisible(true);
+    }
     
+    public void fermer(){
+        window.setVisible(false);
+        
+    }
 }
