@@ -27,15 +27,16 @@ public class Plongeur extends Aventurier {
 
         tuilesTest=g.getTuilesAdjacentes(positionCourante); 
 
-            for (Tuiles t : tuilesTest) {
-                if (t.getEtat() == Assechee) {
-                    tuilesAdj.add(t);
+            for (int i =0; i<tuilesTest.size();i++) {
+                if (tuilesTest.get(i).getEtat() == Assechee) {
+                    if (!tuilesTest.contains(tuilesTest.get(i))) 
+                    tuilesAdj.add(tuilesTest.get(i));
                     
 
-                } else if (t.getEtat() == Inondee || t.getEtat() == coulee) {
-                    if (!tuilesTest.contains(t)) {
-                        tuilesTest.add(t);
-                        tuilesTest.addAll(g.getTuilesAdjacentes(t));
+                } else if (tuilesTest.get(i).getEtat() == Inondee || tuilesTest.get(i).getEtat() == coulee) {
+                    if (!tuilesTest.contains(tuilesTest.get(i))) {
+                        tuilesTest.add(tuilesTest.get(i));
+                        tuilesTest.addAll(g.getTuilesAdjacentes(tuilesTest.get(i)));
                     }
                 }
             }
