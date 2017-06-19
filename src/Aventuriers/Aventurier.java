@@ -150,8 +150,11 @@ public class Aventurier {
         String dep;
         dep = repDep.nextLine();
         for (Tuiles t : tuilesAdj) {
-            if (t.getNom() == dep) {
+            
+            if (dep.equals(t.getNom())) {
+                System.out.println("test");
                 this.seDeplacer(t);
+                
             } else {
                 continue;
             }
@@ -160,6 +163,7 @@ public class Aventurier {
     
     public void seDeplacer(Tuiles t) {
         this.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
+        System.out.println("Vous êtes maintenant sur la tuile : " + t.getNom());
     }
                 
         
