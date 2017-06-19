@@ -7,6 +7,7 @@ package Aventuriers;
 
 import Grille.Grille;
 import Grille.Tuiles;
+import Modele.Couleur;
 import java.util.ArrayList;
 
 /**

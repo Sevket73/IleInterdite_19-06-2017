@@ -9,6 +9,7 @@ import static Grille.Etat.*;
 import Grille.Grille;
 import java.util.ArrayList;
 import Grille.Tuiles;
+import Modele.Couleur;
 
 /**
  *
