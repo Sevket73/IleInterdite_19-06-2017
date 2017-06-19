@@ -39,9 +39,9 @@ public class Plongeur extends Aventurier {
                     }
                 }
             }
-            return tuilesAdj;
+            
 
         }
-    
-}
+        return tuilesAdj;
+}        
 }
