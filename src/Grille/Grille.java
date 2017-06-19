@@ -73,40 +73,32 @@ public class Grille {
         //Tuile en-dessus
         c = positionCourante.getCoordonnée().getColonne();
         l = positionCourante.getCoordonnée().getLigne()-1;
-        
-        if (this.getTuiles(l*6+c).getEtat() == Etat.Assechee || this.getTuiles(l*6+c).getEtat() == Etat.Inondee) {
-            tuilesAdjacentes.add(this.getTuiles(l*6+c));
-        } 
+        tuilesAdjacentes.add(this.getTuiles(l*6+c)); 
         
         //tuile en-dessous
-        c = positionCourante.getCoordonnée().getColonne();
         l = positionCourante.getCoordonnée().getLigne()+1;
-        
-        if (this.getTuiles(l*6+c).getEtat() == Etat.Assechee || this.getTuiles(l*6+c).getEtat() == Etat.Inondee) {
-            tuilesAdjacentes.add(this.getTuiles(l*6+c));
-        }
+        tuilesAdjacentes.add(this.getTuiles(l*6+c));
         
         //tuile à gauche
         c = positionCourante.getCoordonnée().getColonne()-1;
         l = positionCourante.getCoordonnée().getLigne();
-        
-        if (this.getTuiles(l*6+c).getEtat() == Etat.Assechee || this.getTuiles(l*6+c).getEtat() == Etat.Inondee) {
-            tuilesAdjacentes.add(this.getTuiles(l*6+c));
-        }
+        tuilesAdjacentes.add(this.getTuiles(l*6+c));
         
         //tuile à droite
         c = positionCourante.getCoordonnée().getColonne()+1;
-        l = positionCourante.getCoordonnée().getLigne();
-        
-        if (this.getTuiles(l*6+c).getEtat() == Etat.Assechee || this.getTuiles(l*6+c).getEtat() == Etat.Inondee) {
-            tuilesAdjacentes.add(this.getTuiles(l*6+c));
-        }
+        tuilesAdjacentes.add(this.getTuiles(l*6+c));
         
         return tuilesAdjacentes;
     }
     
     public Tuiles getTuiles(String nomTuiles){
         return aze.get(nomTuiles);
+    }
+    
+    public ArrayList<Tuiles> tuilesAssechables() {
+        ArrayList<Tuiles> tuilesAssechables =  new ArrayList<>();
+        ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
+        tuiles Adj = this.getTuilesAdjacentes(tuilesAdj)
     }
 
 }

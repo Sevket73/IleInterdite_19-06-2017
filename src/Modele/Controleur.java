@@ -144,29 +144,7 @@ public class Controleur implements Observateur{
                 action = repAction.nextLine();
                 
                 if (action.equals("deplacer")) {
-                    ArrayList<Tuiles> tuilesAdj = new ArrayList();
-                    tuilesAdj= j.deplacementPossible(g);
-                    System.out.println("Où souhaitez-vous aller ?");
-                    System.out.println();
-                    for (Tuiles t : tuilesAdj){
-                        System.out.println(t.getNom());
-                        Scanner repDep = new Scanner(System.in);
-                        String dep;
-                        dep = repDep.nextLine();
-                        //j.seDeplacer(dep);
-                        
-                        
-                    }    
-                    Scanner repDep = new Scanner(System.in);
-                    String dep;
-                    dep = repDep.nextLine();
-                    for (Tuiles t : tuilesAdj ) {
-                        if (t.getNom() == dep) {
-                            j.seDeplacer(t);
-                        } else {
-                            continue;
-                        }
-                    }
+                    j.deplacement(g);           
                     
                 } else if (action.equals("assecher")) {
                     j.assechement(grille);
@@ -174,19 +152,18 @@ public class Controleur implements Observateur{
 
                 if (k==3) {
                         break;
-                    } else {
-                        System.out.println("Souhaitez-vous passez ? (o/n)");
-                        repPasse = new Scanner(System.in);
-                        passez = repPasse.nextLine();
-                        
-                        if (passez.equals("o")) {
+                } else {
+                    System.out.println("Souhaitez-vous passez ? (o/n)");
+                    repPasse = new Scanner(System.in);
+                    passez = repPasse.nextLine();
+
+                    if (passez.equals("o")) {
                         break;
-                        }
                     }
+                }       
+    
             }
-            
-        } 
-        
+        }
     }
 
     @Override

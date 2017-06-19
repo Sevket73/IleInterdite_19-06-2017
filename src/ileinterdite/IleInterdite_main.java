@@ -6,6 +6,7 @@
 package ileinterdite;
 
 import Aventuriers.Aventurier;
+import Aventuriers.Plongeur;
 import Modele.Controleur;
 import Modele.Couleur;
 import Grille.Grille;
@@ -31,7 +32,7 @@ public class IleInterdite_main {
         Aventurier j1 = new Aventurier("Michel", true, 3, Couleur.Bleu);
         Aventurier j2 = new Aventurier("Paul", true, 3, Couleur.Jaune);
         Aventurier j3 = new Aventurier("Sandrine", true, 3, Couleur.Rouge);
-        Aventurier j4 = new Aventurier("Annie", true, 3, Couleur.Noir);
+        Plongeur j4 = new Plongeur("Annie", true, 3, Couleur.Noir);
         Grille g = new Grille();
         Controleur c = new Controleur(2,g);
         c.creerGrille(g);
