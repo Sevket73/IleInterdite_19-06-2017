@@ -127,49 +127,20 @@ public class Aventurier {
     }
     
     public ArrayList<Tuiles> deplacementPossible(Grille g) {
-        ArrayList<Tuiles> tuilesPos = new ArrayList<>();
         
-        int c;
-        int l;
-        
-        //Tuile en-dessus
-        c = this.getPositionCourante().getCoordonnée().getColonne();
-        l = this.getPositionCourante().getCoordonnée().getLigne()-1;
-        
-        if (g.getTuiles(l*6+c).getEtat() == Etat.Assechee || g.getTuiles(l*6+c).getEtat() == Etat.Inondee) {
-            tuilesPos.add(g.getTuiles(l*6+c));
-        } 
-        
-        //tuile en-dessous
-        c = this.getPositionCourante().getCoordonnée().getColonne();
-        l = this.getPositionCourante().getCoordonnée().getLigne()+1;
-        
-        if (g.getTuiles(l*6+c).getEtat() == Etat.Assechee || g.getTuiles(l*6+c).getEtat() == Etat.Inondee) {
-            tuilesPos.add(g.getTuiles(l*6+c));
-        }
-        
-        //tuile à gauche
-        c = this.getPositionCourante().getCoordonnée().getColonne()-1;
-        l = this.getPositionCourante().getCoordonnée().getLigne();
-        
-        if (g.getTuiles(l*6+c).getEtat() == Etat.Assechee || g.getTuiles(l*6+c).getEtat() == Etat.Inondee) {
-            tuilesPos.add(g.getTuiles(l*6+c));
-        }
-        
-        //tuile à droite
-        c = this.getPositionCourante().getCoordonnée().getColonne()+1;
-        l = this.getPositionCourante().getCoordonnée().getLigne();
-        
-        if (g.getTuiles(l*6+c).getEtat() == Etat.Assechee || g.getTuiles(l*6+c).getEtat() == Etat.Inondee) {
-            tuilesPos.add(g.getTuiles(l*6+c));
-        }
-        
-        return tuilesPos;
+        ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
+        tuilesAdj = g.getTuilesAdjacentes(positionCourante);
+
+        return tuilesAdj;
     }
     
-    public void deplacement(Grille g) {
         
-        System.out.println("Où souhaitez-vous aller? (haut/bas/gauche/droite)");
+        
+        
+        
+        
+        
+        /*System.out.println("Où souhaitez-vous aller? (haut/bas/gauche/droite)");
         String direction;
         Scanner repDir = new Scanner(System.in);
         direction = repDir.nextLine();
@@ -221,10 +192,10 @@ public class Aventurier {
                     this.setPositionCourante(c,l);
                     System.out.println("Vous êtes maintenant sur la tuile : " + g.getNomTuiles(l,c));
                 }
-                break ;
+                break ;*/
                 
-        }
-    }
+        
+    
     public void assechement(Grille g){
 
                 

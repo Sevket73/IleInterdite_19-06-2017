@@ -37,20 +37,7 @@ public class Controleur {
         this.grille = g;
         this.cartes = new ArrayList<>();                
     }
-    
-   /* public Collection getTuileInondée(Grille g) {
-        Collection<Tuiles> collecTuilesIn = new ArrayList();
-        for (Tuiles t : g.getTuiles()) {
-            if (t.getEtat() == Inondee) {
-                collecTuilesIn.add(t);
-            }        
-        }
-        return collecTuilesIn;
-    }*/
-    
-    public void piocheCarte() {
-        
-    }   
+ 
    
     String listeTuile[]= {"","","LePontDesAbimes","LaPorteDeBronze","","",
                           "","LaCaverneDesOmbres","LaPorteDeFer","LaPorteDOr","LesFalaisesDeLOubli","",
@@ -60,10 +47,7 @@ public class Controleur {
                           "","","LaTourDuGuet","LeJardinDesMurmures","",""};
     
     public void creerGrille(Grille g){
-                    
 
-        
-        
         for (int l = 0; l <= 5;l++) {
             for (int c = 0; c <= 5; c++) {
                 if ((l==0 && (( c==0||c==1)||c==4||c==5))||
@@ -105,7 +89,6 @@ public class Controleur {
                     }
                  }           
             }
-    
         }
         
     }  
@@ -128,7 +111,19 @@ public class Controleur {
                 action = repAction.nextLine();
                 
                 if (action.equals("deplacer")) {
-                    j.deplacement(g);
+                    ArrayList<Tuiles> tuilesAdj = new ArrayList();
+                    tuilesAdj= j.deplacementPossible(g);
+                    System.out.println("Où souhaitez-vous aller ?");
+                    System.out.println();
+                    for (Tuiles t : tuilesAdj){
+                        System.out.println(t.getNom());
+                        Scanner repDep = new Scanner(System.in);
+                        String dep;
+                        dep = repDep.nextLine();
+                        j.seDeplacer(dep);
+                        
+                    }    
+                    
                 } else if (action.equals("assecher")) {
                     j.assechement(grille);
                 }
@@ -149,5 +144,6 @@ public class Controleur {
         } 
         
     }
-          
 }
+          
+
