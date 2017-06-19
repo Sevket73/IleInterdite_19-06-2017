@@ -5,10 +5,18 @@
  */
 package Aventuriers;
 
+import Grille.Grille;
+import Grille.Tuiles;
+import java.util.ArrayList;
+
 /**
  *
  * @author chaulaic
  */
-public class Ingenieur {
+public class Ingenieur extends Aventurier{
     
+    public Ingenieur(String nom, Boolean vivant, int nbAction, Couleur couleur) {
+        super(nom, vivant, nbAction, couleur);
+    }
+
 }
