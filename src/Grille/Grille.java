@@ -94,7 +94,7 @@ public class Grille {
     public Tuiles getTuiles(String nomTuiles){
         return aze.get(nomTuiles);
     }
-    
+    /*
     public ArrayList<Tuiles> tuilesAssechables() {
         ArrayList<Tuiles> tuilesAssechables =  new ArrayList<>();
         ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
@@ -106,7 +106,7 @@ public class Grille {
     private Tuiles getTuilesAdjacentes(ArrayList<Tuiles> tuilesAdj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+*/
+    }
 
-}
 
-    
