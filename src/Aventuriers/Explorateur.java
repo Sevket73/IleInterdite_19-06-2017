@@ -5,6 +5,10 @@
  */
 package Aventuriers;
 
+import Grille.Grille;
+import Grille.Tuiles;
+import java.util.ArrayList;
+
 /**
  *
  * @author chaulaic
@@ -15,7 +19,27 @@ public class Explorateur extends Aventurier {
         super(nom, vivant, nbAction, couleur);
     }
     
-    public void deplacement() {
-        
+    public ArrayList<Tuiles>deplacementPossible(Grille g) {
+         ArrayList<Tuiles>tuilesAdj = new ArrayList();
+         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
+         int c = positionCourante.getCoordonnée().getColonne();
+         int l = positionCourante.getCoordonnée().getLigne();
+         tuilesAdj.add(g.getTuiles((l-1)*6+c-1));
+         tuilesAdj.add(g.getTuiles((l-1)*6+c+1));
+         tuilesAdj.add(g.getTuiles((l+1)*6+c-1));
+         tuilesAdj.add(g.getTuiles((l+1)*6+c+1));
+         return tuilesAdj;
+    }
+    
+    public ArrayList<Tuiles>assechementPossible(Grille g){
+         ArrayList<Tuiles>tuilesAdj = new ArrayList();
+         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
+         int c = positionCourante.getCoordonnée().getColonne();
+         int l = positionCourante.getCoordonnée().getLigne();
+         tuilesAdj.add(g.getTuiles((l-1)*6+c-1));
+         tuilesAdj.add(g.getTuiles((l-1)*6+c+1));
+         tuilesAdj.add(g.getTuiles((l+1)*6+c-1));
+         tuilesAdj.add(g.getTuiles((l+1)*6+c+1));
+         return tuilesAdj;
     }
 }

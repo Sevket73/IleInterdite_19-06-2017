@@ -5,10 +5,10 @@
  */
 package Aventuriers;
 
+import static Grille.Etat.*;
 import Grille.Grille;
 import java.util.ArrayList;
-import static model.Etat.*;
-import model.Tuiles;
+import Grille.Tuiles;
 
 /**
  *
@@ -30,8 +30,10 @@ public class Plongeur extends Aventurier {
                 if(t2.getEtat()==Assechee){
                 tuilesAdj.add(t2);
                 
+                
                 }else if(t2.getEtat()==Inondee || t2.getEtat()==coulee){
-                    tuilesTest.add(t2);
+                    if(!tuilesTest.contains(t2)){
+                    tuilesTest.add(t2);}
                 }
                 
             }
