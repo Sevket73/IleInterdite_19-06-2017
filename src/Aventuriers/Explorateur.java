@@ -20,7 +20,8 @@ public class Explorateur extends Aventurier {
         super(nom, vivant, nbAction, couleur);
     }
     
-    public ArrayList<Tuiles>deplacementPossible(Grille g) {
+    @Override
+    public ArrayList<Tuiles> deplacementPossible(Grille g) {
          ArrayList<Tuiles>tuilesAdj = new ArrayList();
          ArrayList<Tuiles>tuilesDiag = new ArrayList();
          ArrayList<Tuiles>tuilesAll = new ArrayList();

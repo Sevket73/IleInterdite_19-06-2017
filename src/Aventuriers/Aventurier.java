@@ -134,7 +134,24 @@ public class Aventurier {
         return tuilesAdj;
     }
     
-        
+    public void deplacement(Grille g) {
+        ArrayList<Tuiles> tuilesAdj = new ArrayList();
+        tuilesAdj= this.deplacementPossible(g);
+        System.out.println("Où souhaitez-vous aller ?");
+        for (Tuiles t : tuilesAdj){
+            System.out.println(t.getNom());   
+        }
+        Scanner repDep = new Scanner(System.in);
+        String dep;
+        dep = repDep.nextLine();
+        for (Tuiles t : tuilesAdj ) {
+            if (t.getNom() == dep) {
+                this.seDeplacer(t);
+            } else {
+                continue;
+            }
+        }
+    }    
         
         
         
