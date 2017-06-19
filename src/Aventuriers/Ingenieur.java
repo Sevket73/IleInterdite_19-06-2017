@@ -18,5 +18,13 @@ public class Ingenieur extends Aventurier{
     public Ingenieur(String nom, Boolean vivant, int nbAction, Couleur couleur) {
         super(nom, vivant, nbAction, couleur);
     }
+    // faire if dans controlleur c'est plus simple
+    public ArrayList<Tuiles> AssechementPossible(Grille g){
+                 ArrayList<Tuiles>tuilesAdj = new ArrayList();
+         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
+         
+         
+         return tuilesAdj;
+    }
 
 }
