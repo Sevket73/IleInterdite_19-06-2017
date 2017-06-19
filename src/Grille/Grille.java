@@ -106,7 +106,7 @@ public class Grille {
     }
     
     public Tuiles getTuiles(String nomTuiles){
-        return aze.
+        return aze.get(nomTuiles);
     }
 
 }

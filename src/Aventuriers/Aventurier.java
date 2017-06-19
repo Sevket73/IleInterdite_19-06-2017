@@ -16,7 +16,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
-import static Aventuriers.Couleur.*;
+import Modele.Couleur;
 
 /**
  *

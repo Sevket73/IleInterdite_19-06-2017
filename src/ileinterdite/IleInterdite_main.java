@@ -7,7 +7,7 @@ package ileinterdite;
 
 import Aventuriers.Aventurier;
 import Modele.Controleur;
-import Aventuriers.Couleur;
+import Modele.Couleur;
 import Grille.Grille;
 
 /**
