@@ -140,8 +140,6 @@ public class Tuiles {
     public void changerCouleur(Couleur couleur){
         this.setCouleur(couleur);
     }
-    
-    
 }
     
 
