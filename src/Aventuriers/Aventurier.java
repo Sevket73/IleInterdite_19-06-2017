@@ -28,7 +28,7 @@ public class Aventurier {
     protected int nbAction;
     protected Couleur couleur;
     protected ArrayList<CartesTresors> cartesEnMain;
-    private Tuiles positionCourante;
+    protected Tuiles positionCourante;
     
     
     public Aventurier(String nom, Boolean vivant, int nbAction, Couleur couleur) {
