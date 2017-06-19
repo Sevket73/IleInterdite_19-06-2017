@@ -129,16 +129,18 @@ public class Aventurier {
     public ArrayList<Tuiles> deplacementPossible(Grille g) {
         
         ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
+        ArrayList<Tuiles> tuilesAdjBis = new ArrayList<>();
         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
         for (Tuiles t : tuilesAdj) {
             if (t.getEtat() == Etat.coulee) {
-                tuilesAdj.remove(t);
+                tuilesAdjBis.add(t);
             }
         }
+        tuilesAdj.removeAll(tuilesAdjBis);
 
         return tuilesAdj;
-    }
-    
+        }
+
     public void deplacement(Grille g) {
         ArrayList<Tuiles> tuilesAdj = new ArrayList();
         tuilesAdj= this.deplacementPossible(g);
@@ -150,11 +152,8 @@ public class Aventurier {
         String dep;
         dep = repDep.nextLine();
         for (Tuiles t : tuilesAdj) {
-            
-            if (dep.equals(t.getNom())) {
-                System.out.println("test");
+            if (t.getNom() == dep) {
                 this.seDeplacer(t);
-                
             } else {
                 continue;
             }
@@ -163,7 +162,6 @@ public class Aventurier {
     
     public void seDeplacer(Tuiles t) {
         this.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
-        System.out.println("Vous êtes maintenant sur la tuile : " + t.getNom());
     }
                 
         
@@ -235,6 +233,16 @@ public class Aventurier {
                 break; 
         }
             
+    }
+    public ArrayList<Tuiles> getTuilesDiag(Grille g,Tuiles positionCourante){
+        ArrayList<Tuiles>tuilesDiag = new ArrayList();
+        int l = positionCourante.getCoordonnée().getLigne();
+        int c = positionCourante.getCoordonnée().getColonne();
+        tuilesDiag.add(g.getTuiles((l-1)*6+c-1));
+        tuilesDiag.add(g.getTuiles((l-1)*6+c+1));
+        tuilesDiag.add(g.getTuiles((l+1)*6+c-1));
+        tuilesDiag.add(g.getTuiles((l+1)*6+c+1));
+        return tuilesDiag;
     }
     
 

@@ -23,25 +23,23 @@ public class Explorateur extends Aventurier {
     @Override
     public ArrayList<Tuiles> deplacementPossible(Grille g) {
          ArrayList<Tuiles>tuilesAdj = new ArrayList();
+         ArrayList<Tuiles>tuilesDiag = new ArrayList();
+         ArrayList<Tuiles>tuilesAll = new ArrayList();
          tuilesAdj = g.getTuilesAdjacentes(positionCourante);
-         int c = positionCourante.getCoordonnée().getColonne();
-         int l = positionCourante.getCoordonnée().getLigne();
-         tuilesAdj.add(g.getTuiles((l-1)*6+c-1));
-         tuilesAdj.add(g.getTuiles((l-1)*6+c+1));
-         tuilesAdj.add(g.getTuiles((l+1)*6+c-1));
-         tuilesAdj.add(g.getTuiles((l+1)*6+c+1));
-         return tuilesAdj;
+         tuilesDiag=getTuilesDiag(g,positionCourante);
+         tuilesAll.addAll(tuilesAdj);
+         tuilesAll.addAll(tuilesDiag);
+         return tuilesAll;
     }
     
     public ArrayList<Tuiles>assechementPossible(Grille g){
          ArrayList<Tuiles>tuilesAdj = new ArrayList();
+         ArrayList<Tuiles>tuilesDiag = new ArrayList();
+         ArrayList<Tuiles>tuilesAll = new ArrayList();
          tuilesAdj = g.getTuilesAdjacentes(positionCourante);
-         int c = positionCourante.getCoordonnée().getColonne();
-         int l = positionCourante.getCoordonnée().getLigne();
-         tuilesAdj.add(g.getTuiles((l-1)*6+c-1));
-         tuilesAdj.add(g.getTuiles((l-1)*6+c+1));
-         tuilesAdj.add(g.getTuiles((l+1)*6+c-1));
-         tuilesAdj.add(g.getTuiles((l+1)*6+c+1));
+         tuilesDiag=getTuilesDiag(g,positionCourante);
+         tuilesAll.addAll(tuilesAdj);
+         tuilesAll.addAll(tuilesDiag);
          return tuilesAdj;
     }
 }
