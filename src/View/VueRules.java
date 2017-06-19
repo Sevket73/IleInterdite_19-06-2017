@@ -5,10 +5,11 @@
  */
 package View;
 
-import Utile.aMessage;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -41,13 +42,14 @@ public class VueRules extends javax.swing.JFrame{
     
     private final JButton resume;
     
-    private aMessage message;
+    private Observateur observateur;
+    
     /**
      */
     public VueRules() {
         window = new JFrame();
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        window.setSize(500, 780);
+        
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         window.setLocation(dim.width/2-window.getSize().width/2,dim.height/2-window.getSize().height/2);
         
@@ -351,8 +353,15 @@ public class VueRules extends javax.swing.JFrame{
             //Add Textarea in to middle panel
             middlePanel.add(scroll);
             
-            window.setVisible(true);
-            
+            resume.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                Message m = new Message();
+                m.type=TypesMessages.MENU;
+                
+                observateur.click(m);
+            }
+        });
             
 
 }
@@ -360,7 +369,21 @@ public class VueRules extends javax.swing.JFrame{
     
     public static void main(String[] args) {
         // TODO code application logic here
-        VueRules rules = new VueRules();
+        //VueRules rules = new VueRules();
     }
     
+    public void afficher(){
+        window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        window.setSize(500, 780);
+        window.setVisible(true);
+    }
+    
+    public void setObservateur(Observateur  observateur){
+        this.observateur = observateur;
+    }
+    
+    public void fermer(){
+        window.setVisible(false);
+        
+    }
 }

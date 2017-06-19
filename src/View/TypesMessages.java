@@ -9,6 +9,9 @@ package View;
  *
  * @author cault
  */
-public interface Observateur {
-    public void click(Message message);
+public enum TypesMessages {
+    RULES,
+    MENU,
+    GRID,
+    STATUE
 }

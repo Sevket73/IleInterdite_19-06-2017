@@ -13,6 +13,11 @@ import Grille.Tuiles;
 import Grille.Grille;
 import Aventuriers.Aventurier;
 import static Grille.Etat.Inondee;
+import View.Message;
+import View.Observateur;
+import View.TypesMessages;
+import View.VueMenu;
+import View.VueRules;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
@@ -21,27 +26,53 @@ import java.util.Scanner;
  *
  * @author chaulaic
  */
-public class Controleur {
+public class Controleur implements Observateur{
     private int niveauEaux;
     private ArrayList<Aventurier> joueurs;
     private Grille grille;
     private ArrayList<Cartes> cartes;
     
-    public Controleur(int niveauEaux, Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4,Grille g) {
+    
+    private VueMenu vueMenu;
+    private VueRules vueRules;
+    
+    private Observateur observateur;
+    private Message message = new Message();
+    
+    
+    public Controleur(int niveauEaux,Grille g) {
         this.niveauEaux = niveauEaux;
         this.joueurs = new ArrayList<>();
-        joueurs.add(j1);
-        joueurs.add(j2);
-        joueurs.add(j3);
-        joueurs.add(j4);
+//        joueurs.add(j1);
+//        joueurs.add(j2);
+//        joueurs.add(j3);
+//        joueurs.add(j4);
         this.grille = g;
         this.cartes = new ArrayList<>();
         
+        vueMenu = new VueMenu();
+        vueMenu.setObservateur(this);
+        
+        vueRules = new VueRules();
+        vueRules.setObservateur(this);
+        
+        message.type = TypesMessages.MENU;
+        this.click(message);
+        
         
     }
- 
+    
+    private void initJoueurs(){
+        ArrayList<String> nomJoueurs = new ArrayList<>();
+        nomJoueurs = vueMenu.getJoueur();
+        
+        this.joueurs.add(new Aventurier(nomJoueurs.get(1), true, 3, Couleur.Bleu));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(2), true, 3, Couleur.Rouge));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(3), true, 3, Couleur.Noir));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(4), true, 3, Couleur.Jaune));
+    }
    
-    String listeTuile[]= {"","","LePontDesAbimes","LaPorteDeBronze","","",
+    private String listeTuile[]= {"","","LePontDesAbimes","LaPorteDeBronze","","",
                           "","LaCaverneDesOmbres","LaPorteDeFer","LaPorteDOr","LesFalaisesDeLOubli","",
                           "LePalaisDeCorail","LaPorteDArgent","LesDunesDeLIllusion","Heliport","LaPorteDeCuivre","LeJardinDesHurlements",
                           "LaForetPourpre","LeLagonPerdu","LeMaraisBrumeux","Observatoire","LeRocherFantome","LaCaverneDuBrasier",
@@ -156,6 +187,24 @@ public class Controleur {
             
         } 
         
+    }
+
+    @Override
+    public void click(Message message) {
+        
+        switch (message.type) {
+            case RULES : 
+                vueRules.afficher();
+                vueMenu.fermer();
+                break;
+            case MENU :
+                vueMenu.afficher();
+                vueRules.fermer();
+                break;
+            case GRID :
+                initJoueurs();
+                
+        }
     }
 }
           

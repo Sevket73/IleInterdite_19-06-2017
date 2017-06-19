@@ -9,6 +9,8 @@ import Aventuriers.Aventurier;
 import Modele.Controleur;
 import Modele.Couleur;
 import Grille.Grille;
+import View.VueMenu;
+import View.VueRules;
 
 /**
  *
@@ -19,16 +21,19 @@ public class IleInterdite_main {
     /**
      * @param args the command line arguments
      */
+
     public static void main(String[] args) {
         // TODO code application logic here
         
         // test de code sans ihm
+
+                
         Aventurier j1 = new Aventurier("Michel", true, 3, Couleur.Bleu);
         Aventurier j2 = new Aventurier("Paul", true, 3, Couleur.Jaune);
         Aventurier j3 = new Aventurier("Sandrine", true, 3, Couleur.Rouge);
         Aventurier j4 = new Aventurier("Annie", true, 3, Couleur.Noir);
         Grille g = new Grille();
-        Controleur c = new Controleur(2,j1,j2,j3,j4,g);
+        Controleur c = new Controleur(2,g);
         c.creerGrille(g);
         
         //System.out.println(g.getTuiles(14).getEtat());
