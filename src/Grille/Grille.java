@@ -104,7 +104,11 @@ public class Grille {
         
         return tuilesAdjacentes;
     }
-
+    
+    public Tuiles getTuiles(String nomTuiles){
+        return aze.
     }
+
+}
 
     
