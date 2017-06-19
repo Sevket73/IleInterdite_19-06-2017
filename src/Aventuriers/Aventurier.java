@@ -139,8 +139,8 @@ public class Aventurier {
         tuilesAdj.removeAll(tuilesAdjBis);
 
         return tuilesAdj;
-    }
-    
+        }
+
     public void deplacement(Grille g) {
         ArrayList<Tuiles> tuilesAdj = new ArrayList();
         tuilesAdj= this.deplacementPossible(g);
