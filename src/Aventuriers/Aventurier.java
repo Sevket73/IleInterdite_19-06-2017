@@ -130,6 +130,11 @@ public class Aventurier {
         
         ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
+        for (Tuiles t : tuilesAdj) {
+            if (t.getEtat() == Etat.coulee) {
+                tuilesAdj.remove(t);
+            }
+        }
 
         return tuilesAdj;
     }
@@ -144,7 +149,7 @@ public class Aventurier {
         Scanner repDep = new Scanner(System.in);
         String dep;
         dep = repDep.nextLine();
-        for (Tuiles t : tuilesAdj ) {
+        for (Tuiles t : tuilesAdj) {
             if (t.getNom() == dep) {
                 this.seDeplacer(t);
             } else {
