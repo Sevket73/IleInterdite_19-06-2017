@@ -193,6 +193,10 @@ public class Aventurier {
                     System.out.println("Vous êtes maintenant sur la tuile : " + g.getNomTuiles(l,c));
                 }
                 break ;*/
+    
+    public void seDeplacer(Tuiles t) {
+        this.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
+    }
                 
         
     

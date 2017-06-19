@@ -117,12 +117,17 @@ public class Controleur {
                     System.out.println();
                     for (Tuiles t : tuilesAdj){
                         System.out.println(t.getNom());
-                        Scanner repDep = new Scanner(System.in);
-                        String dep;
-                        dep = repDep.nextLine();
-                        j.seDeplacer(dep);
-                        
                     }    
+                    Scanner repDep = new Scanner(System.in);
+                    String dep;
+                    dep = repDep.nextLine();
+                    for (Tuiles t : tuilesAdj ) {
+                        if (t.getNom() == dep) {
+                            j.seDeplacer(t);
+                        } else {
+                            continue;
+                        }
+                    }
                     
                 } else if (action.equals("assecher")) {
                     j.assechement(grille);
