@@ -37,7 +37,6 @@ public class VueGrille extends javax.swing.JFrame{
         window.setLocation(dim.width/7*3-window.getSize().width/2,dim.height/7*3-window.getSize().height/2);
         
         
-        this.window.setVisible(true);
         this.window.setTitle("l'ile interdite");
         
         mainPanel = new JPanel(new GridLayout(6,6));
@@ -45,6 +44,7 @@ public class VueGrille extends javax.swing.JFrame{
         for(int i = 0 ; i<36 ; i++){
             mainPanel.add(new JLabel("empty"));
         }
+        window.setVisible(true);
     }
     
     public static void main(String[] args) {

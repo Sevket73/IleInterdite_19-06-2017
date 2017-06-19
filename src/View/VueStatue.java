@@ -33,7 +33,6 @@ public class VueStatue extends javax.swing.JFrame {
         window.setSize(dim.width/7*6, dim.height/7*1);
         window.setLocation(dim.width/7*3-window.getSize().width/2,dim.height/18*17-window.getSize().height/2);
         
-        window.setVisible(true);
         
         mainPanel = new JPanel(new GridLayout(1,6));
         mainPanel.add(new JLabel("Niveau Eaux"));
@@ -44,6 +43,8 @@ public class VueStatue extends javax.swing.JFrame {
         mainPanel.add(new JLabel("Etat tresor4"));
         
         window.add(mainPanel);
+        
+        window.setVisible(true);
     }
         
     public static void main(String[] args) {

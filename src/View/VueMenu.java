@@ -33,7 +33,7 @@ import javax.swing.border.MatteBorder;
  *
  * @author cault
  */
-public class VueMenu extends javax.swing.JFrame{
+public class VueMenu extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
@@ -67,7 +67,6 @@ public class VueMenu extends javax.swing.JFrame{
         window.setLocation(dim.width/2-window.getSize().width/2,dim.height/2-window.getSize().height/2);
         
         
-        this.window.setVisible(true);
         this.window.setTitle("l'ile interdite");
         
         mainPanel = new JPanel(new BorderLayout());
@@ -121,6 +120,7 @@ public class VueMenu extends javax.swing.JFrame{
             
         
         this.window.repaint();
+        window.setVisible(true);
         
         rules.addMouseListener(new MouseListener() {
             @Override

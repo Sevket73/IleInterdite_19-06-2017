@@ -5,7 +5,7 @@
  */
 package Modele;
 
-import Aventuriers.Couleur;
+import Modele.Couleur;
 import Grille.Etat;
 import Cartes.Cartes;
 import Grille.CoorD;
@@ -35,7 +35,9 @@ public class Controleur {
         joueurs.add(j3);
         joueurs.add(j4);
         this.grille = g;
-        this.cartes = new ArrayList<>();                
+        this.cartes = new ArrayList<>();
+        
+        
     }
  
    
@@ -120,7 +122,8 @@ public class Controleur {
                         Scanner repDep = new Scanner(System.in);
                         String dep;
                         dep = repDep.nextLine();
-                        j.seDeplacer(dep);
+                        //j.seDeplacer(dep);
+                        
                         
                     }    
                     

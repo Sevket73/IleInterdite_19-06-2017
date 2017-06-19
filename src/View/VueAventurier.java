@@ -46,7 +46,7 @@ public class VueAventurier extends javax.swing.JFrame {
         mainPanel = new JPanel(new BorderLayout());
         this.window.add(mainPanel);
         
-        window.setVisible(true);
+        
 
         mainPanel.setBackground(new Color(230, 230, 230));
         mainPanel.setBorder(BorderFactory.createLineBorder(couleur, 2)) ;
@@ -113,6 +113,7 @@ public class VueAventurier extends javax.swing.JFrame {
     }
  
 
+    
     
      public static void main(String [] args) {
         // Instanciation de la fenêtre 

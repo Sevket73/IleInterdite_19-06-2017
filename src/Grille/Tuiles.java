@@ -6,7 +6,7 @@
 package Grille;
 
 import Aventuriers.Aventurier;
-import Aventuriers.Couleur;
+import Modele.Couleur;
 import Cartes.Tresor;
 import java.awt.Color;
 import java.util.ArrayList;

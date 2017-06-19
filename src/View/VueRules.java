@@ -52,7 +52,6 @@ public class VueRules extends javax.swing.JFrame{
         window.setLocation(dim.width/2-window.getSize().width/2,dim.height/2-window.getSize().height/2);
         
         
-        this.window.setVisible(true);
         this.window.setTitle("Règle du jeu L'ile interdite");
         
         mainPanel = new JPanel(new BorderLayout());
@@ -351,6 +350,8 @@ public class VueRules extends javax.swing.JFrame{
 
             //Add Textarea in to middle panel
             middlePanel.add(scroll);
+            
+            window.setVisible(true);
             
             
 
