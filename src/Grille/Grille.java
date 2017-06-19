@@ -98,7 +98,7 @@ public class Grille {
     public ArrayList<Tuiles> tuilesAssechables() {
         ArrayList<Tuiles> tuilesAssechables =  new ArrayList<>();
         ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
-        tuiles Adj = this.getTuilesAdjacentes(tuilesAdj)
+        tuilesAdj = this.getTuilesAdjacentes(tuilesAdj)
     }
 
 }
