@@ -94,13 +94,13 @@ public class Grille {
     public Tuiles getTuiles(String nomTuiles){
         return aze.get(nomTuiles);
     }
-    
+    /*
     public ArrayList<Tuiles> tuilesAssechables() {
         ArrayList<Tuiles> tuilesAssechables =  new ArrayList<>();
         ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
         tuiles Adj = this.getTuilesAdjacentes(tuilesAdj)
     }
-
+*/
 }
 
     
