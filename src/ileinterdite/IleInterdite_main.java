@@ -5,10 +5,7 @@
  */
 package ileinterdite;
 
-import Aventuriers.Aventurier;
-import Aventuriers.Explorateur;
-import Aventuriers.Ingenieur;
-import Aventuriers.Plongeur;
+import Aventuriers.*;
 import Modele.Controleur;
 import Modele.Couleur;
 import Grille.Grille;
