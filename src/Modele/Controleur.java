@@ -12,6 +12,7 @@ import Grille.CoorD;
 import Grille.Tuiles;
 import Grille.Grille;
 import Aventuriers.Aventurier;
+import Cartes.Tresor;
 import static Grille.Etat.Inondee;
 import View.Message;
 import View.Observateur;
@@ -23,6 +24,8 @@ import View.VueStatue;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
+import Cartes.*;
+import java.util.Collections;
 
 /**
  *
@@ -200,10 +203,22 @@ public class Controleur /*implements Observateur*/{
         }
     }*/
     
-    public ArrayList<Cartes> creerPioche() {
-        for (int i = 0; i<6;i++) {
-            cartes.add(new CartesTresors())
+    private void creerPioche() {
+        for (int i = 0; i<5;i++) {
+            cartes.add(new CarteTresor(Tresor.Statue_du_Zephyr));
+            cartes.add(new CarteTresor(Tresor.Calice_de_l_onde));
+            cartes.add(new CarteTresor(Tresor.Cristal_Ardent));
+            cartes.add(new CarteTresor(Tresor.Pierre_Sacree));
         }
+        for (int i =0; i<3;i++) {
+            cartes.add(new CarteHelicoptere());
+        }
+        for (int i=0; i<2;i++){
+            cartes.add(new CarteSacDeSable());
+            cartes.add(new CarteMonteeDesEaux());
+        }
+        
+        Collections.shuffle(cartes);
     }
 }
           

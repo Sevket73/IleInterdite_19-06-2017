@@ -9,10 +9,10 @@ package Cartes;
  *
  * @author chaulaic
  */
-public class CarteTresors extends CartesTirage {
+public class CarteTresor extends CartesTirage {
     private Tresor nomTresor;
 
-    public CarteTresors(Tresor tresor) {
+    public CarteTresor(Tresor tresor) {
         super();
         this.nomTresor = tresor;
     }

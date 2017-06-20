@@ -9,9 +9,9 @@ package Cartes;
  *
  * @author chaulaic
  */
-public class CartesHelicoptère extends CartesTirage {
+public class CarteHelicoptere extends CartesTirage {
 
-    public CartesHelicoptère() {
+    public CarteHelicoptere() {
         super();
         
     }
