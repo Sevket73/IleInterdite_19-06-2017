@@ -131,8 +131,9 @@ public class Aventurier {
         ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
         ArrayList<Tuiles> tuilesAdjBis = new ArrayList<>();
         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
+
         for (Tuiles t : tuilesAdj) {
-            if (t.getEtat() == Etat.coulee || t == null) {
+            if (t.getEtat() == Etat.coulee ) {
                 tuilesAdjBis.add(t);
             }
         }

@@ -36,17 +36,19 @@ public class IleInterdite_main {
         Plongeur j4 = new Plongeur("Annie", true, 3, Couleur.Noir);
         Grille g = new Grille();
         Controleur c = new Controleur(2,g);
+        c.creerGrille(g);
         
         
         //System.out.println(g.getTuiles(14).getEtat());
         //System.out.println(g.getTuiles(3).getEtat());
         
-        j1.setPositionCourante(3, 0);
+        j1.setPositionCourante(3, 2);
         j2.setPositionCourante(3, 1);
         j3.setPositionCourante(3, 0);
         j4.setPositionCourante(2, 1);
         
-        c.jouer(j1, j2, j3, j3, g);
+        c.jouer(j1, j2, j3, j4, g);
+        
     }
     
 }

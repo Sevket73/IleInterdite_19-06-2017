@@ -143,7 +143,6 @@ public class Controleur implements Observateur{
         
         this.creerGrille(grille);
         this.creerPioche();
-        
         this.ajouterJoueurs(j1, j2, j3, j4);
         
         for (Aventurier j : joueurs) {
@@ -240,10 +239,10 @@ public class Controleur implements Observateur{
     }
     
     private void ajouterJoueurs(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4) {
-        this.joueurs.add(j4);
-        this.joueurs.add(j3);
-        this.joueurs.add(j2);
         this.joueurs.add(j1);
+        this.joueurs.add(j2);
+        this.joueurs.add(j3);
+        this.joueurs.add(j4);
         for (Aventurier j : joueurs) {
             if (j == null) {
                 joueurs.remove(j);

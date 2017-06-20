@@ -74,8 +74,10 @@ public class Grille {
         c = positionCourante.getCoordonnée().getColonne();
         l = positionCourante.getCoordonnée().getLigne()-1;
         int x = l*6+c;
-        if (x<=1||x==6||x==4||x==11){System.out.println("NEGATIF HAUT");}else{
-        tuilesAdjacentes.add(this.getTuiles(x)); }
+        if (x<=1||x==6||x==4||x==11){
+            System.out.println("NEGATIF HAUT");
+        } else {
+            tuilesAdjacentes.add(this.getTuiles(x)); }
         
         //tuile en-dessous
         l = positionCourante.getCoordonnée().getLigne()+1;
@@ -96,8 +98,11 @@ public class Grille {
         x = l*6+c;
         if (x>=34||x==29||x==4||x==11||positionCourante.getCoordonnée().getColonne()+1==6){System.out.println("NEGATIF DROITE");}else{
         tuilesAdjacentes.add(this.getTuiles(x));}
-        
+        /*for (Tuiles t : tuilesAdjacentes) {
+            System.out.println(t.getNom());
+        }*/
         return tuilesAdjacentes;
+        
     }
     
     public Tuiles getTuiles(String nomTuiles){
