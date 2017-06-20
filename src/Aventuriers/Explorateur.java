@@ -42,5 +42,21 @@ public class Explorateur extends Aventurier {
          tuilesAll.addAll(tuilesAdj);
          tuilesAll.addAll(tuilesDiag);
          return tuilesAdj;
-    }*/
+    }
+    private ArrayList<Tuiles> getTuilesDiag(Grille g,Tuiles positionCourante){
+        ArrayList<Tuiles>tuilesDiag = new ArrayList();
+        int l = positionCourante.getCoordonnée().getLigne();
+        int c = positionCourante.getCoordonnée().getColonne();
+        if((l-1)<0||c-1<0)
+        tuilesDiag.add(g.getTuiles((l-1)*6+c-1));
+        if((l-1)<0||c+1>5)
+        tuilesDiag.add(g.getTuiles((l-1)*6+c+1));
+        if((l+1)<5||c-1<0)
+        tuilesDiag.add(g.getTuiles((l+1)*6+c-1));
+        if((l+1)<5||c-1<5)
+        tuilesDiag.add(g.getTuiles((l+1)*6+c+1));
+        
+        return tuilesDiag;
+    }
+    
 }
