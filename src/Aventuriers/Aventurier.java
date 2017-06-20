@@ -132,7 +132,7 @@ public class Aventurier {
         ArrayList<Tuiles> tuilesAdjBis = new ArrayList<>();
         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
         for (Tuiles t : tuilesAdj) {
-            if (t.getEtat() == Etat.coulee) {
+            if (t.getEtat() == Etat.coulee || t == null) {
                 tuilesAdjBis.add(t);
             }
         }
@@ -171,7 +171,7 @@ public class Aventurier {
         tuilesAssechables = g.getTuilesAdjacentes(positionCourante);
         tuilesAssechables.add(positionCourante);
         for (Tuiles t : tuilesAssechables) {
-            if (t.getEtat() != Etat.Assechee || t.getEtat() != Etat.coulee) {
+            if ((t.getEtat() != Etat.Assechee || t.getEtat() != Etat.coulee) || t == null) {
                 suppr.add(t);
             } 
         }
