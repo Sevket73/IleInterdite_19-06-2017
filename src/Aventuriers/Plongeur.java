@@ -33,8 +33,9 @@ public class Plongeur extends Aventurier {
             aze = g.getTuilesAdjacentes(t);
             for (int x = 0; x < aze.size(); x++) {
                 Tuiles t2 = aze.get(x);
-
-                if (t2.getEtat() == (Assechee) ){
+                System.out.println(t2.getEtat());
+                if (t2.getEtat() == (Assechee)){
+                    System.out.println("coucou");
                     if (!tuilesAdj.contains(t2)) {
                         tuilesAdj.add(t2);
                     }
