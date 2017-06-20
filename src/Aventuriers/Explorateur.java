@@ -29,6 +29,7 @@ public class Explorateur extends Aventurier {
          tuilesDiag=getTuilesDiag(g,positionCourante);
          tuilesAll.addAll(tuilesAdj);
          tuilesAll.addAll(tuilesDiag);
+        
          return tuilesAll;
     }
     
