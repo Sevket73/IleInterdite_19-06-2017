@@ -12,7 +12,7 @@ package Cartes;
 public class CarteHelicoptere extends CartesTirage {
 
     public CarteHelicoptere() {
-        super();
+        super(); //supercoptère
         
     }
 
