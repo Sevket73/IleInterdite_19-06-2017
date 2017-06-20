@@ -7,6 +7,7 @@ package ileinterdite;
 
 import Aventuriers.Aventurier;
 import Aventuriers.Explorateur;
+import Aventuriers.Ingenieur;
 import Aventuriers.Plongeur;
 import Modele.Controleur;
 import Modele.Couleur;
@@ -31,7 +32,7 @@ public class IleInterdite_main {
 
                 
         Aventurier j1 = new Aventurier("Michel", true, 3, Couleur.Bleu);
-        Aventurier j2 = new Aventurier("Paul", true, 3, Couleur.Jaune);
+        Aventurier j2 = new Ingenieur("Paul", true, 3, Couleur.Jaune);
         Aventurier j3 = new Explorateur("Sandrine", true, 3, Couleur.Rouge);
         Plongeur j4 = new Plongeur("Annie", true, 3, Couleur.Noir);
         Grille g = new Grille();
@@ -43,7 +44,7 @@ public class IleInterdite_main {
         //System.out.println(g.getTuiles(3).getEtat());
         
         j1.setPositionCourante(3, 2);
-        j2.setPositionCourante(3, 1);
+        j2.setPositionCourante(3, 4);
         j3.setPositionCourante(3, 0);
         j4.setPositionCourante(2, 1);
         
