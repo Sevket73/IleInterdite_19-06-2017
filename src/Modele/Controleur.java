@@ -84,7 +84,7 @@ public class Controleur implements Observateur{
         for (int l = 0; l <= 5;l++) {
             for (int c = 0; c <= 5; c++) {
                 if ((l==0 && (( c==0||c==1)||c==4||c==5))||(l==1&&c==0)||(l==1&&c==5)||((l==4&&c==0)||(l==4&&c==5))||(l==5 && (( c==0||c==1)||c==4||c==5))){
-                    continue;
+                    Tuiles t = new Tuiles( new CoorD(c,l));
                     
                 } else {
 

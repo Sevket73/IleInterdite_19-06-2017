@@ -73,20 +73,29 @@ public class Grille {
         //Tuile en-dessus
         c = positionCourante.getCoordonnée().getColonne();
         l = positionCourante.getCoordonnée().getLigne()-1;
-        tuilesAdjacentes.add(this.getTuiles(l*6+c)); 
+        int x = l*6+c;
+        if (x<=1||x==6||x==4||x==11){System.out.println("NEGATIF HAUT");}else{
+        tuilesAdjacentes.add(this.getTuiles(x)); }
         
         //tuile en-dessous
         l = positionCourante.getCoordonnée().getLigne()+1;
-        tuilesAdjacentes.add(this.getTuiles(l*6+c));
+        x = l*6+c;
+        if (x>=34||x==31||x==24||x==29){System.out.println("NEGATIF BAS");}else{
+        tuilesAdjacentes.add(this.getTuiles(x));}
         
         //tuile à gauche
+        
         c = positionCourante.getCoordonnée().getColonne()-1;
         l = positionCourante.getCoordonnée().getLigne();
-        tuilesAdjacentes.add(this.getTuiles(l*6+c));
+        x = l*6+c;
+        if (x<=1||x==6||x==24||x==31||positionCourante.getCoordonnée().getColonne()-1==-1){System.out.println("NEGATIF GAUCHE");}else{
+        tuilesAdjacentes.add(this.getTuiles(x));}
         
         //tuile à droite
         c = positionCourante.getCoordonnée().getColonne()+1;
-        tuilesAdjacentes.add(this.getTuiles(l*6+c));
+        x = l*6+c;
+        if (x>=34||x==29||x==4||x==11||positionCourante.getCoordonnée().getColonne()+1==6){System.out.println("NEGATIF DROITE");}else{
+        tuilesAdjacentes.add(this.getTuiles(x));}
         
         return tuilesAdjacentes;
     }

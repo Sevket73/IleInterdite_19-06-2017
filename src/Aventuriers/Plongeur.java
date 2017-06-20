@@ -5,6 +5,7 @@
  */
 package Aventuriers;
 
+
 import static Grille.Etat.*;
 import Grille.Grille;
 import java.util.ArrayList;
@@ -22,13 +23,15 @@ public class Plongeur extends Aventurier {
     }
     @Override
     public ArrayList<Tuiles> deplacementPossible(Grille g) {
-        ArrayList<Tuiles> tuilesAdj = new ArrayList();
-        ArrayList<Tuiles> tuilesT = new ArrayList();
+        ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
+        ArrayList<Tuiles> tuilesT = new ArrayList<>();
+        tuilesAdj.addAll(super.deplacementPossible(g));
         tuilesT.add(positionCourante);
         for( int i = 0 ; i<tuilesT.size();i++){
             if(tuilesT.get(i).getEtat() !=coulee ){
                 tuilesAdj.add(tuilesT.get(i));
             }
+            
             for(Tuiles t : g.getTuilesAdjacentes(tuilesT.get(i))){
                 
                 if(t.getEtat() == Assechee && !tuilesAdj.contains(t)){
@@ -37,6 +40,7 @@ public class Plongeur extends Aventurier {
                 else if ( t.getEtat() != Assechee && !tuilesT.contains(t)){
                     tuilesT.add(t);
                 }
+             
             }
         }
                 

@@ -33,6 +33,15 @@ public class Tuiles {
         this.possedeAventurier = new ArrayList<>();
         this.coordonnées = c;
     }
+    public Tuiles(CoorD c){
+        this.setNom(null);
+        this.etat = null;
+        this.couleur = null;
+        this.tresor = null;
+        this.departAventurier = null;
+        this.possedeAventurier = new ArrayList<>();
+        this.coordonnées = c;
+    }
 
     /**
      * @return the etat

@@ -40,7 +40,7 @@ public class IleInterdite_main {
         //System.out.println(g.getTuiles(14).getEtat());
         //System.out.println(g.getTuiles(3).getEtat());
         
-        j1.setPositionCourante(3, 2);
+        j1.setPositionCourante(3, 0);
         j2.setPositionCourante(3, 1);
         j3.setPositionCourante(3, 0);
         j4.setPositionCourante(2, 1);
