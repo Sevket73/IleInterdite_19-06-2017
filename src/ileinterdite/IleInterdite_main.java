@@ -5,10 +5,7 @@
  */
 package ileinterdite;
 
-import Aventuriers.Aventurier;
-import Aventuriers.Explorateur;
-import Aventuriers.Pilote;
-import Aventuriers.Plongeur;
+import Aventuriers.*;
 import Modele.Controleur;
 import Modele.Couleur;
 import Grille.Grille;
@@ -31,8 +28,8 @@ public class IleInterdite_main {
         // test de code sans ihm
 
                 
-        Aventurier j1 = new Pilote("Michel", true, 3, Couleur.Bleu);
-        Aventurier j2 = new Aventurier("Paul", true, 3, Couleur.Jaune);
+        Aventurier j1 = new Aventurier("Michel", true, 3, Couleur.Bleu);
+        Aventurier j2 = new Ingenieur("Paul", true, 3, Couleur.Jaune);
         Aventurier j3 = new Explorateur("Sandrine", true, 3, Couleur.Rouge);
         Plongeur j4 = new Plongeur("Annie", true, 3, Couleur.Noir);
         Grille g = new Grille();
