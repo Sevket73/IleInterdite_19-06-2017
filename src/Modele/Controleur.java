@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Scanner;
 import Cartes.*;
 import java.util.Collections;
+import java.util.Stack;
 
 /**
  *
@@ -35,7 +36,7 @@ public class Controleur /*implements Observateur*/{
     private int niveauEaux;
     private ArrayList<Aventurier> joueurs;
     private Grille grille = new Grille();
-    private ArrayList<Cartes> cartes;
+    private Stack<Cartes> cartes;
     
     
     private VueMenu vueMenu;
@@ -44,7 +45,7 @@ public class Controleur /*implements Observateur*/{
     private VueStatue vueStatue;
     
     private Observateur observateur;
-    private Message message = new Message();
+    private Message messArrayListage = new Message();
     
     
     public Controleur(int niveauEaux,Grille g) {
@@ -55,7 +56,9 @@ public class Controleur /*implements Observateur*/{
 //        joueurs.add(j3);
 //        joueurs.add(j4);
         this.grille = g;
-        this.cartes = new ArrayList<>();
+        this.cartes = new Stack<>();
+        
+       
         /*
         vueMenu = new VueMenu();
         vueMenu.setObservateur(this);
@@ -135,45 +138,60 @@ public class Controleur /*implements Observateur*/{
         }
         
     }  
-    public void jouer(Aventurier j, Grille g) {
-        System.out.println(j.getNom() + " à vous de jouer!");
-        System.out.println("");
+    public void jouer(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4, Grille g) {
         String passez;
-        System.out.println("Vous êtes sur la tuile : " + g.getNomTuiles(j.getPositionCourante().getCoordonnée().getLigne(),j.getPositionCourante().getCoordonnée().getColonne()));
         
-        System.out.println("Souhaitez-vous passez ? (o/n)");
-        Scanner repPasse = new Scanner(System.in);
-        passez = repPasse.nextLine();
+        this.creerGrille(grille);
+        this.creerPioche();
         
-        if (passez.equals("n")) {
-            for (int k = 1; k < 4; k++) {
-                System.out.println("Action " + k);
-                System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
-                String action;
-                Scanner repAction = new Scanner(System.in);
-                action = repAction.nextLine();
-                
-                if (action.equals("deplacer")) {
-                    j.deplacement(g);           
-                    
-                } else if (action.equals("assecher")) {
-                    j.assechement(grille);
-                }
+        this.ajouterJoueurs(j1, j2, j3, j4);
+        
+        for (Aventurier j : joueurs) {
+            System.out.println(j.getNom() + " à vous de jouer!");
+            System.out.println("");
+            System.out.println("Vous êtes sur la tuile : " + g.getNomTuiles(j.getPositionCourante().getCoordonnée().getLigne(),j.getPositionCourante().getCoordonnée().getColonne()));
+            System.out.println("Souhaitez-vous passez ? (o/n)");
+            Scanner repPasse = new Scanner(System.in);
+            passez = repPasse.nextLine();
+            
+            if (passez.equals("n")) {
+                for (int k = 1; k < 4; k++) {
+                    System.out.println("Action " + k);
+                    System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
+                    String action;
+                    Scanner repAction = new Scanner(System.in);
+                    action = repAction.nextLine();
 
-                if (k==3) {
-                        break;
-                } else {
-                    System.out.println("Souhaitez-vous passez ? (o/n)");
-                    repPasse = new Scanner(System.in);
-                    passez = repPasse.nextLine();
+                    if (action.equals("deplacer")) {
+                        j.deplacement(g);           
 
-                    if (passez.equals("o")) {
-                        break;
+                    } else if (action.equals("assecher")) {
+                        j.assechement(grille);
                     }
-                }       
-    
+
+                    if (k==3) {
+                            break;
+                    } else {
+                        System.out.println("Souhaitez-vous passez ? (o/n)");
+                        repPasse = new Scanner(System.in);
+                        passez = repPasse.nextLine();
+
+                        if (passez.equals("o")) {
+                            break;
+                        }
+                    }       
+
+                }
             }
         }
+        
+        
+        
+        
+        
+        
+        
+        
     }
 /*
     @Override
@@ -219,6 +237,18 @@ public class Controleur /*implements Observateur*/{
         }
         
         Collections.shuffle(cartes);
+    }
+    
+    private void ajouterJoueurs(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4) {
+        this.joueurs.add(j4);
+        this.joueurs.add(j3);
+        this.joueurs.add(j2);
+        this.joueurs.add(j1);
+        for (Aventurier j : joueurs) {
+            if (j == null) {
+                joueurs.remove(j);
+            }
+        }
     }
 }
           
