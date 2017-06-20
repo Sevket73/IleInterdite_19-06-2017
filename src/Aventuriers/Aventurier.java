@@ -217,16 +217,7 @@ public class Aventurier {
     }
             
     
-    public ArrayList<Tuiles> getTuilesDiag(Grille g,Tuiles positionCourante){
-        ArrayList<Tuiles>tuilesDiag = new ArrayList();
-        int l = positionCourante.getCoordonnée().getLigne();
-        int c = positionCourante.getCoordonnée().getColonne();
-        tuilesDiag.add(g.getTuiles((l-1)*6+c-1));
-        tuilesDiag.add(g.getTuiles((l-1)*6+c+1));
-        tuilesDiag.add(g.getTuiles((l+1)*6+c-1));
-        tuilesDiag.add(g.getTuiles((l+1)*6+c+1));
-        return tuilesDiag;
-    }
+
     
 
 }
