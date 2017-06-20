@@ -168,18 +168,19 @@ public class Aventurier {
     }
                 
     public ArrayList<Tuiles> tuilesAssechables(Grille g){
+
+        ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
         ArrayList<Tuiles> tuilesAssechables = new ArrayList<>();
-        ArrayList<Tuiles> suppr = new ArrayList<>();
-        tuilesAssechables = g.getTuilesAdjacentes(positionCourante);
-        tuilesAssechables.add(positionCourante);
-        for (Tuiles t : tuilesAssechables) {
-            if ((t.getEtat() != Etat.Assechee || t.getEtat() != Etat.coulee) || t == null) {
-                suppr.add(t);
+        tuilesAdj = g.getTuilesAdjacentes(positionCourante);
+        tuilesAdj.add(g.getTuiles(positionCourante.getCoordonnée().getLigne()*6 + positionCourante.getCoordonnée().getColonne()));
+        for (Tuiles t : tuilesAdj) {
+            if (t.getEtat() != Etat.Inondee) {
+                tuilesAssechables.add(t);
             } 
         }
-        tuilesAssechables.removeAll(suppr);
-
-        return tuilesAssechables;
+        
+        tuilesAdj.removeAll(tuilesAssechables);
+        return tuilesAdj;
         
     }
     
