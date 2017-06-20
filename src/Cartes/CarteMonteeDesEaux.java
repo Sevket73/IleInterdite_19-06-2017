@@ -9,6 +9,11 @@ package Cartes;
  *
  * @author chaulaic
  */
-public class SacDeSable extends CartesTresors  {
+public class CarteMonteeDesEaux extends CartesTirage {
+
+    public CarteMonteeDesEaux() {
+        super();
+    }
+
     
 }

@@ -25,15 +25,15 @@ public class VueGrille extends javax.swing.JFrame{
     private final JFrame window;
     private final JPanel mainPanel;
     
-    
+    private Observateur observateur;
+
     
     public VueGrille(){
         this.window = new JFrame();
-        window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         
-        window.setSize(dim.width/7*6, dim.height/7*6);
+
         window.setLocation(dim.width/7*3-window.getSize().width/2,dim.height/7*3-window.getSize().height/2);
         
         
@@ -44,14 +44,27 @@ public class VueGrille extends javax.swing.JFrame{
         for(int i = 0 ; i<36 ; i++){
             mainPanel.add(new JLabel("empty"));
         }
+    }
+    
+    
+    public void setObservateur(Observateur  observateur){
+        this.observateur = observateur;
+    }
+
+    public void afficher(){
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        window.setSize(dim.width/7*6, dim.height/7*6);
         window.setVisible(true);
     }
     
-    public static void main(String[] args) {
-
-     VueGrille grille = new VueGrille();
-     
-     
+    public void fermer(){
+        window.setVisible(false);
+        
+    }
+    
+    public void creeGrille(){
+        
     }
     
 }

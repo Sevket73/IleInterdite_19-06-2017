@@ -24,13 +24,15 @@ public class VueStatue extends javax.swing.JFrame {
     private static JFrame window;
     private static JPanel mainPanel;
     
+    private Observateur observateur;
+    
     
     
     public VueStatue(){
         this.window = new JFrame();
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        window.setSize(dim.width/7*6, dim.height/7*1);
+
         window.setLocation(dim.width/7*3-window.getSize().width/2,dim.height/18*17-window.getSize().height/2);
         
         
@@ -44,12 +46,21 @@ public class VueStatue extends javax.swing.JFrame {
         
         window.add(mainPanel);
         
-        window.setVisible(true);
     }
         
-    public static void main(String[] args) {
-        VueStatue statue = new VueStatue();
-        
+    public void setObservateur(Observateur  observateur){
+        this.observateur = observateur;
+    }
+
+    public void afficher(){
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        window.setSize(dim.width/7*6, dim.height/7*1);
+        window.setVisible(true);
+    }
+    
+    public void fermer(){
+        window.setVisible(false);
         
     }
     

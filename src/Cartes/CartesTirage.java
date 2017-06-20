@@ -11,14 +11,19 @@ import Aventuriers.Aventurier;
  *
  * @author chaulaic
  */
-public class CartesTresors extends Cartes {
-    private Tresor tresor;
+public class CartesTirage extends Cartes {
     private Aventurier aventurierPocesseur;
-    
-    public void cartesTresors(Tresor tresor, Aventurier aventurierPocesseur) {
-        this.tresor = tresor;
-        this.aventurierPocesseur = aventurierPocesseur;
+
+    public CartesTirage() {
+        this.aventurierPocesseur = null;
     }
     
+    
+    
+    public void ajouterPocesseur(Aventurier j) {
+        if (this.aventurierPocesseur == null) {
+            this.aventurierPocesseur = j;
+        } 
+    }
     
 }

@@ -11,11 +11,11 @@ import Grille.Tuiles;
  *
  * @author chaulaic
  */
-public class CartesInondations {
+public class CarteInondations  extends Cartes{
     private Tuiles cible;
     private Tuiles tuileInondable;
     
-    public void cartesInondations(Tuiles cible, Tuiles tuileInondable) {
+    public CarteInondations(Tuiles cible, Tuiles tuileInondable) {
         this.cible = cible;
         this.tuileInondable = tuileInondable;
     }

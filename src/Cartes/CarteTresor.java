@@ -9,6 +9,12 @@ package Cartes;
  *
  * @author chaulaic
  */
-public class Helicoptère extends CartesTresors {
-    
+public class CarteTresor extends CartesTirage {
+    private Tresor nomTresor;
+
+    public CarteTresor(Tresor tresor) {
+        super();
+        this.nomTresor = tresor;
+    }
+
 }

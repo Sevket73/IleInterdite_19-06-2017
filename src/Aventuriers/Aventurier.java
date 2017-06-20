@@ -5,7 +5,7 @@
  */
 package Aventuriers;
 
-import Cartes.CartesTresors;
+import Cartes.CartesTirage;
 import Grille.CoorD;
 import Grille.Etat;
 import Grille.Grille;
@@ -27,7 +27,7 @@ public class Aventurier {
     protected Boolean vivant;
     protected int nbAction;
     protected Couleur couleur;
-    protected ArrayList<CartesTresors> cartesEnMain;
+    protected ArrayList<CartesTirage> cartesEnMain;
     protected Tuiles positionCourante;
     
     
@@ -72,7 +72,7 @@ public class Aventurier {
     /**
      * @return the cartesEnMain
      */
-    public ArrayList<CartesTresors> getCartesEnMain() {
+    public ArrayList<CartesTirage> getCartesEnMain() {
         return cartesEnMain;
     }
 
@@ -107,7 +107,7 @@ public class Aventurier {
     /**
      * @param cartesEnMain the cartesEnMain to set
      */
-    private void setCartesEnMain(ArrayList<CartesTresors> cartesEnMain) {
+    private void setCartesEnMain(ArrayList<CartesTirage> cartesEnMain) {
         this.cartesEnMain = cartesEnMain;
     }
     
@@ -132,7 +132,7 @@ public class Aventurier {
         ArrayList<Tuiles> tuilesAdjBis = new ArrayList<>();
         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
         for (Tuiles t : tuilesAdj) {
-            if (t.getEtat() == Etat.coulee) {
+            if (t.getEtat() == Etat.coulee || t == null) {
                 tuilesAdjBis.add(t);
             }
         }
@@ -171,7 +171,7 @@ public class Aventurier {
         tuilesAssechables = g.getTuilesAdjacentes(positionCourante);
         tuilesAssechables.add(positionCourante);
         for (Tuiles t : tuilesAssechables) {
-            if (t.getEtat() == Etat.Assechee || t.getEtat() == Etat.coulee) {
+            if ((t.getEtat() != Etat.Assechee || t.getEtat() != Etat.coulee) || t == null) {
                 suppr.add(t);
             } 
         }
@@ -181,7 +181,7 @@ public class Aventurier {
         
     }
     
-    public void assechement(Grille g){ // probleme re tester !!
+    public void assechement(Grille g){ 
         ArrayList<Tuiles> tuilesAssechables = new ArrayList<>();
         tuilesAssechables = this.tuilesAssechables(g);
         System.out.println("Quelle tuile souhaitez vous assecher ?");

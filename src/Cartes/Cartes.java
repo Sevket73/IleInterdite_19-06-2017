@@ -9,6 +9,6 @@ package Cartes;
  *
  * @author chaulaic
  */
-public class Cartes {
-    private int NumCartes;
+public abstract class Cartes {
+
 }

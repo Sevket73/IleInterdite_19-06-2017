@@ -9,10 +9,11 @@ package Cartes;
  *
  * @author chaulaic
  */
-public class Tresors extends CartesTresors {
-    private String nomTresor;
-    
-    public void Tresors(String nomTresor) {
-        this.nomTresor = nomTresor;
+public class CarteSacDeSable extends CartesTirage  {
+
+    public CarteSacDeSable() {
+        super();
     }
+
+    
 }
