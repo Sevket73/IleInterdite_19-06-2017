@@ -11,8 +11,9 @@ package Cartes;
  */
 public class Tresors extends CartesTresors {
     private String nomTresor;
-    
-    public void Tresors(String nomTresor) {
-        this.nomTresor = nomTresor;
+
+    public Tresors(int num, Tresor tresor) {
+        super(num, tresor);
     }
+
 }

@@ -10,5 +10,10 @@ package Cartes;
  * @author chaulaic
  */
 public class SacDeSable extends CartesTresors  {
+
+    public SacDeSable(int num, Tresor tresor) {
+        super(num, tresor);
+    }
+
     
 }

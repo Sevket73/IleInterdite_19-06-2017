@@ -10,5 +10,9 @@ package Cartes;
  * @author chaulaic
  */
 public class Cartes {
-    private int NumCartes;
+    private int numCartes;
+    
+    public Cartes(int num) {
+        this.numCartes = num;
+    }
 }

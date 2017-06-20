@@ -14,11 +14,19 @@ import Aventuriers.Aventurier;
 public class CartesTresors extends Cartes {
     private Tresor tresor;
     private Aventurier aventurierPocesseur;
-    
-    public void cartesTresors(Tresor tresor, Aventurier aventurierPocesseur) {
+
+    public CartesTresors(int num, Tresor tresor) {
+        super(num);
         this.tresor = tresor;
-        this.aventurierPocesseur = aventurierPocesseur;
+        this.aventurierPocesseur = null;
     }
     
+    
+    
+    public void ajouterPocesseur(Aventurier j) {
+        if (this.aventurierPocesseur == null) {
+            this.aventurierPocesseur = j;
+        } 
+    }
     
 }

@@ -10,5 +10,10 @@ package Cartes;
  * @author chaulaic
  */
 public class MonteeDesEaux extends CartesTresors {
+
+    public MonteeDesEaux(int num, Tresor tresor) {
+        super(num, tresor);
+    }
+
     
 }

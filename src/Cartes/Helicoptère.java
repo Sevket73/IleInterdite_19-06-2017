@@ -10,5 +10,12 @@ package Cartes;
  * @author chaulaic
  */
 public class Helicoptère extends CartesTresors {
+
+    public Helicoptère(int num, Tresor tresor) {
+        super(num, tresor);
+    }
+
+    
+    
     
 }
