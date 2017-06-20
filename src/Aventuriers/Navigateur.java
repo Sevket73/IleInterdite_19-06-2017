@@ -5,10 +5,18 @@
  */
 package Aventuriers;
 
+import Grille.Grille;
+import Modele.Couleur;
+import java.util.Scanner;
+
 /**
  *
  * @author chaulaic
  */
-public class Navigateur {
+public class Navigateur extends Aventurier {
+    
+    public Navigateur(String nom, Boolean vivant, int nbAction, Couleur couleur) {
+        super(nom, vivant, nbAction, couleur);
+    }
     
 }

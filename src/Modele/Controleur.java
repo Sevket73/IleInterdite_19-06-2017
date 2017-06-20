@@ -166,7 +166,7 @@ public class Controleur implements Observateur{
                     action = repAction.nextLine();
 
                     if (action.equals("deplacer")) {
-                        j.deplacement(g);           
+                        j.deplacement(grille);           
 
                     } else if (action.equals("assecher")) {
                         j.assechement(grille);
