@@ -171,7 +171,7 @@ public class Aventurier {
         tuilesAssechables = g.getTuilesAdjacentes(positionCourante);
         tuilesAssechables.add(positionCourante);
         for (Tuiles t : tuilesAssechables) {
-            if (t.getEtat() == Etat.Assechee || t.getEtat() == Etat.coulee) {
+            if (t.getEtat() != Etat.Assechee || t.getEtat() != Etat.coulee) {
                 suppr.add(t);
             } 
         }
@@ -181,7 +181,7 @@ public class Aventurier {
         
     }
     
-    public void assechement(Grille g){ // probleme re tester !!
+    public void assechement(Grille g){ 
         ArrayList<Tuiles> tuilesAssechables = new ArrayList<>();
         tuilesAssechables = this.tuilesAssechables(g);
         System.out.println("Quelle tuile souhaitez vous assecher ?");

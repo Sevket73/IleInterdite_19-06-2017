@@ -28,10 +28,10 @@ import java.util.Scanner;
  *
  * @author chaulaic
  */
-public class Controleur implements Observateur{
+public class Controleur /*implements Observateur*/{
     private int niveauEaux;
     private ArrayList<Aventurier> joueurs;
-    private Grille grille;
+    private Grille grille = new Grille();
     private ArrayList<Cartes> cartes;
     
     
@@ -53,7 +53,7 @@ public class Controleur implements Observateur{
 //        joueurs.add(j4);
         this.grille = g;
         this.cartes = new ArrayList<>();
-        
+        /*
         vueMenu = new VueMenu();
         vueMenu.setObservateur(this);
         
@@ -67,9 +67,9 @@ public class Controleur implements Observateur{
         vueStatue.setObservateur(this);
         
         message.type = TypesMessages.MENU;
-        this.click(message);
+//        this.click(message);
         
-        
+      */  
     }
     
     private void initJoueurs(){
@@ -82,12 +82,12 @@ public class Controleur implements Observateur{
         this.joueurs.add(new Aventurier(nomJoueurs.get(0), true, 3, Couleur.Jaune));
     }
    
-    private String listeTuile[]= {"","","LePontDesAbimes","LaPorteDeBronze","","",
-                          "","LaCaverneDesOmbres","LaPorteDeFer","LaPorteDOr","LesFalaisesDeLOubli","",
+    private String listeTuile[]= {null,null,"LePontDesAbimes","LaPorteDeBronze",null,null,
+                          null,"LaCaverneDesOmbres","LaPorteDeFer","LaPorteDOr","LesFalaisesDeLOubli",null,
                           "LePalaisDeCorail","LaPorteDArgent","LesDunesDeLIllusion","Heliport","LaPorteDeCuivre","LeJardinDesHurlements",
                           "LaForetPourpre","LeLagonPerdu","LeMaraisBrumeux","Observatoire","LeRocherFantome","LaCaverneDuBrasier",
-                          "","LeTempleDuSoleil","LeTempleDeLaLune","LePalaisDesMarees","LeValDuCrepuscule","",
-                          "","","LaTourDuGuet","LeJardinDesMurmures","",""};
+                          null,"LeTempleDuSoleil","LeTempleDeLaLune","LePalaisDesMarees","LeValDuCrepuscule",null,
+                          null,null,"LaTourDuGuet","LeJardinDesMurmures",null,null};
     
     public void creerGrille(Grille g){
 
@@ -105,7 +105,7 @@ public class Controleur implements Observateur{
                     if ((l==0 && c==3)||(l==3 && ((c==1||c==3)||c==5))||l==5 && c ==3){
                         g.getTuiles(l*6+c).changerEtat(Etat.Inondee);
                     }       
-                    else if (c==2 && (((l==2 || l == 3 )|| l == 4) )){
+                    else if ((c==2 && (((l==2 || l == 3 )|| l == 4) ))|| c == 4 && l == 3){
                         g.getTuiles(l*6+c).changerEtat(Etat.coulee);  
                     }
                     
@@ -172,7 +172,7 @@ public class Controleur implements Observateur{
             }
         }
     }
-
+/*
     @Override
     public void click(Message message) {
         
@@ -198,7 +198,7 @@ public class Controleur implements Observateur{
                 
                 
         }
-    }
+    }*/
 }
           
 
