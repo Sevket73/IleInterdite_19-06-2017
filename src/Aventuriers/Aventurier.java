@@ -187,20 +187,26 @@ public class Aventurier {
     public void assechement(Grille g){ 
         ArrayList<Tuiles> tuilesAssechables = new ArrayList<>();
         tuilesAssechables = this.tuilesAssechables(g);
-        System.out.println("Quelle tuile souhaitez vous assecher ?");
-        for (Tuiles t : tuilesAssechables) {
-            System.out.println(t.getNom());
-        }
-        Scanner repAss = new Scanner(System.in);
-        String ass;
-        ass = repAss.nextLine();
-        for (Tuiles t : tuilesAssechables) {
-            if (ass.equals(t.getNom())) {
-                this.assecher(t);
-            } else {
-                continue;
+        if (tuilesAssechables.isEmpty()) {
+            System.out.println("Il n'y a aucune tuile à assecher !");
+                    
+        } else {
+            System.out.println("Quelle tuile souhaitez vous assecher ?");
+            for (Tuiles t : tuilesAssechables) {
+                System.out.println(t.getNom());
+            }
+            Scanner repAss = new Scanner(System.in);
+            String ass;
+            ass = repAss.nextLine();
+            for (Tuiles t : tuilesAssechables) {
+                if (ass.equals(t.getNom())) {
+                    this.assecher(t);
+                } else {
+                    continue;
+                }
             }
         }
+        
         
  
     }

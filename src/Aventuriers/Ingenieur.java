@@ -9,6 +9,7 @@ import Grille.Grille;
 import Grille.Tuiles;
 import Modele.Couleur;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -19,13 +20,34 @@ public class Ingenieur extends Aventurier{
     public Ingenieur(String nom, Boolean vivant, int nbAction, Couleur couleur) {
         super(nom, vivant, nbAction, couleur);
     }
-    // faire if dans controlleur c'est plus simple
-    public ArrayList<Tuiles> AssechementPossible(Grille g){
-                 ArrayList<Tuiles>tuilesAdj = new ArrayList();
-         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
-         
-         
-         return tuilesAdj;
+
+    @Override
+    public void assechement(Grille g) {
+        ArrayList<Tuiles> tuilesAssechables = new ArrayList<>();
+        
+        for (int i = 1; i < 3; i++) {
+            tuilesAssechables = this.tuilesAssechables(g);
+                if (tuilesAssechables.isEmpty()) {
+                    System.out.println("Il n'y a aucune tuile à assecher !");
+                    break;
+                }
+            System.out.println("Quelle tuile souhaitez vous assecher ? (" + i + ")");
+            for (Tuiles t : tuilesAssechables) {
+                System.out.println(t.getNom());
+            }
+            Scanner repAss = new Scanner(System.in);
+            String ass;
+            ass = repAss.nextLine();
+            for (Tuiles t : tuilesAssechables) {
+                if (ass.equals(t.getNom())) {
+                    this.assecher(t);
+                    //tuilesAssechables.remove(t);
+                } else {
+                    continue;
+                }
+            }
+        }
+        
     }
 
 }
