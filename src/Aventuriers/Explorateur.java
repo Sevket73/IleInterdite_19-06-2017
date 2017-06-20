@@ -19,7 +19,7 @@ public class Explorateur extends Aventurier {
     public Explorateur(String nom, Boolean vivant, int nbAction, Couleur couleur) {
         super(nom, vivant, nbAction, couleur);
     }
-  
+  /*
     @Override
     public ArrayList<Tuiles> deplacementPossible(Grille g) {
          ArrayList<Tuiles>tuilesAdj = new ArrayList();
@@ -42,5 +42,5 @@ public class Explorateur extends Aventurier {
          tuilesAll.addAll(tuilesAdj);
          tuilesAll.addAll(tuilesDiag);
          return tuilesAdj;
-    }
+    }*/
 }
