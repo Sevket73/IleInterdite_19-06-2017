@@ -193,7 +193,7 @@ public class Controleur /*implements Observateur*/{
         
         
     }
-/*
+
     @Override
     public void click(Message message) {
         
@@ -219,7 +219,7 @@ public class Controleur /*implements Observateur*/{
                 
                 
         }
-    }*/
+    }
     
     private void creerPioche() {
         for (int i = 0; i<5;i++) {

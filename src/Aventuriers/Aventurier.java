@@ -146,7 +146,8 @@ public class Aventurier {
         tuilesAdj= this.deplacementPossible(g);
         System.out.println("Où souhaitez-vous aller ?");
         for (Tuiles t : tuilesAdj){
-            System.out.println(t.getNom());   
+            if (t != null)
+                System.out.println(t.getNom());   
         }
         Scanner repDep = new Scanner(System.in);
         String dep;
