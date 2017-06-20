@@ -199,6 +199,12 @@ public class Controleur /*implements Observateur*/{
                 
         }
     }*/
+    
+    public ArrayList<Cartes> creerPioche() {
+        for (int i = 0; i<6;i++) {
+            cartes.add(new CartesTresors())
+        }
+    }
 }
           
 

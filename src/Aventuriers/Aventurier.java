@@ -5,7 +5,7 @@
  */
 package Aventuriers;
 
-import Cartes.CartesTresors;
+import Cartes.CartesTirage;
 import Grille.CoorD;
 import Grille.Etat;
 import Grille.Grille;
@@ -27,7 +27,7 @@ public class Aventurier {
     protected Boolean vivant;
     protected int nbAction;
     protected Couleur couleur;
-    protected ArrayList<CartesTresors> cartesEnMain;
+    protected ArrayList<CartesTirage> cartesEnMain;
     protected Tuiles positionCourante;
     
     
@@ -72,7 +72,7 @@ public class Aventurier {
     /**
      * @return the cartesEnMain
      */
-    public ArrayList<CartesTresors> getCartesEnMain() {
+    public ArrayList<CartesTirage> getCartesEnMain() {
         return cartesEnMain;
     }
 
@@ -107,7 +107,7 @@ public class Aventurier {
     /**
      * @param cartesEnMain the cartesEnMain to set
      */
-    private void setCartesEnMain(ArrayList<CartesTresors> cartesEnMain) {
+    private void setCartesEnMain(ArrayList<CartesTirage> cartesEnMain) {
         this.cartesEnMain = cartesEnMain;
     }
     

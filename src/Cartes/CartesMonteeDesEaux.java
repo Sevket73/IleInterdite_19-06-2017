@@ -9,11 +9,11 @@ package Cartes;
  *
  * @author chaulaic
  */
-public class Tresors extends CartesTresors {
-    private String nomTresor;
+public class CartesMonteeDesEaux extends CartesTirage {
 
-    public Tresors(int num, Tresor tresor) {
-        super(num, tresor);
+    public CartesMonteeDesEaux() {
+        super();
     }
 
+    
 }

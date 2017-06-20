@@ -11,13 +11,10 @@ import Aventuriers.Aventurier;
  *
  * @author chaulaic
  */
-public class CartesTresors extends Cartes {
-    private Tresor tresor;
+public class CartesTirage extends Cartes {
     private Aventurier aventurierPocesseur;
 
-    public CartesTresors(int num, Tresor tresor) {
-        super(num);
-        this.tresor = tresor;
+    public CartesTirage() {
         this.aventurierPocesseur = null;
     }
     

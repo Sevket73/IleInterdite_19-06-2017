@@ -15,8 +15,7 @@ public class CartesInondations  extends Cartes{
     private Tuiles cible;
     private Tuiles tuileInondable;
     
-    public CartesInondations( int numcarte, Tuiles cible, Tuiles tuileInondable) {
-        super(numcarte);
+    public CartesInondations(Tuiles cible, Tuiles tuileInondable) {
         this.cible = cible;
         this.tuileInondable = tuileInondable;
     }

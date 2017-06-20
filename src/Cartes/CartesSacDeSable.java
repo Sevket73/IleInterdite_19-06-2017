@@ -9,10 +9,10 @@ package Cartes;
  *
  * @author chaulaic
  */
-public class SacDeSable extends CartesTresors  {
+public class CartesSacDeSable extends CartesTirage  {
 
-    public SacDeSable(int num, Tresor tresor) {
-        super(num, tresor);
+    public CartesSacDeSable() {
+        super();
     }
 
     
