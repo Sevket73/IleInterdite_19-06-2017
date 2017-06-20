@@ -32,7 +32,7 @@ import java.util.Stack;
  *
  * @author chaulaic
  */
-public class Controleur /*implements Observateur*/{
+public class Controleur implements Observateur{
     private int niveauEaux;
     private ArrayList<Aventurier> joueurs;
     private Grille grille = new Grille();
