@@ -24,28 +24,24 @@ public class Plongeur extends Aventurier {
     @Override
     public ArrayList<Tuiles> deplacementPossible(Grille g) {
         ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
-        ArrayList<Tuiles> tuilesT = new ArrayList<>();
-        tuilesAdj.addAll(super.deplacementPossible(g));
-        tuilesT.add(positionCourante);
-        for( int i = 0 ; i<tuilesT.size();i++){
-            if(tuilesT.get(i).getEtat() !=coulee ){
-                tuilesAdj.add(tuilesT.get(i));
-            }
-            
-            for(Tuiles t : g.getTuilesAdjacentes(tuilesT.get(i))){
-                
-                if(t.getEtat() == Assechee && !tuilesAdj.contains(t)){
-                    tuilesAdj.add(t);
+        ArrayList<Tuiles> tuilesATest = new ArrayList<>();
+        tuilesATest.add(positionCourante);
+        
+        for ( int i = 0 ; i<tuilesATest.size();i++){
+            for(Tuiles t : g.getTuilesAdjacentes(tuilesATest.get(i))){
+                if(t.getEtat()!=Assechee){
+                    
+                    if(!tuilesATest.contains(t))
+                        if(t.getEtat()==Inondee){
+                            tuilesAdj.add(t);}
+                            tuilesATest.add(t);
+
+                }else{
+                    if(!tuilesATest.contains(t))
+                        tuilesATest.add(t);
                 }
-                else if ( t.getEtat() != Assechee && !tuilesT.contains(t)){
-                    tuilesT.add(t);
-                }
-             
             }
         }
-                
-        tuilesAdj.remove(positionCourante);
-            
 
         
         return tuilesAdj;
