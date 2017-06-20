@@ -28,7 +28,7 @@ public class IleInterdite_main {
         // test de code sans ihm
 
                 
-        Aventurier j1 = new Aventurier("Michel", true, 3, Couleur.Bleu);
+        Aventurier j1 = new Pilote("Michel", true, 3, Couleur.Bleu);
         Aventurier j2 = new Ingenieur("Paul", true, 3, Couleur.Jaune);
         Aventurier j3 = new Explorateur("Sandrine", true, 3, Couleur.Rouge);
         Plongeur j4 = new Plongeur("Annie", true, 3, Couleur.Noir);
