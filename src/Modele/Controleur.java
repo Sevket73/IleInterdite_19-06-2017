@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 import Cartes.*;
+import static Grille.Etat.Assechee;
 import java.util.Collections;
 import java.util.Stack;
 
@@ -105,15 +106,17 @@ public class Controleur implements Observateur{
                 } else {
 
                     Tuiles t = new Tuiles(listeTuile[l*6 + c], new CoorD(c,l));
-
+                    t.changerEtat(Assechee);
                     g.addTuiles((l*6 + c),t);
                     
+                            
                     if ((l==0 && c==3)||(l==3 && ((c==1||c==3)||c==5))||l==5 && c ==3){
                         g.getTuiles(l*6+c).changerEtat(Etat.Inondee);
                     }       
                     else if ((c==2 && (((l==2 || l == 3 )|| l == 4) ))|| c == 4 && l == 3){
                         g.getTuiles(l*6+c).changerEtat(Etat.coulee);  
                     }
+                    
                     
                     if (l==0 && c==3 ){
                          g.getTuiles(l*6+c).changerCouleur(Couleur.Rouge);
