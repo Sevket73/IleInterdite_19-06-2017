@@ -244,16 +244,17 @@ public class Controleur implements Observateur{
     }
     
     private void piocherCarteInon() {
-
-        CarteInondations cI = cartesInon.pop();
-        Tuiles t = cI.getCible();
+        Tuiles t = cartesInon.pop().getCible();
+        
+        CarteInondations cI = new CarteInondations(t);
+        
         if ( t.getEtat()==Assechee){
             t.changerEtat(Inondee);
             defausseInon.push(cI);
             
         }else if (t.getEtat()==Inondee){
             t.changerEtat(coulee);
-            
+                        
             
         }
     }
