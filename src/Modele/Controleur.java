@@ -244,9 +244,9 @@ public class Controleur implements Observateur{
     }
     
     private void piocherCarteInon() {
-        Tuiles t = cartesInon.pop().getCible();
         
-        CarteInondations cI = new CarteInondations(t);
+        CarteInondations cI= cartesInon.pop();
+        Tuiles t =cI.getCible();
         
         if ( t.getEtat()==Assechee){
             t.changerEtat(Inondee);
