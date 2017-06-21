@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 import Cartes.*;
+import static Cartes.Tresor.*;
 import static Grille.Etat.Assechee;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -47,7 +48,7 @@ public class Controleur implements Observateur{
         this.joueurs = new ArrayList<>();
         this.grille = g;
         this.cartesPioche = new Stack<>();
-        this.listeTuiles = new Stack<Tuile>(EnumSet.allOf(Tuile.class));
+        this.listeTuiles = new Stack();
         
        
         /*
@@ -88,54 +89,49 @@ public class Controleur implements Observateur{
     
     public void creerGrille(Grille g){
         
+        for (Tuile t : EnumSet.allOf(Tuile.class)) {
+            listeTuiles.push(t);
+        }
         
-        
-        
-        
+        Collections.shuffle(listeTuiles);
         
         for (int l = 0; l <= 5;l++) {
             for (int c = 0; c <= 5; c++) {
-                if ((l==0 && (( c==0||c==1)||c==4||c==5))||(l==1&&c==0)||(l==1&&c==5)||((l==4&&c==0)||(l==4&&c==5))||(l==5 && (( c==0||c==1)||c==4||c==5))){
-                    Tuiles t = new Tuiles( new CoorD(c,l));
-                    
+                if ((l == 0 && ((c == 0||c == 1)||c == 4||c == 5))||(l == 1 && c == 0)||(l == 1 && c == 5)||((l == 4 && c == 0 )||(l == 4 && c == 5))||(l == 5 && ((c == 0||c == 1)||c == 4||c == 5))) {
+                    Tuiles t = new Tuiles( null, new CoorD(c,l),null);
                 } else {
-
-                    Tuiles t = new Tuiles(listeTuile[l*6 + c], new CoorD(c,l));
+                    Tuiles t = new Tuiles(listeTuiles.pop().toString(), new CoorD(c,l), null);
                     t.changerEtat(Assechee);
-                    g.addTuiles((l*6 + c),t);
+                    g.addTuiles((l * 6 + c),t);
+                }
+            }        
+        } 
+
+        g.getTuiles("LaPorteDeBronze").changerCouleur(Couleur.Rouge);
+        g.getTuiles("LaPorteDOr").changerCouleur(Couleur.Jaune);
+        g.getTuiles("LaPorteDeFer").changerCouleur(Couleur.Noir);
+        g.getTuiles("LaPorteDArgent").changerCouleur(Couleur.Orange);
+        g.getTuiles("LaPorteDeCuivre").changerCouleur(Couleur.Vert);
+        g.getTuiles("Heliport").changerCouleur(Couleur.Bleu);
+        
+        g.getTuiles("LePalaisDeCorail").setTresor(Calice_de_l_onde);
+        g.getTuiles("LePalaisDesMarees").setTresor(Calice_de_l_onde);
+        g.getTuiles("LeJardinDesHurlements").setTresor(Statue_du_Zephyr);
+        g.getTuiles("LeJardinDesMurmures").setTresor(Statue_du_Zephyr);
+        g.getTuiles("LeTempleDeLaLune").setTresor(Pierre_Sacree);
+        g.getTuiles("LeTempleDuSoleil").setTresor(Pierre_Sacree);
+        g.getTuiles("LaCaverneDuBrasier").setTresor(Cristal_Ardent);
+        g.getTuiles("LaCaverneDesOmbres").setTresor(Cristal_Ardent);
                     
-                            
-                    if ((l==0 && c==3)||(l==3 && ((c==1||c==3)||c==5))||l==5 && c ==3){
+                    
+                    /*if ((l==0 && c==3)||(l==3 && ((c==1||c==3)||c==5))||l==5 && c ==3){
                         g.getTuiles(l*6+c).changerEtat(Etat.Inondee);
                     }       
                     else if ((c==2 && (((l==2 || l == 3 )|| l == 4) ))|| c == 4 && l == 3){
                         g.getTuiles(l*6+c).changerEtat(Etat.coulee);  
-                    }
-                    
-                    
-                    if (l==0 && c==3 ){
-                         g.getTuiles(l*6+c).changerCouleur(Couleur.Rouge);
-                    }
-                    else if (l==1&&c == 2){
-                          g.getTuiles(l*6+c).changerCouleur(Couleur.Noir);  
-                    } 
-                    else if (l==1&& c == 3){
-                          g.getTuiles(l*6+c).changerCouleur(Couleur.Jaune);  
-                    } 
-                    else if (l==2&& c == 1){
-                          g.getTuiles(l*6+c).changerCouleur(Couleur.Orange);  
-                    }
-                    else if (l==2&& c == 3){
-                          g.getTuiles(l*6+c).changerCouleur(Couleur.Bleu);  
-                    }
-                    else if (l==2 && c == 4){
-                          g.getTuiles(l*6+c).changerCouleur(Couleur.Vert);  
-                    }
-                 }           
-            }
-        }
-        
-    }      
+                    }*/
+    }           
+                
 
     public void jouer(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4, Grille g) {
         String passez;
@@ -254,13 +250,13 @@ public class Controleur implements Observateur{
         }
     }
     
-    private boolean peutPrendreTresor(Tresor tresor) {
+    /*private boolean peutPrendreTresor(Tresor tresor) {
         
     }
     
     private void prendreTresor(Tresor tresor) {
         
-    }
+    }*/
     
    /* private boolean partieFinie() {
         

@@ -117,7 +117,7 @@ public class Tuiles {
     /**
      * @param tresor the tresor to set
      */
-    private void setTresor(Tresor tresor) {
+    public void setTresor(Tresor tresor) {
         this.tresor = tresor;
     }
 

@@ -37,7 +37,7 @@ public class Aventurier {
         this.nbAction = nbAction;
         this.couleur = couleur;
         this.cartesEnMain = new ArrayList<>();
-        this.positionCourante = new Tuiles(null, new CoorD(0,0));
+        this.positionCourante = new Tuiles(null, new CoorD(0,0),null);
     }
     
     //getteurs et setteurs :
