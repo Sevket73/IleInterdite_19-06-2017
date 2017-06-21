@@ -19,6 +19,7 @@ import static Cartes.Tresor.*;
 import static Grille.Etat.*;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Stack;
 
 /**
@@ -31,7 +32,7 @@ public class Controleur implements Observateur {
     private ArrayList<Aventurier> joueurs;
     private Grille grille = new Grille();
     private Stack<CartesTirage> cartesPioche;
-    private Stack<Tresor> tresorsAcquis;
+    private HashSet<Tresor> tresorsAcquis;
     private Stack<Tuile> listeTuiles;
     private Stack<CartesTirage> cartes;
     private Stack<CartesTirage> defausse;
@@ -53,7 +54,7 @@ public class Controleur implements Observateur {
         this.cartesPioche = new Stack<>();
         this.listeTuiles = new Stack();
         this.cartesPioche = new Stack();
-        this.tresorsAcquis = new Stack();
+        this.tresorsAcquis = new HashSet();
         this.listeTuiles = new Stack();
         this.cartes = new Stack();
         this.defausse = new Stack();
