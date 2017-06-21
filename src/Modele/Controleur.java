@@ -146,8 +146,11 @@ public class Controleur implements Observateur{
         
         this.creerGrille(grille);
         this.creerPiocheTirage();
-        this.ajouterJoueurs(j1, j2, j3, j4);
+        this.creerPiocheInon();
+        this.initJoueurs(j1, j2, j3, j4);
+        this.niveauEaux = 1;
         if (this.verifNbJoueurs()) {
+            
             for (Aventurier j : joueurs) {
                 System.out.println(j.getNom() + " à vous de jouer!");
                 System.out.println("");
@@ -205,7 +208,7 @@ public class Controleur implements Observateur{
                 vueRules.fermer();
                 break;
             case GRID :
-                initJoueurs();
+                Controleur.this.initJoueurs();
                 this.creerGrille(grille);
                 grille.getAze();
                 
@@ -252,7 +255,7 @@ public class Controleur implements Observateur{
             t.changerEtat(Inondee);
             defausseInon.push(cI);
             
-        }else if (t.getEtat()==Inondee){
+        } else if (t.getEtat()==Inondee) {
             t.changerEtat(coulee);
                         
             
@@ -273,18 +276,29 @@ public class Controleur implements Observateur{
     private void monterEau() {
         niveauEaux += 1;
     }
-    private void ajouterJoueurs(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4) {
+    
+    private void initCartes(Aventurier j) {
+        for (int i = 0; i < 4; i++) {
+            this.piocherCarte(j);
+        }
+    }
+    
+    private void initJoueurs(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4) {
         if (j1 != null) {
             this.joueurs.add(j1);
+            this.initCartes(j1);
         }
         if (j2 != null) {
             this.joueurs.add(j2);
+            this.initCartes(j2);
         }
         if (j3 != null) {
             this.joueurs.add(j3);
+            this.initCartes(j3);
         }
         if (j4 != null) {
             this.joueurs.add(j4);
+            this.initCartes(j4);
         }
     }
     
