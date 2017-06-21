@@ -14,8 +14,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 import Cartes.*;
+import Cartes.CarteInondations;
 import static Cartes.Tresor.*;
-import static Grille.Etat.Assechee;
+import static Grille.Etat.*;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Stack;
@@ -33,8 +34,8 @@ public class Controleur implements Observateur{
     private Stack<Tuile> listeTuiles;
     private Stack<CartesTirage> cartes;
     private Stack<CartesTirage> defausse;
-    private Stack<String> cartesInon;
-    private Stack<String> defausseInon;
+    private Stack<CarteInondations> cartesInon;
+    private Stack<CarteInondations> defausseInon;
     
     
     private VueMenu vueMenu;
@@ -232,16 +233,28 @@ public class Controleur implements Observateur{
     
     private void creerPiocheInon() {
         for (int i = 0; i<grille.getAze().size(); i++) {
-            cartesInon.push(grille.getTuiles(i).getNom());
-            Collections.shuffle(cartesInon);
+            Tuiles t = grille.getTuiles(i);
+            CarteInondations cI = new CarteInondations(t);
+            cartesInon.push(cI);
         }
     }
     
     private void piocherCarteInon() {
-        cartesInon.pop();
+
+        CarteInondations cI = cartesInon.pop();
+        Tuiles t = cI.getCible();
+        if ( t.getEtat()==Assechee){
+            t.changerEtat(Inondee);
+            defausseInon.push(cI);
+            
+        }else if (t.getEtat()==Inondee){
+            t.changerEtat(coulee);
+            
+            
+        }
     }
     
-    private void piocherCarte(Aventurier j) {
+    private  void piocherCarte(Aventurier j) {
         CartesTirage carte = new CartesTirage();
         carte = cartes.pop();
         if (carte instanceof CarteMonteeDesEaux) {

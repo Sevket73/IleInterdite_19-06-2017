@@ -11,12 +11,26 @@ import Grille.Tuiles;
  *
  * @author chaulaic
  */
-public class CarteInondations  extends Cartes{
+public class CarteInondations extends Cartes {
+
     private Tuiles cible;
-    private Tuiles tuileInondable;
-    
-    public CarteInondations(Tuiles cible, Tuiles tuileInondable) {
+
+    public CarteInondations(Tuiles cible) {
         this.cible = cible;
-        this.tuileInondable = tuileInondable;
+
+    }
+
+    /**
+     * @return the cible
+     */
+    public Tuiles getCible() {
+        return cible;
+    }
+
+    /**
+     * @param cible the cible to set
+     */
+    public void setCible(Tuiles cible) {
+        this.cible = cible;
     }
 }
