@@ -135,12 +135,12 @@ public class Tuiles {
     public void setPossedeAventurier(ArrayList<Aventurier> possedeAventurier) {
         this.possedeAventurier = possedeAventurier;
     }
-    public void addPossedeAventurier(Aventurier possedeAventurier){
+    public void addPossedeAventurier(Aventurier j){
         this.possedeAventurier.add(departAventurier);
     
     }
-    public void removePossedeAventurier(Aventurier possedeAventurier){
-        this.possedeAventurier.remove(possedeAventurier);
+    public void removePossedeAventurier(Aventurier j){
+        this.possedeAventurier.remove(j);
     }
     
 
