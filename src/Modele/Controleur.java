@@ -19,6 +19,7 @@ import static Cartes.Tresor.*;
 import static Grille.Etat.*;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Stack;
 
 /**
@@ -31,7 +32,7 @@ public class Controleur implements Observateur {
     private ArrayList<Aventurier> joueurs;
     private Grille grille = new Grille();
     private Stack<CartesTirage> cartesPioche;
-    private Stack<Tresor> tresorsAcquis;
+    private HashSet<Tresor> tresorsAcquis;
     private Stack<Tuile> listeTuiles;
     private Stack<CartesTirage> cartes;
     private Stack<CartesTirage> defausse;
@@ -53,7 +54,7 @@ public class Controleur implements Observateur {
         this.cartesPioche = new Stack<>();
         this.listeTuiles = new Stack();
         this.cartesPioche = new Stack();
-        this.tresorsAcquis = new Stack();
+        this.tresorsAcquis = new HashSet();
         this.listeTuiles = new Stack();
         this.cartes = new Stack();
         this.defausse = new Stack();
@@ -152,7 +153,7 @@ public class Controleur implements Observateur {
         this.initJoueurs(j1, j2, j3, j4);
         this.niveauEaux = 1;
         if (this.verifNbJoueurs()) {
-
+            
             for (Aventurier j : joueurs) {
                 System.out.println(j.getNom() + " à vous de jouer!");
                 System.out.println("");
@@ -329,6 +330,70 @@ public class Controleur implements Observateur {
             return true;
         }
     }
+    
+    private boolean peutPrendreTresor(Aventurier j, Tresor tresor) {
+        int i = 0;
+        for ( CartesTirage c : j.getCartesEnMain()) {
+            if (c instanceof CarteTresor) {
+                if (c.getNom() == tresor.toString()) {
+                    i++;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        if (i <= 4) {
+            if (j.getPositionCourante().getTresor() == tresor ) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 
-   
+    private void prendreTresor(Tresor tresor, Aventurier j) {
+        if (this.peutPrendreTresor(j, tresor)) {
+            this.tresorsAcquis.add(tresor);
+        }
+    }
+    
+    private boolean partieGagnée() {
+        Boolean allAlive = true;
+        Boolean allHelico = true;
+        
+        for (Aventurier j : this.joueurs) {
+            if (j.getVivant()) {
+                allAlive = true;
+            } else {
+                allAlive = false;
+                break;
+            }
+            
+            if (j.getPositionCourante().getNom() == "Heliport") {
+                allHelico = true;
+            } else {
+                allHelico = false;
+                break;
+            }
+        }
+        
+        if (allAlive) {
+            if (allHelico) {
+                if (this.tresorsAcquis.size() == 4) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        
+    }
 }
