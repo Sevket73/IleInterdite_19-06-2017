@@ -330,14 +330,5 @@ public class Controleur implements Observateur {
         }
     }
 
-    /*private boolean peutPrendreTresor(Tresor tresor) {
-        
-    }
-    
-    private void prendreTresor(Tresor tresor) {
-        
-    }*/
- /* private boolean partieFinie() {
-        
-    }*/
+   
 }
