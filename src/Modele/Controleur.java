@@ -30,13 +30,13 @@ public class Controleur implements Observateur {
     private int niveauEaux;
     private ArrayList<Aventurier> joueurs;
     private Grille grille = new Grille();
-    private Stack<CartesTirage> cartesPioche = new Stack();
-    private Stack<Tresor> tresors = new Stack();
-    private Stack<Tuile> listeTuiles = new Stack();
-    private Stack<CartesTirage> cartes = new Stack();
-    private Stack<CartesTirage> defausse = new Stack();
-    private Stack<CarteInondations> cartesInon = new Stack();
-    private Stack<CarteInondations> defausseInon = new Stack();
+    private Stack<CartesTirage> cartesPioche;
+    private Stack<Tresor> tresorsAcquis;
+    private Stack<Tuile> listeTuiles;
+    private Stack<CartesTirage> cartes;
+    private Stack<CartesTirage> defausse;
+    private Stack<CarteInondations> cartesInon;
+    private Stack<CarteInondations> defausseInon;
 
     private VueMenu vueMenu;
     private VueRules vueRules;
@@ -52,6 +52,13 @@ public class Controleur implements Observateur {
         this.grille = g;
         this.cartesPioche = new Stack<>();
         this.listeTuiles = new Stack();
+        this.cartesPioche = new Stack();
+        this.tresorsAcquis = new Stack();
+        this.listeTuiles = new Stack();
+        this.cartes = new Stack();
+        this.defausse = new Stack();
+        this.cartesInon = new Stack();
+        this.defausseInon = new Stack();
 
         /*
         vueMenu = new VueMenu();
