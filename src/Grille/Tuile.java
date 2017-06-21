@@ -16,7 +16,7 @@ public enum Tuile {
     LaPorteDeFer, // pion vilet
     LaPorteDOr, // pion jaune
     LesFalaiseDeLOubli,
-    LePaliasDeCorail,
+    LePalaisDeCorail,
     LaPorteDArgent, //pion orange
     LesDunesDeLIllusion,
     Heliport, // pion bleu

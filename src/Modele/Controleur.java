@@ -6,27 +6,17 @@
 package Modele;
 
 import Modele.Couleur;
-import Grille.Etat;
-import Cartes.Cartes;
-import Grille.CoorD;
-import Grille.Tuiles;
-import Grille.Grille;
-import Aventuriers.Aventurier;
-import Cartes.Tresor;
-import static Grille.Etat.Inondee;
-import View.Message;
-import View.Observateur;
-import View.TypesMessages;
-import View.VueGrille;
-import View.VueMenu;
-import View.VueRules;
-import View.VueStatue;
+import Grille.*;
+import Grille.Tuile;
+import Aventuriers.*;
+import View.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 import Cartes.*;
 import static Grille.Etat.Assechee;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.Stack;
 
 /**
@@ -37,7 +27,10 @@ public class Controleur implements Observateur{
     private int niveauEaux;
     private ArrayList<Aventurier> joueurs;
     private Grille grille = new Grille();
-    private Stack<Cartes> cartes;
+    private Stack<Cartes> cartesPioche;
+    private Stack<Tresor> tresors;
+    private Stack<Tuile> listeTuiles;
+    
     
     
     private VueMenu vueMenu;
@@ -52,12 +45,9 @@ public class Controleur implements Observateur{
     public Controleur(int niveauEaux,Grille g) {
         this.niveauEaux = niveauEaux;
         this.joueurs = new ArrayList<>();
-//        joueurs.add(j1);
-//        joueurs.add(j2);
-//        joueurs.add(j3);
-//        joueurs.add(j4);
         this.grille = g;
-        this.cartes = new Stack<>();
+        this.cartesPioche = new Stack<>();
+        this.listeTuiles = new Stack<Tuile>(EnumSet.allOf(Tuile.class));
         
        
         /*
@@ -97,7 +87,12 @@ public class Controleur implements Observateur{
                           null,null,"LaTourDuGuet","LeJardinDesMurmures",null,null};
     
     public void creerGrille(Grille g){
-
+        
+        
+        
+        
+        
+        
         for (int l = 0; l <= 5;l++) {
             for (int c = 0; c <= 5; c++) {
                 if ((l==0 && (( c==0||c==1)||c==4||c==5))||(l==1&&c==0)||(l==1&&c==5)||((l==4&&c==0)||(l==4&&c==5))||(l==5 && (( c==0||c==1)||c==4||c==5))){
@@ -220,20 +215,20 @@ public class Controleur implements Observateur{
     
     private void creerPioche() {
         for (int i = 0; i<5;i++) {
-            cartes.add(new CarteTresor(Tresor.Statue_du_Zephyr));
-            cartes.add(new CarteTresor(Tresor.Calice_de_l_onde));
-            cartes.add(new CarteTresor(Tresor.Cristal_Ardent));
-            cartes.add(new CarteTresor(Tresor.Pierre_Sacree));
+            cartesPioche.add(new CarteTresor(Tresor.Statue_du_Zephyr));
+            cartesPioche.add(new CarteTresor(Tresor.Calice_de_l_onde));
+            cartesPioche.add(new CarteTresor(Tresor.Cristal_Ardent));
+            cartesPioche.add(new CarteTresor(Tresor.Pierre_Sacree));
         }
         for (int i =0; i<3;i++) {
-            cartes.add(new CarteHelicoptere());
+            cartesPioche.add(new CarteHelicoptere());
         }
         for (int i=0; i<2;i++){
-            cartes.add(new CarteSacDeSable());
-            cartes.add(new CarteMonteeDesEaux());
+            cartesPioche.add(new CarteSacDeSable());
+            cartesPioche.add(new CarteMonteeDesEaux());
         }
         
-        Collections.shuffle(cartes);
+        Collections.shuffle(cartesPioche);
     }
     
     private void ajouterJoueurs(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4) {
@@ -257,6 +252,14 @@ public class Controleur implements Observateur{
         } else {
             return true;
         }
+    }
+    
+    private boolean peutPrendreTresor(Tresor tresor) {
+        
+    }
+    
+    private void prendreTresor(Tresor tresor) {
+        
     }
     
    /* private boolean partieFinie() {

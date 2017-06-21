@@ -24,11 +24,11 @@ public class Tuiles {
     ArrayList<Aventurier> possedeAventurier;
     CoorD coordonnées;
     
-    public Tuiles(String nom, CoorD c) {
+    public Tuiles(String nom, CoorD c, Tresor tresor) {
         this.setNom(nom);
         this.etat = null;
         this.couleur = null;
-        this.tresor = null;
+        this.tresor = tresor;
         this.departAventurier = null;
         this.possedeAventurier = new ArrayList<>();
         this.coordonnées = c;
