@@ -106,7 +106,12 @@ public class Grille {
     }
     
     public Tuiles getTuiles(String nomTuiles){
-        return aze.get(nomTuiles);
+        for (Tuiles t : aze.values()) {
+            if (t.getNom() == nomTuiles) {
+                return t;
+            }
+        }
+        return null;
     }
     
 

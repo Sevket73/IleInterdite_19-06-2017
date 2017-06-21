@@ -115,6 +115,10 @@ public class Aventurier {
         this.cartesEnMain.add(c);
     }
     
+    public void enleverCarte(CartesTirage c) {
+        this.cartesEnMain.remove(c);
+    }
+    
     /**
      * @return the positionCourante
      */

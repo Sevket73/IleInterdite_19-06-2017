@@ -17,4 +17,11 @@ public class CarteTresor extends CartesTirage {
         this.nomTresor = tresor;
     }
 
+    /**
+     * @return the nomTresor
+     */
+    public Tresor getNomTresor() {
+        return nomTresor;
+    }
+
 }

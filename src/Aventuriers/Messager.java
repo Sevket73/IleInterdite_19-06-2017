@@ -5,10 +5,24 @@
  */
 package Aventuriers;
 
+import Cartes.CarteTresor;
+import Cartes.CartesTirage;
+import Modele.Couleur;
+import java.util.Scanner;
+
 /**
  *
  * @author chaulaic
  */
-public class Messager {
+public class Messager extends Aventurier {
+    
+    public Messager(String nom, Boolean vivant, int nbAction, Couleur couleur) {
+        super(nom, vivant, nbAction, couleur);
+    }
+    
+    public void donnerCarteTresor(CartesTirage t,Aventurier j) {
+       j.addCarteEnMain(t);
+       this.enleverCarte(t);
+    }
     
 }
