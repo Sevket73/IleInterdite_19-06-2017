@@ -19,6 +19,7 @@ import static Cartes.Tresor.*;
 import static Grille.Etat.*;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Stack;
 
 /**
@@ -30,7 +31,7 @@ public class Controleur implements Observateur{
     private ArrayList<Aventurier> joueurs;
     private Grille grille = new Grille();
     private Stack<Cartes> cartesPioche;
-    private Stack<Tresor> tresors;
+    private HashSet<Tresor> tresorsAcquis;
     private Stack<Tuile> listeTuiles;
     private Stack<CartesTirage> cartes;
     private Stack<CartesTirage> defausse;
@@ -310,17 +311,71 @@ public class Controleur implements Observateur{
         }
     }
     
-    /*private boolean peutPrendreTresor(Tresor tresor) {
+    private boolean peutPrendreTresor(Tresor tresor, Aventurier j) {
+        int i;
+        i = 0;
+        for (CartesTirage c : j.getCartesEnMain()) {
+            if (c instanceof CarteTresor) {
+                if (((CarteTresor) c).getNomTresor() == tresor) {
+                    i++;
+                }
+            }
+        }
+        if (i <= 4) {
+            if (j.getPositionCourante().getTresor() == tresor) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
         
     }
     
-    private void prendreTresor(Tresor tresor) {
-        
-    }*/
+    private void prendreTresor(Tresor tresor, Aventurier j) {
+        if (this.peutPrendreTresor(tresor, j)) {
+            this.tresorsAcquis.add(tresor);
+        } else {
+            System.out.println("Vous ne pouvez pas prendre le trésor !! ");
+        }
+    }
     
-   /* private boolean partieFinie() {
+    private boolean partieFinie() {
+        Boolean allAlive;
+        allAlive = true;
+        for (Aventurier j : this.joueurs) {
+            if (j.getVivant()) {
+                allAlive = true;
+            } else {
+                allAlive = false;
+            }
+        }
         
-    }*/
+        Boolean allHelico;
+        allHelico = true;
+        for (Aventurier j : this.joueurs) {
+            if (j.getPositionCourante() == grille.getTuiles("Heliport")) {
+                allHelico = true;
+            } else {
+                allHelico = false;
+            }
+        }
+        
+        if (this.tresorsAcquis.size() == 4) {
+            if (allAlive){
+                if (allHelico) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
           
 
