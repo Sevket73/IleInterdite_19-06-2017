@@ -214,19 +214,10 @@ public class Aventurier {
                 }
             }
         }
-        
-        
-        
- 
     }
     
     public void assecher(Tuiles t) {
         t.changerEtat(Etat.Assechee);
         System.out.println("La tuile " + t.getNom() + " est maintenant assechee!");
     }
-            
-    
-
-    
-
 }

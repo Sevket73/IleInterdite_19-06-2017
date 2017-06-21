@@ -20,9 +20,9 @@ public class Messager extends Aventurier {
         super(nom, vivant, nbAction, couleur);
     }
     
-    public void donnerCarteTresor(CartesTirage t,Aventurier j) {
-       j.addCarteEnMain(t);
-       this.enleverCarte(t);
+    public void donnerCarteTresor(CartesTirage c,Aventurier j) {
+       j.addCarteEnMain(c);
+       this.enleverCarte(c);
     }
     
 }
