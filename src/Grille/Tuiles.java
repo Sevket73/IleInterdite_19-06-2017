@@ -125,16 +125,24 @@ public class Tuiles {
     /**
      * @param departAventurier the departAventurier to set
      */
-    private void setDepartAventurier(Aventurier departAventurier) {
-        this.departAventurier = departAventurier;
+    public void setDepartAventurier(Aventurier departAventurier) {
+        departAventurier.setPositionCourante(this.getCoordonnée().getColonne(),this.getCoordonnée().getLigne());
     }
 
     /**
      * @param possedeAventurier the possedeAventurier to set
      */
-    private void setPossedeAventurier(ArrayList<Aventurier> possedeAventurier) {
+    public void setPossedeAventurier(ArrayList<Aventurier> possedeAventurier) {
         this.possedeAventurier = possedeAventurier;
     }
+    public void addPossedeAventurier(Aventurier possedeAventurier){
+        this.possedeAventurier.add(departAventurier);
+    
+    }
+    public void removePossedeAventurier(Aventurier possedeAventurier){
+        this.possedeAventurier.remove(possedeAventurier);
+    }
+    
 
     /**
      * @param coordonnée the coordonnée to set
