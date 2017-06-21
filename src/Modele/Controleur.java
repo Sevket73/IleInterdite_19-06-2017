@@ -148,53 +148,47 @@ public class Controleur implements Observateur{
         this.creerGrille(grille);
         this.creerPioche();
         this.ajouterJoueurs(j1, j2, j3, j4);
-        
-        for (Aventurier j : joueurs) {
-            System.out.println(j.getNom() + " à vous de jouer!");
-            System.out.println("");
-            System.out.println("Vous êtes sur la tuile : " + g.getNomTuiles(j.getPositionCourante().getCoordonnée().getLigne(),j.getPositionCourante().getCoordonnée().getColonne()));
-            System.out.println("Souhaitez-vous passez ? (o/n)");
-            Scanner repPasse = new Scanner(System.in);
-            passez = repPasse.nextLine();
-            
-            if (passez.equals("n")) {
-                for (int k = 1; k < 4; k++) {
-                    System.out.println("Action " + k);
-                    System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
-                    String action;
-                    Scanner repAction = new Scanner(System.in);
-                    action = repAction.nextLine();
+        if (this.verifNbJoueurs()) {
+            for (Aventurier j : joueurs) {
+                System.out.println(j.getNom() + " à vous de jouer!");
+                System.out.println("");
+                System.out.println("Vous êtes sur la tuile : " + g.getNomTuiles(j.getPositionCourante().getCoordonnée().getLigne(),j.getPositionCourante().getCoordonnée().getColonne()));
+                System.out.println("Souhaitez-vous passez ? (o/n)");
+                Scanner repPasse = new Scanner(System.in);
+                passez = repPasse.nextLine();
 
-                    if (action.equals("deplacer")) {
-                        j.deplacement(grille);           
+                if (passez.equals("n")) {
+                    for (int k = 1; k < 4; k++) {
+                        System.out.println("Action " + k);
+                        System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
+                        String action;
+                        Scanner repAction = new Scanner(System.in);
+                        action = repAction.nextLine();
 
-                    } else if (action.equals("assecher")) {
-                        j.assechement(grille);
-                    }
+                        if (action.equals("deplacer")) {
+                            j.deplacement(grille);           
 
-                    if (k==3) {
-                            break;
-                    } else {
-                        System.out.println("Souhaitez-vous passez ? (o/n)");
-                        repPasse = new Scanner(System.in);
-                        passez = repPasse.nextLine();
-
-                        if (passez.equals("o")) {
-                            break;
+                        } else if (action.equals("assecher")) {
+                            j.assechement(grille);
                         }
-                    }       
 
+                        if (k==3) {
+                                break;
+                        } else {
+                            System.out.println("Souhaitez-vous passez ? (o/n)");
+                            repPasse = new Scanner(System.in);
+                            passez = repPasse.nextLine();
+
+                            if (passez.equals("o")) {
+                                break;
+                            }
+                        }
+                    }
                 }
             }
+        } else {
+            System.out.println("Il n'y a pas assez de joueurs !");
         }
-        
-        
-        
-        
-        
-        
-        
-        
     }
 
     @Override
@@ -243,16 +237,31 @@ public class Controleur implements Observateur{
     }
     
     private void ajouterJoueurs(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4) {
-        this.joueurs.add(j1);
-        this.joueurs.add(j2);
-        this.joueurs.add(j3);
-        this.joueurs.add(j4);
-        for (Aventurier j : joueurs) {
-            if (j == null) {
-                joueurs.remove(j);
-            }
+        if (j1 != null) {
+            this.joueurs.add(j1);
+        }
+        if (j2 != null) {
+            this.joueurs.add(j2);
+        }
+        if (j3 != null) {
+            this.joueurs.add(j3);
+        }
+        if (j4 != null) {
+            this.joueurs.add(j4);
         }
     }
+    
+    private boolean verifNbJoueurs() {
+        if (this.joueurs.size() < 2 ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+   /* private boolean partieFinie() {
+        
+    }*/
 }
           
 
