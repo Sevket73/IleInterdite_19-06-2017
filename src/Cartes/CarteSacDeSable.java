@@ -23,7 +23,7 @@ public class CarteSacDeSable extends CartesTirage  {
     }
     public ArrayList<Tuiles> assechementPossible(Grille g){
         ArrayList<Tuiles> assPoss = new ArrayList();
-        for (Tuiles t : g.getAze().values()) {
+        for (Tuiles t : g.getHmGrille().values()) {
             if (t.getEtat() != Etat.Inondee) {
                 assPoss.add(t);
             } 

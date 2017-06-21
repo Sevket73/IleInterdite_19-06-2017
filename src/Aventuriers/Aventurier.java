@@ -6,7 +6,7 @@
 package Aventuriers;
 
 import Cartes.CartesTirage;
-import Grille.CoorD;
+import Grille.Coordonnee;
 import Grille.Etat;
 import Grille.Grille;
 import Grille.Tuiles;
@@ -37,7 +37,7 @@ public class Aventurier {
         this.nbAction = nbAction;
         this.couleur = couleur;
         this.cartesEnMain = new ArrayList<>();
-        this.positionCourante = new Tuiles(null, new CoorD(0,0),null);
+        this.positionCourante = new Tuiles(null, new Coordonnee(0,0),null);
     }
     
     //getteurs et setteurs :

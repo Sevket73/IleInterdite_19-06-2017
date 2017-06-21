@@ -106,9 +106,9 @@ public class Controleur /*implements Observateur*/ {
         for (int l = 0; l <= 5; l++) {
             for (int c = 0; c <= 5; c++) {
                 if ((l == 0 && ((c == 0 || c == 1) || c == 4 || c == 5)) || (l == 1 && c == 0) || (l == 1 && c == 5) || ((l == 4 && c == 0) || (l == 4 && c == 5)) || (l == 5 && ((c == 0 || c == 1) || c == 4 || c == 5))) {
-                    Tuiles t = new Tuiles(null, new CoorD(c, l), null);
+                    Tuiles t = new Tuiles(null, new Coordonnee(c, l), null);
                 } else {
-                    Tuiles t = new Tuiles(listeTuiles.pop().toString(), new CoorD(c, l), null);
+                    Tuiles t = new Tuiles(listeTuiles.pop().toString(), new Coordonnee(c, l), null);
                     t.changerEtat(Assechee);
                     g.addTuiles((l * 6 + c), t);
                    
@@ -132,7 +132,7 @@ public class Controleur /*implements Observateur*/ {
         g.getTuiles("LaCaverneDuBrasier").setTresor(Cristal_Ardent);
         g.getTuiles("LaCaverneDesOmbres").setTresor(Cristal_Ardent);
 
-/*
+        /*
         for(Tuiles t : g.getAze().values()){
             if(t.getCouleur()==j1.getCouleur()){
                 t.setDepartAventurier(j1);
@@ -271,7 +271,7 @@ public class Controleur /*implements Observateur*/ {
     }
 
     private void creerPiocheInon() {
-        for (int i = 0; i < grille.getAze().size(); i++) {
+        for (int i = 0; i < grille.getHmGrille().size(); i++) {
             Tuiles t = grille.getTuiles(i);
             CarteInondations cI = new CarteInondations(t);
             cartesInon.push(cI);

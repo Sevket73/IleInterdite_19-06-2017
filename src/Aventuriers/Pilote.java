@@ -26,7 +26,7 @@ public class Pilote extends Aventurier {
         Collection<Tuiles> tteLesTuiles = new ArrayList<>();
         ArrayList<Tuiles> tuilesAdj = new ArrayList();
         
-        tteLesTuiles = g.getAze().values();
+        tteLesTuiles = g.getHmGrille().values();
         for( Tuiles t : tteLesTuiles){
             if(t.getEtat()!=coulee)
                 tuilesAdj.add(t);
