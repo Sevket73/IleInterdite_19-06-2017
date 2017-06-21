@@ -7,8 +7,8 @@ package Cartes;
 
 /**
  *
- * @author chaulaic
+ * @author salkims
  */
-public abstract class Cartes {
-
+public class Cartes {
+    
 }

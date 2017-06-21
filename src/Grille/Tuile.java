@@ -13,7 +13,7 @@ public enum Tuile {
     LePontDesAbimes,
     LaPorteDeBronze, // pion rouge
     LaCaverneDesOmbres,
-    LaPorteDeFer, // pion vilet
+    LaPorteDeFer, // pion violet
     LaPorteDOr, // pion jaune
     LesFalaiseDeLOubli,
     LePaliasDeCorail,

@@ -75,6 +75,13 @@ public class Aventurier {
     public ArrayList<CartesTirage> getCartesEnMain() {
         return cartesEnMain;
     }
+    public void addCarteEnMain(CartesTirage carte){
+        this.cartesEnMain.add(carte);
+        
+    }
+    public void enleverCarteEnMain(CartesTirage carte){
+        this.cartesEnMain.remove(carte);
+    }
 
     /**
      * @param nom the nom to set

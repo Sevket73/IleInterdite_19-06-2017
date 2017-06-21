@@ -7,7 +7,7 @@ package Modele;
 
 import Modele.Couleur;
 import Grille.Etat;
-import Cartes.Cartes;
+import Cartes.CartesTirage;
 import Grille.CoorD;
 import Grille.Tuiles;
 import Grille.Grille;
@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Scanner;
 import Cartes.*;
 import static Grille.Etat.Assechee;
+import Grille.Tuile;
 import java.util.Collections;
 import java.util.Stack;
 
@@ -37,9 +38,10 @@ public class Controleur implements Observateur{
     private int niveauEaux;
     private ArrayList<Aventurier> joueurs;
     private Grille grille = new Grille();
-    private Stack<Cartes> cartes;
-    
-    
+    private Stack<CartesTirage> cartes;
+    private Stack<CartesTirage> defausse;
+    private Stack<String> cartesInon;
+    private Stack<String> defausseInon;
     private VueMenu vueMenu;
     private VueRules vueRules;
     private VueGrille vueGrille;
@@ -146,7 +148,7 @@ public class Controleur implements Observateur{
         String passez;
         
         this.creerGrille(grille);
-        this.creerPioche();
+        this.creerPiocheTirage();
         this.ajouterJoueurs(j1, j2, j3, j4);
         
         for (Aventurier j : joueurs) {
@@ -182,9 +184,12 @@ public class Controleur implements Observateur{
                         if (passez.equals("o")) {
                             break;
                         }
-                    }       
+                    }
+                    
 
+                    
                 }
+                
             }
         }
         
@@ -224,7 +229,7 @@ public class Controleur implements Observateur{
         }
     }
     
-    private void creerPioche() {
+    private void creerPiocheTirage() {
         for (int i = 0; i<5;i++) {
             cartes.add(new CarteTresor(Tresor.Statue_du_Zephyr));
             cartes.add(new CarteTresor(Tresor.Calice_de_l_onde));
@@ -242,6 +247,30 @@ public class Controleur implements Observateur{
         Collections.shuffle(cartes);
     }
     
+    private void creerPiocheInon(){
+        for(int i = 0 ; i<grille.getAze().size();i++){
+            cartesInon.push(grille.getTuiles(i).getNom());
+            Collections.shuffle(cartesInon);
+        }
+    }
+    private void piocherCarteInon(){
+        cartesInon.pop();
+    }
+    private void piocherCarte(Aventurier j){
+        CartesTirage carte = new CartesTirage();
+        carte = cartes.pop();
+        if (carte instanceof CarteMonteeDesEaux){
+            monterEau();
+            defausse.push(carte);
+        }else{
+            j.addCarteEnMain(carte);
+    }
+       
+    }
+    private void monterEau(){
+        niveauEaux += 1;
+    }
+    
     private void ajouterJoueurs(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4) {
         this.joueurs.add(j1);
         this.joueurs.add(j2);
@@ -253,6 +282,7 @@ public class Controleur implements Observateur{
             }
         }
     }
+    
 }
           
 

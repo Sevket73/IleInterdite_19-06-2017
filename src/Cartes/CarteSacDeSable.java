@@ -9,11 +9,12 @@ package Cartes;
  *
  * @author chaulaic
  */
-public class CarteSacDeSable extends CartesTirage  {
+public class CarteSacDeSable extends CartesTirage{
 
     public CarteSacDeSable() {
         super();
     }
+    
 
     
 }

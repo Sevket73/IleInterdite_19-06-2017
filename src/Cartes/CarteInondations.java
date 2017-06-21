@@ -19,4 +19,5 @@ public class CarteInondations  extends Cartes{
         this.cible = cible;
         this.tuileInondable = tuileInondable;
     }
+    
 }
