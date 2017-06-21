@@ -8,6 +8,7 @@ package Grille;
 import Aventuriers.Aventurier;
 import Modele.Couleur;
 import Cartes.Tresor;
+import static Grille.Etat.coulee;
 import java.awt.Color;
 import java.util.ArrayList;
 
@@ -145,6 +146,7 @@ public class Tuiles {
     
     public void changerEtat(Etat etat){
         this.setEtat(etat);
+      
     }
     public void changerCouleur(Couleur couleur){
         this.setCouleur(couleur);
