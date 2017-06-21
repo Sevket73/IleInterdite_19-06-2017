@@ -110,6 +110,7 @@ public class Aventurier {
     private void setCartesEnMain(ArrayList<CartesTirage> cartesEnMain) {
         this.cartesEnMain = cartesEnMain;
     }
+
     public void addCarteEnMain(CartesTirage c){
         this.cartesEnMain.add(c);
     }
