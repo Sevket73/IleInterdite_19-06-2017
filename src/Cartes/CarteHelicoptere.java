@@ -13,6 +13,7 @@ public class CarteHelicoptere extends CartesTirage {
 
     public CarteHelicoptere() {
         super(); //supercoptère
+        setNom("helicoptere");
         
     }
 
