@@ -46,7 +46,7 @@ public class IleInterdite_main {
         j3.setPositionCourante(3, 0);
         //j4.setPositionCourante(2, 1);
         
-        c.jouer(j1, null, null, null,g);
+        c.jouer(j1, j2, j3, null,g);
         
     }
     

@@ -83,15 +83,15 @@ public class Controleur implements Observateur{
         this.joueurs.add(new Aventurier(nomJoueurs.get(0), true, 3, Couleur.Jaune));
     }
    
-    private String listeTuile[]= {null,null,"LePontDesAbimes","LaPorteDeBronze",null,null,
+    /*private String listeTuile[]= {null,null,"LePontDesAbimes","LaPorteDeBronze",null,null,
                           null,"LaCaverneDesOmbres","LaPorteDeFer","LaPorteDOr","LesFalaisesDeLOubli",null,
                           "LePalaisDeCorail","LaPorteDArgent","LesDunesDeLIllusion","Heliport","LaPorteDeCuivre","LeJardinDesHurlements",
                           "LaForetPourpre","LeLagonPerdu","LeMaraisBrumeux","Observatoire","LeRocherFantome","LaCaverneDuBrasier",
                           null,"LeTempleDuSoleil","LeTempleDeLaLune","LePalaisDesMarees","LeValDuCrepuscule",null,
-                          null,null,"LaTourDuGuet","LeJardinDesMurmures",null,null};
+                          null,null,"LaTourDuGuet","LeJardinDesMurmures",null,null};*/
     
     public void creerGrille(Grille g){
-        
+        ArrayList<Tuiles> prout = new ArrayList();
         for (Tuile t : EnumSet.allOf(Tuile.class)) {
             listeTuiles.push(t);
         }
@@ -106,9 +106,13 @@ public class Controleur implements Observateur{
                     Tuiles t = new Tuiles(listeTuiles.pop().toString(), new CoorD(c,l), null);
                     t.changerEtat(Assechee);
                     g.addTuiles((l * 6 + c),t);
+                    //prout.add(t);
                 }
             }        
         } 
+        /*for (Tuiles k : prout) {
+            System.out.println(k.getNom());
+        }*/
 
         g.getTuiles("LaPorteDeBronze").changerCouleur(Couleur.Rouge);
         g.getTuiles("LaPorteDOr").changerCouleur(Couleur.Jaune);

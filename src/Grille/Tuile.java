@@ -21,7 +21,7 @@ public enum Tuile {
     LesDunesDeLIllusion,
     Heliport, // pion bleu
     LaPorteDeCuivre, // pion vert
-    LeJardinDesHurlement,
+    LeJardinDesHurlements,
     LaForetPourpre,
     LeLagonPerdu,
     LeMaraisBrumeux,
