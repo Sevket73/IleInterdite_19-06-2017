@@ -154,6 +154,11 @@ public class Controleur /*implements Observateur*/ {
         this.creerGrille(grille, j1, j2, j3, j4);
         this.creerPiocheTirage();
         this.creerPiocheInon();
+        
+        for (CarteInondations c : this.cartesInon) {
+            System.out.println(c.getCible().getNom());
+        }
+        System.out.println("");
         this.initJoueurs(j1, j2, j3, j4);
         this.niveauEaux = 1;
         for (Tuiles t : g.getAze().values()) {
@@ -294,7 +299,12 @@ public class Controleur /*implements Observateur*/ {
         if (cartesInon.isEmpty()) {
             cartesInon.addAll(defausseInon);
             defausseInon.removeAllElements();
+            for (CarteInondations c : cartesInon) {
+                System.out.println(c.getCible().getNom());
+            }
         }
+        /*System.out.println("Je tire une carte");
+        System.out.println(cartesInon.pop().getCible().getNom());*/
         CarteInondations cI = cartesInon.pop();
         Tuiles t = cI.getCible();
 
