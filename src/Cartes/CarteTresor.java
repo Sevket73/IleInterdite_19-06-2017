@@ -10,18 +10,9 @@ package Cartes;
  * @author chaulaic
  */
 public class CarteTresor extends CartesTirage {
-    private Tresor nomTresor;
-
+    
     public CarteTresor(Tresor tresor) {
         super();
-        this.nomTresor = tresor;
+        setNom(tresor.toString());
     }
-
-    /**
-     * @return the nomTresor
-     */
-    public Tresor getNomTresor() {
-        return nomTresor;
-    }
-
 }

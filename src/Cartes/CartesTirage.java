@@ -13,7 +13,8 @@ import Aventuriers.Aventurier;
  */
 public class CartesTirage extends Cartes {
     private Aventurier aventurierPocesseur;
-
+    private String nom;
+    
     public CartesTirage() {
         this.aventurierPocesseur = null;
     }
@@ -21,9 +22,37 @@ public class CartesTirage extends Cartes {
     
     
     public void ajouterPocesseur(Aventurier j) {
-        if (this.aventurierPocesseur == null) {
-            this.aventurierPocesseur = j;
+        if (this.getAventurierPocesseur() == null) {
+            this.setAventurierPocesseur(j);
         } 
+    }
+
+    /**
+     * @return the aventurierPocesseur
+     */
+    public Aventurier getAventurierPocesseur() {
+        return aventurierPocesseur;
+    }
+
+    /**
+     * @param aventurierPocesseur the aventurierPocesseur to set
+     */
+    public void setAventurierPocesseur(Aventurier aventurierPocesseur) {
+        this.aventurierPocesseur = aventurierPocesseur;
+    }
+
+    /**
+     * @return the nom
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * @param nom the nom to set
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
     }
     
     

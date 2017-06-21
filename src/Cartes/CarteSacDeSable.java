@@ -5,6 +5,11 @@
  */
 package Cartes;
 
+import Grille.Etat;
+import Grille.Grille;
+import Grille.Tuiles;
+import java.util.ArrayList;
+
 /**
  *
  * @author chaulaic
@@ -15,5 +20,13 @@ public class CarteSacDeSable extends CartesTirage  {
         super();
     }
 
-    
+    public ArrayList<Tuiles> assechementPossible(Grille g) {
+        ArrayList<Tuiles> assPoss = new ArrayList();
+        for ( Tuiles t : g.getAze().values()) {
+            if(t.getEtat() != Etat.Inondee) {
+                assPoss.add(t);
+            }
+        }
+        return assPoss;
+    }
 }
