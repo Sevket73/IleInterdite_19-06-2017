@@ -153,62 +153,65 @@ public class Controleur implements Observateur {
         this.initJoueurs(j1, j2, j3, j4);
         this.niveauEaux = 1;
         if (this.verifNbJoueurs()) {
-            
-            for (Aventurier j : joueurs) {
-                System.out.println(j.getNom() + " à vous de jouer!");
-                System.out.println("");
-                System.out.println("Vous êtes sur la tuile : " + g.getNomTuiles(j.getPositionCourante().getCoordonnée().getLigne(), j.getPositionCourante().getCoordonnée().getColonne()));
-                System.out.println("Souhaitez-vous passez ? (o/n)");
-                Scanner repPasse = new Scanner(System.in);
-                passez = repPasse.nextLine();
+            while (!this.partiePerdue()) {
+                while (!this.partieGagnée()) {
+                    for (Aventurier j : joueurs) {
+                        System.out.println(j.getNom() + " à vous de jouer!");
+                        System.out.println("");
+                        System.out.println("Vous êtes sur la tuile : " + g.getNomTuiles(j.getPositionCourante().getCoordonnée().getLigne(), j.getPositionCourante().getCoordonnée().getColonne()));
+                        System.out.println("Souhaitez-vous passez ? (o/n)");
+                        Scanner repPasse = new Scanner(System.in);
+                        passez = repPasse.nextLine();
 
-                if (passez.equals("n")) {
-                    for (int k = 1; k < 4; k++) {
-                        System.out.println("Action " + k);
-                        System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
-                        String action;
-                        Scanner repAction = new Scanner(System.in);
-                        action = repAction.nextLine();
+                        if (passez.equals("n")) {
+                            for (int k = 1; k < 4; k++) {
+                                System.out.println("Action " + k);
+                                System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
+                                String action;
+                                Scanner repAction = new Scanner(System.in);
+                                action = repAction.nextLine();
 
-                        if (action.equals("deplacer")) {
-                            j.deplacement(grille);
+                                if (action.equals("deplacer")) {
+                                    j.deplacement(grille);
 
-                        } else if (action.equals("assecher")) {
-                            j.assechement(grille);
-                        }
+                                } else if (action.equals("assecher")) {
+                                    j.assechement(grille);
+                                }
 
-                        if (k == 3) {
-                            break;
+                                if (k == 3) {
+                                    break;
+                                } else {
+                                    System.out.println("Souhaitez-vous passez ? (o/n)");
+                                    repPasse = new Scanner(System.in);
+                                    passez = repPasse.nextLine();
+
+                                    if (passez.equals("o")) {
+                                        break;
+                                    }
+                                }
+                                this.piocherCarte(j);
+                                this.piocherCarte(j);
+                                for (CartesTirage t : j.getCartesEnMain()) {
+                                    System.out.println(t.getClass().toString());
+                                }
+                                for (int i = 0; i <= niveauEaux; i++) {
+                                    this.piocherCarteInon();
+                                }
+                            }
                         } else {
-                            System.out.println("Souhaitez-vous passez ? (o/n)");
-                            repPasse = new Scanner(System.in);
-                            passez = repPasse.nextLine();
-
-                            if (passez.equals("o")) {
-                                break;
+                            this.piocherCarte(j);
+                            this.piocherCarte(j);
+                            for (CartesTirage t : j.getCartesEnMain()) {
+                                System.out.println(t.getNom());
+                            }
+                            for (int i = 0; i <= niveauEaux; i++) {
+                                this.piocherCarteInon();
+                                System.out.println(niveauEaux);
                             }
                         }
-                        this.piocherCarte(j);
-                        this.piocherCarte(j);
-                        for (CartesTirage t : j.getCartesEnMain()) {
-                            System.out.println(t.getClass().toString());
-                        }
-                        for (int i = 0; i <= niveauEaux; i++) {
-                            this.piocherCarteInon();
-                        }
-                    }
-                } else {
-                    this.piocherCarte(j);
-                    this.piocherCarte(j);
-                    for (CartesTirage t : j.getCartesEnMain()) {
-                        System.out.println(t.getNom());
-                    }
-                    for (int i = 0; i <= niveauEaux; i++) {
-                        this.piocherCarteInon();
-                        System.out.println(niveauEaux);
+
                     }
                 }
-
             }
 
         } else {
@@ -330,10 +333,10 @@ public class Controleur implements Observateur {
             return true;
         }
     }
-    
+
     private boolean peutPrendreTresor(Aventurier j, Tresor tresor) {
         int i = 0;
-        for ( CartesTirage c : j.getCartesEnMain()) {
+        for (CartesTirage c : j.getCartesEnMain()) {
             if (c instanceof CarteTresor) {
                 if (c.getNom() == tresor.toString()) {
                     i++;
@@ -345,7 +348,7 @@ public class Controleur implements Observateur {
             }
         }
         if (i <= 4) {
-            if (j.getPositionCourante().getTresor() == tresor ) {
+            if (j.getPositionCourante().getTresor() == tresor) {
                 return true;
             } else {
                 return false;
@@ -360,11 +363,11 @@ public class Controleur implements Observateur {
             this.tresorsAcquis.add(tresor);
         }
     }
-    
+
     private boolean partieGagnée() {
         Boolean allAlive = true;
         Boolean allHelico = true;
-        
+
         for (Aventurier j : this.joueurs) {
             if (j.getVivant()) {
                 allAlive = true;
@@ -372,7 +375,7 @@ public class Controleur implements Observateur {
                 allAlive = false;
                 break;
             }
-            
+
             if (j.getPositionCourante().getNom() == "Heliport") {
                 allHelico = true;
             } else {
@@ -380,7 +383,7 @@ public class Controleur implements Observateur {
                 break;
             }
         }
-        
+
         if (allAlive) {
             if (allHelico) {
                 if (this.tresorsAcquis.size() == 4) {
@@ -394,6 +397,19 @@ public class Controleur implements Observateur {
         } else {
             return false;
         }
-        
+
+    }
+
+    private Boolean partiePerdue() {
+        Boolean allAlive = true;
+        for (Aventurier j : this.joueurs) {
+            if (j.getVivant()) {
+                allAlive = false;
+            } else {
+                allAlive = true;
+                break;
+            }
+        }
+        return allAlive;
     }
 }
