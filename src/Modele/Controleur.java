@@ -215,6 +215,20 @@ public class Controleur /*implements Observateur*/ {
                                     //for (CartesTirage c : j.getCartesEnMain()) {
                                     //   if(c!=null) System.out.println(c.getNom());
                                     //}
+                                    System.out.println("Les tuiles inondées sont : ");
+                                    for (Tuile t : g.getHmGrille().values()) {
+                                        if (t.getEtat() == EtatEnum.Inondee) {
+                                            System.out.print(t.getNom() + ' ');
+                                        }
+                                    }
+                                    System.out.println();
+                                    System.out.println("Les tuiles coulées sont : ");
+                                    for (Tuile t : g.getHmGrille().values()) {
+                                        if (t.getEtat() == EtatEnum.Coulee) {
+                                            System.out.print(t.getNom() + ' ');
+                                        }
+                                    }
+                                    System.out.println();
                                     System.out.println("Quelle action souhaitez vous faire ? (deplacer/assecher/donner une carte/coup special/passer)");
                                     Scanner repAction = new Scanner(System.in);
                                     String action;

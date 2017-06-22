@@ -174,9 +174,10 @@ public class Aventurier {
 
         for (Tuile t : tuilesAdj) {
             if (t.getNom() != null) {
-                System.out.println(t.getNom());
+                System.out.print(t.getNom() + ' ');
             }
         }
+        System.out.println();
         Scanner repDep = new Scanner(System.in);
         String dep;
         dep = repDep.nextLine();
@@ -224,8 +225,9 @@ public class Aventurier {
         } else {
             System.out.println("Quelle tuile souhaitez vous assecher ?");
             for (Tuile t : tuilesAssechables) {
-                System.out.println(t.getNom());
+                System.out.print(t.getNom() + ' ');
             }
+            System.out.println();
             Scanner repAss = new Scanner(System.in);
             String ass;
             ass = repAss.nextLine();
