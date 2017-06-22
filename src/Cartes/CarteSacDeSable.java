@@ -5,9 +5,9 @@
  */
 package Cartes;
 
-import Grille.Etat;
+import Grille.EtatEnum;
 import Grille.Grille;
-import Grille.Tuiles;
+import Grille.Tuile;
 import java.util.ArrayList;
 
 /**
@@ -21,10 +21,10 @@ public class CarteSacDeSable extends CartesTirage  {
         setNom("SacDeSable");
     
     }
-    public ArrayList<Tuiles> assechementPossible(Grille g){
-        ArrayList<Tuiles> assPoss = new ArrayList();
-        for (Tuiles t : g.getHmGrille().values()) {
-            if (t.getEtat() != Etat.Inondee) {
+    public ArrayList<Tuile> assechementPossible(Grille g){
+        ArrayList<Tuile> assPoss = new ArrayList();
+        for (Tuile t : g.getHmGrille().values()) {
+            if (t.getEtat() != EtatEnum.Inondee) {
                 assPoss.add(t);
             } 
         }  

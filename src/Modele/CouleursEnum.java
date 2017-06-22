@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cartes;
+package Modele;
 
 /**
  *
  * @author chaulaic
  */
-public enum Tresor {
-    Cristal_Ardent,
-    Pierre_Sacree,
-    Statue_du_Zephyr,
-    Calice_de_l_onde
-    
+public enum CouleursEnum {
+    Rouge,
+    Bleu,
+    Vert,
+    Jaune,
+    Noir,
+    Blanc,
+    Orange
 }

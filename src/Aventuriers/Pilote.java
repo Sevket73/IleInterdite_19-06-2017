@@ -5,30 +5,30 @@
  */
 package Aventuriers;
 
-import static Grille.Etat.coulee;
 import Grille.Grille;
-import Grille.Tuiles;
-import Modele.Couleur;
+import Grille.Tuile;
+import Modele.CouleursEnum;
 import java.util.ArrayList;
 import java.util.Collection;
+import static Grille.EtatEnum.Coulee;
 
 /**
  *
  * @author chaulaic
  */
 public class Pilote extends Aventurier {
-    public Pilote(String nom, Boolean vivant, int nbAction, Couleur couleur){
+    public Pilote(String nom, Boolean vivant, int nbAction, CouleursEnum couleur){
         super(nom, vivant, nbAction, couleur);
     }
     
     @Override
-    public ArrayList<Tuiles> deplacementPossible(Grille g) {
-        Collection<Tuiles> tteLesTuiles = new ArrayList<>();
-        ArrayList<Tuiles> tuilesAdj = new ArrayList();
+    public ArrayList<Tuile> deplacementPossible(Grille g) {
+        Collection<Tuile> tteLesTuiles = new ArrayList<>();
+        ArrayList<Tuile> tuilesAdj = new ArrayList();
         
         tteLesTuiles = g.getHmGrille().values();
-        for( Tuiles t : tteLesTuiles){
-            if(t.getEtat()!=coulee)
+        for( Tuile t : tteLesTuiles){
+            if(t.getEtat()!=Coulee)
                 tuilesAdj.add(t);
         }
            

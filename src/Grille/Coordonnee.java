@@ -5,7 +5,7 @@
  */
 package Grille;
 
-import Grille.Tuiles;
+import Grille.Tuile;
 
 /**
  *
@@ -14,7 +14,7 @@ import Grille.Tuiles;
 public class Coordonnee {
     private int colonne;
     private int ligne;
-    private Tuiles tuile;
+    private Tuile tuile;
     
     public Coordonnee(int colonne, int ligne) {
         this.colonne = colonne;
@@ -29,7 +29,7 @@ public class Coordonnee {
         return ligne;
     }
 
-    public Tuiles getTuile() {
+    public Tuile getTuile() {
         return tuile;
     }
 

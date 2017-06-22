@@ -7,16 +7,16 @@ package Aventuriers;
 
 import Cartes.CartesTirage;
 import Grille.Coordonnee;
-import Grille.Etat;
+import Grille.EtatEnum;
 import Grille.Grille;
-import Grille.Tuiles;
-import static Grille.Etat.Assechee;
-import static Grille.Etat.Inondee;
+import Grille.Tuile;
+import static Grille.EtatEnum.Assechee;
+import static Grille.EtatEnum.Inondee;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
-import Modele.Couleur;
+import Modele.CouleursEnum;
 
 /**
  *
@@ -26,18 +26,18 @@ public class Aventurier {
     protected String nom;
     protected Boolean vivant;
     protected int nbAction;
-    protected Couleur couleur;
+    protected CouleursEnum couleur;
     protected ArrayList<CartesTirage> cartesEnMain;
-    protected Tuiles positionCourante;
+    protected Tuile positionCourante;
     
     
-    public Aventurier(String nom, Boolean vivant, int nbAction, Couleur couleur) {
+    public Aventurier(String nom, Boolean vivant, int nbAction, CouleursEnum couleur) {
         this.nom = nom;
         this.vivant = vivant;
         this.nbAction = nbAction;
         this.couleur = couleur;
         this.cartesEnMain = new ArrayList<>();
-        this.positionCourante = new Tuiles(null, new Coordonnee(0,0),null);
+        this.positionCourante = new Tuile(null, new Coordonnee(0,0),null);
     }
     
     //getteurs et setteurs :
@@ -65,7 +65,7 @@ public class Aventurier {
     /**
      * @return the couleur
      */
-    public Couleur getCouleur() {
+    public CouleursEnum getCouleur() {
         return couleur;
     }
 
@@ -100,7 +100,7 @@ public class Aventurier {
     /**
      * @param couleur the couleur to set
      */
-    private void setCouleur(Couleur couleur) {
+    private void setCouleur(CouleursEnum couleur) {
         this.couleur = couleur;
     }
 
@@ -122,7 +122,7 @@ public class Aventurier {
     /**
      * @return the positionCourante
      */
-    public Tuiles getPositionCourante() {
+    public Tuile getPositionCourante() {
         return positionCourante;
     }
 
@@ -134,14 +134,14 @@ public class Aventurier {
         this.getPositionCourante().getCoordonnée().setLigne(l);
     }
     
-    public ArrayList<Tuiles> deplacementPossible(Grille g) {
+    public ArrayList<Tuile> deplacementPossible(Grille g) {
         
-        ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
-        ArrayList<Tuiles> tuilesAdjBis = new ArrayList<>();
+        ArrayList<Tuile> tuilesAdj = new ArrayList<>();
+        ArrayList<Tuile> tuilesAdjBis = new ArrayList<>();
         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
 
-        for (Tuiles t : tuilesAdj) {
-            if (t.getEtat() == Etat.coulee ) {
+        for (Tuile t : tuilesAdj) {
+            if (t.getEtat() == EtatEnum.Coulee ) {
                 tuilesAdjBis.add(t);
             }
         }
@@ -151,18 +151,18 @@ public class Aventurier {
         }
 
     public void deplacement(Grille g) {
-        ArrayList<Tuiles> tuilesAdj = new ArrayList();
+        ArrayList<Tuile> tuilesAdj = new ArrayList();
 
         System.out.println("Où souhaitez-vous aller ?");
 
-        for (Tuiles t : tuilesAdj){
+        for (Tuile t : tuilesAdj){
             if (t != null)
                 System.out.println(t.getNom());   
         }
         Scanner repDep = new Scanner(System.in);
         String dep;
         dep = repDep.nextLine();
-        for (Tuiles t : tuilesAdj) {
+        for (Tuile t : tuilesAdj) {
             if (dep.equals(t.getNom())) {
                 this.seDeplacer(t);
             } else {
@@ -171,7 +171,7 @@ public class Aventurier {
         }
     }
     
-    public void seDeplacer(Tuiles t) {
+    public void seDeplacer(Tuile t) {
         this.getPositionCourante().removePossedeAventurier(this);
         this.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
         System.out.println("Vous êtes maintenant sur la tuile :" + t.getNom());
@@ -179,14 +179,14 @@ public class Aventurier {
         
     }
                 
-    public ArrayList<Tuiles> tuilesAssechables(Grille g){
+    public ArrayList<Tuile> tuilesAssechables(Grille g){
 
-        ArrayList<Tuiles> tuilesAdj = new ArrayList<>();
-        ArrayList<Tuiles> tuilesAssechables = new ArrayList<>();
+        ArrayList<Tuile> tuilesAdj = new ArrayList<>();
+        ArrayList<Tuile> tuilesAssechables = new ArrayList<>();
         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
         tuilesAdj.add(g.getTuiles(positionCourante.getCoordonnée().getLigne()*6 + positionCourante.getCoordonnée().getColonne()));
-        for (Tuiles t : tuilesAdj) {
-            if (t.getEtat() != Etat.Inondee) {
+        for (Tuile t : tuilesAdj) {
+            if (t.getEtat() != EtatEnum.Inondee) {
                 tuilesAssechables.add(t);
             } 
         }
@@ -197,20 +197,20 @@ public class Aventurier {
     }
     
     public void assechement(Grille g){ 
-        ArrayList<Tuiles> tuilesAssechables = new ArrayList<>();
+        ArrayList<Tuile> tuilesAssechables = new ArrayList<>();
         tuilesAssechables = this.tuilesAssechables(g);
         if (tuilesAssechables.isEmpty()) {
             System.out.println("Il n'y a aucune tuile à assecher !");
                     
         } else {
             System.out.println("Quelle tuile souhaitez vous assecher ?");
-            for (Tuiles t : tuilesAssechables) {
+            for (Tuile t : tuilesAssechables) {
                 System.out.println(t.getNom());
             }
             Scanner repAss = new Scanner(System.in);
             String ass;
             ass = repAss.nextLine();
-            for (Tuiles t : tuilesAssechables) {
+            for (Tuile t : tuilesAssechables) {
                 if (ass.equals(t.getNom())) {
                     this.assecher(t);
                 } else {
@@ -220,8 +220,8 @@ public class Aventurier {
         }
     }
     
-    public void assecher(Tuiles t) {
-        t.changerEtat(Etat.Assechee);
+    public void assecher(Tuile t) {
+        t.changerEtat(EtatEnum.Assechee);
         System.out.println("La tuile " + t.getNom() + " est maintenant assechee!");
     }
 }

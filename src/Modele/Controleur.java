@@ -5,9 +5,9 @@
  */
 package Modele;
 
-import Modele.Couleur;
+import Modele.CouleursEnum;
 import Grille.*;
-import Grille.Tuile;
+import Grille.TuilesEnum;
 import Aventuriers.*;
 import View.*;
 import java.util.ArrayList;
@@ -15,8 +15,8 @@ import java.util.Collection;
 import java.util.Scanner;
 import Cartes.*;
 import Cartes.CarteInondation;
-import static Cartes.Tresor.*;
-import static Grille.Etat.*;
+import static Cartes.TresorsEnum.*;
+import static Grille.EtatEnum.*;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -32,8 +32,8 @@ public class Controleur /*implements Observateur*/ {
     private ArrayList<Aventurier> joueurs;
     private Grille grille = new Grille();
     private Stack<CartesTirage> cartesPioche;
-    private HashSet<Tresor> tresorsAcquis;
-    private Stack<Tuile> listeTuiles;
+    private HashSet<TresorsEnum> tresorsAcquis;
+    private Stack<TuilesEnum> listeTuiles;
     private Stack<CartesTirage> cartes;
     private Stack<CartesTirage> defausse;
     private Stack<CarteInondation> cartesInon;
@@ -84,10 +84,10 @@ public class Controleur /*implements Observateur*/ {
         ArrayList<String> nomJoueurs = new ArrayList<>();
         nomJoueurs = vueMenu.getJoueur();
 
-        this.joueurs.add(new Aventurier(nomJoueurs.get(1), true, 3, Couleur.Bleu));
-        this.joueurs.add(new Aventurier(nomJoueurs.get(2), true, 3, Couleur.Rouge));
-        this.joueurs.add(new Aventurier(nomJoueurs.get(3), true, 3, Couleur.Noir));
-        this.joueurs.add(new Aventurier(nomJoueurs.get(0), true, 3, Couleur.Jaune));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(1), true, 3, CouleursEnum.Bleu));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(2), true, 3, CouleursEnum.Rouge));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(3), true, 3, CouleursEnum.Noir));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(0), true, 3, CouleursEnum.Jaune));
     }
 
     /*private String listeTuile[]= {null,null,"LePontDesAbimes","LaPorteDeBronze",null,null,
@@ -97,7 +97,7 @@ public class Controleur /*implements Observateur*/ {
                           null,"LeTempleDuSoleil","LeTempleDeLaLune","LePalaisDesMarees","LeValDuCrepuscule",null,
                           null,null,"LaTourDuGuet","LeJardinDesMurmures",null,null};*/
     public void creerGrille(Grille g,Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) {
-        for (Tuile t : EnumSet.allOf(Tuile.class)) {
+        for (TuilesEnum t : EnumSet.allOf(TuilesEnum.class)) {
             listeTuiles.push(t);
         }
 
@@ -106,9 +106,9 @@ public class Controleur /*implements Observateur*/ {
         for (int l = 0; l <= 5; l++) {
             for (int c = 0; c <= 5; c++) {
                 if ((l == 0 && ((c == 0 || c == 1) || c == 4 || c == 5)) || (l == 1 && c == 0) || (l == 1 && c == 5) || ((l == 4 && c == 0) || (l == 4 && c == 5)) || (l == 5 && ((c == 0 || c == 1) || c == 4 || c == 5))) {
-                    Tuiles t = new Tuiles(null, new Coordonnee(c, l), null);
+                    Tuile t = new Tuile(null, new Coordonnee(c, l), null);
                 } else {
-                    Tuiles t = new Tuiles(listeTuiles.pop().toString(), new Coordonnee(c, l), null);
+                    Tuile t = new Tuile(listeTuiles.pop().toString(), new Coordonnee(c, l), null);
                     t.changerEtat(Assechee);
                     g.addTuiles((l * 6 + c), t);
                    
@@ -116,12 +116,12 @@ public class Controleur /*implements Observateur*/ {
             }
         }
         
-        g.getTuiles("LaPorteDeBronze").changerCouleur(Couleur.Rouge);
-        g.getTuiles("LaPorteDOr").changerCouleur(Couleur.Jaune);
-        g.getTuiles("LaPorteDeFer").changerCouleur(Couleur.Noir);
-        g.getTuiles("LaPorteDArgent").changerCouleur(Couleur.Orange);
-        g.getTuiles("LaPorteDeCuivre").changerCouleur(Couleur.Vert);
-        g.getTuiles("Heliport").changerCouleur(Couleur.Bleu);
+        g.getTuiles("LaPorteDeBronze").changerCouleur(CouleursEnum.Rouge);
+        g.getTuiles("LaPorteDOr").changerCouleur(CouleursEnum.Jaune);
+        g.getTuiles("LaPorteDeFer").changerCouleur(CouleursEnum.Noir);
+        g.getTuiles("LaPorteDArgent").changerCouleur(CouleursEnum.Orange);
+        g.getTuiles("LaPorteDeCuivre").changerCouleur(CouleursEnum.Vert);
+        g.getTuiles("Heliport").changerCouleur(CouleursEnum.Bleu);
 
         g.getTuiles("LePalaisDeCorail").setTresor(Calice_de_l_onde);
         g.getTuiles("LePalaisDesMarees").setTresor(Calice_de_l_onde);
@@ -254,10 +254,10 @@ public class Controleur /*implements Observateur*/ {
 */
     private void creerPiocheTirage() {
         for (int i = 0; i < 5; i++) {
-            cartesPioche.push(new CarteTresor(Tresor.Statue_du_Zephyr));
-            cartesPioche.push(new CarteTresor(Tresor.Calice_de_l_onde));
-            cartesPioche.push(new CarteTresor(Tresor.Cristal_Ardent));
-            cartesPioche.push(new CarteTresor(Tresor.Pierre_Sacree));
+            cartesPioche.push(new CarteTresor(TresorsEnum.Statue_du_Zephyr));
+            cartesPioche.push(new CarteTresor(TresorsEnum.Calice_de_l_onde));
+            cartesPioche.push(new CarteTresor(TresorsEnum.Cristal_Ardent));
+            cartesPioche.push(new CarteTresor(TresorsEnum.Pierre_Sacree));
         }
         for (int i = 0; i < 3; i++) {
             cartesPioche.push(new CarteHelicoptere());
@@ -272,7 +272,7 @@ public class Controleur /*implements Observateur*/ {
 
     private void creerPiocheInon() {
         for (int i = 0; i < grille.getHmGrille().size(); i++) {
-            Tuiles t = grille.getTuiles(i);
+            Tuile t = grille.getTuiles(i);
             CarteInondation cI = new CarteInondation(t);
             cartesInon.push(cI);
         }
@@ -283,14 +283,14 @@ if(cartesInon.isEmpty()){
     cartesInon.addAll(defausseInon);
 }
         CarteInondation cI = cartesInon.pop();
-        Tuiles t = cI.getCible();
+        Tuile t = cI.getCible();
 
         if (t.getEtat() == Assechee) {
             t.changerEtat(Inondee);
             defausseInon.push(cI);
 
         } else if (t.getEtat() == Inondee) {
-            t.changerEtat(coulee);
+            t.changerEtat(Coulee);
 
         }
     }
@@ -348,7 +348,7 @@ if(cartesInon.isEmpty()){
         }
     }
 
-    private boolean peutPrendreTresor(Aventurier j, Tresor tresor) {
+    private boolean peutPrendreTresor(Aventurier j, TresorsEnum tresor) {
         int i = 0;
         for (CartesTirage c : j.getCartesEnMain()) {
             if (c instanceof CarteTresor) {
@@ -372,7 +372,7 @@ if(cartesInon.isEmpty()){
         }
     }
 
-    private void prendreTresor(Tresor tresor, Aventurier j) {
+    private void prendreTresor(TresorsEnum tresor, Aventurier j) {
         if (this.peutPrendreTresor(j, tresor)) {
             this.tresorsAcquis.add(tresor);
         }

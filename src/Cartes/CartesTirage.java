@@ -12,11 +12,11 @@ import Aventuriers.Aventurier;
  * @author chaulaic
  */
 public class CartesTirage extends Cartes {
-    private Aventurier aventurierPocesseur;
+    private Aventurier aventurierPossesseur;
     private String nom;
 
     public CartesTirage() {
-        this.aventurierPocesseur = null;
+        this.aventurierPossesseur = null;
     }
     
     
@@ -31,14 +31,14 @@ public class CartesTirage extends Cartes {
      * @return the aventurierPocesseur
      */
     public Aventurier getAventurierPocesseur() {
-        return aventurierPocesseur;
+        return aventurierPossesseur;
     }
 
     /**
      * @param aventurierPocesseur the aventurierPocesseur to set
      */
     public void setAventurierPocesseur(Aventurier aventurierPocesseur) {
-        this.aventurierPocesseur = aventurierPocesseur;
+        this.aventurierPossesseur = aventurierPocesseur;
     }
 
     /**

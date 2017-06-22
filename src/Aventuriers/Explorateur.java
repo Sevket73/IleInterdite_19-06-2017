@@ -6,8 +6,8 @@
 package Aventuriers;
 
 import Grille.Grille;
-import Grille.Tuiles;
-import Modele.Couleur;
+import Grille.Tuile;
+import Modele.CouleursEnum;
 import java.util.ArrayList;
 
 /**
@@ -16,17 +16,17 @@ import java.util.ArrayList;
  */
 public class Explorateur extends Aventurier {
     
-    public Explorateur(String nom, Boolean vivant, int nbAction, Couleur couleur) {
+    public Explorateur(String nom, Boolean vivant, int nbAction, CouleursEnum couleur) {
         super(nom, vivant, nbAction, couleur);
     }
     
     
   
     @Override
-    public ArrayList<Tuiles> deplacementPossible(Grille g) {
-         ArrayList<Tuiles>tuilesAdj = new ArrayList();
-         ArrayList<Tuiles>tuilesDiag = new ArrayList();
-         ArrayList<Tuiles>tuilesAll = new ArrayList();
+    public ArrayList<Tuile> deplacementPossible(Grille g) {
+         ArrayList<Tuile>tuilesAdj = new ArrayList();
+         ArrayList<Tuile>tuilesDiag = new ArrayList();
+         ArrayList<Tuile>tuilesAll = new ArrayList();
          tuilesAdj = g.getTuilesAdjacentes(positionCourante);
          tuilesDiag=getTuilesDiag(g,positionCourante);
          tuilesAll.addAll(tuilesAdj);
@@ -35,18 +35,18 @@ public class Explorateur extends Aventurier {
          return tuilesAll;
     }
     
-    public ArrayList<Tuiles> assechementPossible(Grille g){
-         ArrayList<Tuiles>tuilesAdj = new ArrayList();
-         ArrayList<Tuiles>tuilesDiag = new ArrayList();
-         ArrayList<Tuiles>tuilesAll = new ArrayList();
+    public ArrayList<Tuile> assechementPossible(Grille g){
+         ArrayList<Tuile>tuilesAdj = new ArrayList();
+         ArrayList<Tuile>tuilesDiag = new ArrayList();
+         ArrayList<Tuile>tuilesAll = new ArrayList();
          tuilesAdj = g.getTuilesAdjacentes(positionCourante);
          tuilesDiag=getTuilesDiag(g,positionCourante);
          tuilesAll.addAll(tuilesAdj);
          tuilesAll.addAll(tuilesDiag);
          return tuilesAdj;
     }
-    private ArrayList<Tuiles> getTuilesDiag(Grille g,Tuiles positionCourante){
-        ArrayList<Tuiles>tuilesDiag = new ArrayList();
+    private ArrayList<Tuile> getTuilesDiag(Grille g,Tuile positionCourante){
+        ArrayList<Tuile>tuilesDiag = new ArrayList();
         
         int l = positionCourante.getCoordonnée().getLigne();
         int c = positionCourante.getCoordonnée().getColonne();

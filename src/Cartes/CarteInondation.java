@@ -5,7 +5,7 @@
  */
 package Cartes;
 
-import Grille.Tuiles;
+import Grille.Tuile;
 
 /**
  *
@@ -13,9 +13,9 @@ import Grille.Tuiles;
  */
 public class CarteInondation extends Cartes {
 
-    private Tuiles cible;
+    private Tuile cible;
 
-    public CarteInondation(Tuiles cible) {
+    public CarteInondation(Tuile cible) {
         this.cible = cible;
 
     }
@@ -23,14 +23,14 @@ public class CarteInondation extends Cartes {
     /**
      * @return the cible
      */
-    public Tuiles getCible() {
+    public Tuile getCible() {
         return cible;
     }
 
     /**
      * @param cible the cible to set
      */
-    public void setCible(Tuiles cible) {
+    public void setCible(Tuile cible) {
         this.cible = cible;
     }
 }

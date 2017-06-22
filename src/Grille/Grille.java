@@ -15,37 +15,37 @@ import java.util.HashMap;
  */
 public class Grille {
 
-    private HashMap<Integer, Tuiles> hmGrille = new HashMap();
+    private HashMap<Integer, Tuile> hmGrille = new HashMap();
 
     public Grille() {
-        hmGrille = new HashMap<Integer, Tuiles>();
+        hmGrille = new HashMap<Integer, Tuile>();
 
     }
 
-    public void addTuiles(Integer i, Tuiles t) {
+    public void addTuiles(Integer i, Tuile t) {
         getHmGrille().put(i, t);
     }
 
-    public Tuiles getTuiles(int k) {
+    public Tuile getTuiles(int k) {
         return hmGrille.get(k);
     }
 
-    public Tuiles getTuiles(int lig, int col) {
+    public Tuile getTuiles(int lig, int col) {
         return hmGrille.get(lig * 6 + col);
     }
 
     /**
      * @return the aze
      */
-    public HashMap<Integer, Tuiles> getHmGrille() {
+    public HashMap<Integer, Tuile> getHmGrille() {
         return hmGrille;
     }
 
     /**
      * @param aze the aze to set
      */
-    public void setAze(HashMap<Integer, Tuiles> aze) {
-        aze = new HashMap<Integer, Tuiles>();
+    public void setAze(HashMap<Integer, Tuile> aze) {
+        aze = new HashMap<Integer, Tuile>();
         this.hmGrille = aze;
     }
 
@@ -60,9 +60,9 @@ public class Grille {
         return this.hmGrille.get(k).getNom();
     }
 
-    public ArrayList<Tuiles> getTuilesAdjacentes(Tuiles positionCourante) {
+    public ArrayList<Tuile> getTuilesAdjacentes(Tuile positionCourante) {
 
-        ArrayList<Tuiles> tuilesAdjacentes = new ArrayList<>();
+        ArrayList<Tuile> tuilesAdjacentes = new ArrayList<>();
 
         int c;
         int l;
@@ -111,8 +111,8 @@ public class Grille {
 
     }
 
-    public Tuiles getTuiles(String nomTuiles) {
-        for (Tuiles t : hmGrille.values()) {
+    public Tuile getTuiles(String nomTuiles) {
+        for (Tuile t : hmGrille.values()) {
             if (t.getNom() == nomTuiles) {
                 return t;
             }

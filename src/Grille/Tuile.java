@@ -5,33 +5,160 @@
  */
 package Grille;
 
+import Aventuriers.Aventurier;
+import Modele.CouleursEnum;
+import Cartes.TresorsEnum;
+import java.awt.Color;
+import java.util.ArrayList;
+import static Grille.EtatEnum.Coulee;
+
 /**
  *
- * @author cault
+ * @author chaulaic
  */
-public enum Tuile {
-    LePontDesAbimes,
-    LaPorteDeBronze, // pion rouge
-    LaCaverneDesOmbres,
-    LaPorteDeFer, // pion vilet
-    LaPorteDOr, // pion jaune
-    LesFalaiseDeLOubli,
-    LePalaisDeCorail,
-    LaPorteDArgent, //pion orange
-    LesDunesDeLIllusion,
-    Heliport, // pion bleu
-    LaPorteDeCuivre, // pion vert
-    LeJardinDesHurlements,
-    LaForetPourpre,
-    LeLagonPerdu,
-    LeMaraisBrumeux,
-    Observatoire,
-    LeRocherFantome,
-    LaCaverneDuBrasier,
-    LeTempleDeLaLune,
-    LeTempleDuSoleil,
-    LePalaisDesMarees,
-    LeValDuCrepuscule,
-    LaTourDuGuet,
-    LeJardinDesMurmures  
+public class Tuile {
+    private String nom;
+    private EtatEnum etat; 
+    private CouleursEnum couleur;
+    private TresorsEnum tresor;
+    private Aventurier departAventurier;
+    private ArrayList<Aventurier> possedeAventurier;
+    private Coordonnee coordonnées;
+    
+    public Tuile(String nom, Coordonnee c, TresorsEnum tresor) {
+        this.setNom(nom);
+        this.etat = null;
+        this.couleur = null;
+        this.tresor = tresor;
+        this.departAventurier = null;
+        this.possedeAventurier = new ArrayList<>();
+        this.coordonnées = c;
+    }
+    public Tuile(Coordonnee c){
+        this.setNom(null);
+        this.etat = null;
+        this.couleur = null;
+        this.tresor = null;
+        this.departAventurier = null;
+        this.possedeAventurier = new ArrayList<>();
+        this.coordonnées = c;
+    }
+
+    /**
+     * @return the etat
+     */
+    public EtatEnum getEtat() {
+        return etat;
+    }
+
+    /**
+     * @return the nom
+     */
+    public String getNom() {
+        return nom;
+    }
+    
+
+    /**
+     * @return the couleur
+     */
+    public CouleursEnum getCouleur() {
+        return couleur;
+    }
+
+    /**
+     * @return the tresor
+     */
+    public TresorsEnum getTresor() {
+        return tresor;
+    }
+
+    /**
+     * @return the departAventurier
+     */
+    public Aventurier getDepartAventurier() {
+        return departAventurier;
+    }
+
+    /**
+     * @return the possedeAventurier
+     */
+    public ArrayList<Aventurier> getPossedeAventurier() {
+        return possedeAventurier;
+    }
+
+    /**
+     * @return the coordonnée
+     */
+    public Coordonnee getCoordonnée() {
+        return coordonnées;
+    }
+
+    /**
+     * @param nom the nom to set
+     */
+    private void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    /**
+     * @param etat the etat to set
+     */
+    private void setEtat(EtatEnum etat) {
+        this.etat = etat;
+    }
+
+    /**
+     * @param couleur the couleur to set
+     */
+    private void setCouleur(CouleursEnum couleur) {
+        this.couleur = couleur;
+    }
+
+    /**
+     * @param tresor the tresor to set
+     */
+    public void setTresor(TresorsEnum tresor) {
+        this.tresor = tresor;
+    }
+
+    /**
+     * @param departAventurier the departAventurier to set
+     */
+    public void setDepartAventurier(Aventurier departAventurier) {
+        departAventurier.setPositionCourante(this.getCoordonnée().getColonne(),this.getCoordonnée().getLigne());
+    }
+
+    /**
+     * @param possedeAventurier the possedeAventurier to set
+     */
+    public void setPossedeAventurier(ArrayList<Aventurier> possedeAventurier) {
+        this.possedeAventurier = possedeAventurier;
+    }
+    public void addPossedeAventurier(Aventurier j){
+        this.possedeAventurier.add(departAventurier);
+    
+    }
+    public void removePossedeAventurier(Aventurier j){
+        this.possedeAventurier.remove(j);
+    }
+    
+
+    /**
+     * @param coordonnée the coordonnée to set
+     */
+    public void setCoordonnée(int c, int l) {
+        this.coordonnées.setColonne(c);
+        this.coordonnées.setLigne(l);
+    }
+    
+    public void changerEtat(EtatEnum etat){
+        this.setEtat(etat);
+      
+    }
+    public void changerCouleur(CouleursEnum couleur){
+        this.setCouleur(couleur);
+    }
 }
+    
+
