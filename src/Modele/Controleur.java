@@ -100,14 +100,14 @@ public class Controleur /*implements Observateur*/ {
         for (Tuile t : EnumSet.allOf(Tuile.class)) {
             listeTuiles.push(t);
         }
-        for (int i = listeTuiles.size(); i >0;i--) {
+        for (int i = listeTuiles.size(); i > 0; i--) {
             reverseListeTuiles.push(listeTuiles.pop());
         }
         /*for (Tuile t : reverseListeTuiles) {
             System.out.println("Tuiles : ");
             System.out.println(t.toString());
         }*/
-        /*System.out.println("");
+ /*System.out.println("");
         System.out.println(listeTuiles.peek().toString());
         this.listeTuiles.remove(listeTuiles.peek());
         System.out.println(listeTuiles.peek().toString());
@@ -123,7 +123,7 @@ public class Controleur /*implements Observateur*/ {
                 if ((l == 0 && ((c == 0 || c == 1) || c == 4 || c == 5)) || (l == 1 && c == 0) || (l == 1 && c == 5) || ((l == 4 && c == 0) || (l == 4 && c == 5)) || (l == 5 && ((c == 0 || c == 1) || c == 4 || c == 5))) {
                     Tuiles t = new Tuiles(null, new CoorD(c, l), null);
                     g.addTuiles((l * 6 + c), t);
-                    
+
                 } else {
                     Tuiles t = new Tuiles(reverseListeTuiles.pop().toString(), new CoorD(c, l), null);
                     /*this.listeTuiles.remove(listeTuiles.peek());
@@ -134,8 +134,8 @@ public class Controleur /*implements Observateur*/ {
                 }
             }
         }
-        
-       System.out.println("") ;
+
+        System.out.println("");
         for (Tuiles t : g.getAze().values()) {
             System.out.println(t.getNom());
         }
@@ -214,32 +214,61 @@ public class Controleur /*implements Observateur*/ {
                         passez = repPasse.nextLine();
 
                         if (passez.equals("n")) {
-                            for (int k = 1; k < 4; k++) {
-                                System.out.println("Action " + k);
-                                System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
-                                String action;
-                                Scanner repAction = new Scanner(System.in);
-                                action = repAction.nextLine();
+                            if (j instanceof Navigateur) {
+                                for (int k = 1; k < 5; k++) {
+                                    System.out.println("Action " + k);
+                                    System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
+                                    String action;
+                                    Scanner repAction = new Scanner(System.in);
+                                    action = repAction.nextLine();
 
-                                if (action.equals("deplacer")) {
-                                    j.deplacement(grille);
+                                    if (action.equals("deplacer")) {
+                                        j.deplacement(grille);
 
-                                } else if (action.equals("assecher")) {
-                                    j.assechement(grille);
-                                }
+                                    } else if (action.equals("assecher")) {
+                                        j.assechement(grille);
+                                    }
 
-                                if (k == 3) {
-                                    break;
-                                } else {
-                                    System.out.println("Souhaitez-vous passez ? (o/n)");
-                                    repPasse = new Scanner(System.in);
-                                    passez = repPasse.nextLine();
-
-                                    if (passez.equals("o")) {
+                                    if (k == 3) {
                                         break;
+                                    } else {
+                                        System.out.println("Souhaitez-vous passez ? (o/n)");
+                                        repPasse = new Scanner(System.in);
+                                        passez = repPasse.nextLine();
+
+                                        if (passez.equals("o")) {
+                                            break;
+                                        }
                                     }
                                 }
+                            } else {
+                                for (int k = 1; k < 4; k++) {
+                                    System.out.println("Action " + k);
+                                    System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
+                                    String action;
+                                    Scanner repAction = new Scanner(System.in);
+                                    action = repAction.nextLine();
 
+                                    if (action.equals("deplacer")) {
+                                        j.deplacement(grille);
+
+                                    } else if (action.equals("assecher")) {
+                                        j.assechement(grille);
+                                    }
+
+                                    if (k == 3) {
+                                        break;
+                                    } else {
+                                        System.out.println("Souhaitez-vous passez ? (o/n)");
+                                        repPasse = new Scanner(System.in);
+                                        passez = repPasse.nextLine();
+
+                                        if (passez.equals("o")) {
+                                            break;
+                                        }
+                                    }
+
+                                }
                             }
                             this.donnerCarteTresEtInon(j);
 
