@@ -5,7 +5,8 @@
  */
 package Aventuriers;
 
-import Cartes.CarteHelicoptere;
+import Cartes.CarteSpecial;
+//import comment.CarteHelicoptere;
 import Cartes.CartesTirage;
 import Grille.Coordonnee;
 import Grille.EtatEnum;
@@ -172,7 +173,7 @@ public class Aventurier {
         System.out.println("Où souhaitez-vous aller ?");
 
         for (Tuile t : tuilesAdj) {
-            if (t != null) {
+            if (t.getNom() != null) {
                 System.out.println(t.getNom());
             }
         }
@@ -256,7 +257,7 @@ public class Aventurier {
     public CartesTirage getCarte(String nom) {
         CartesTirage c1 = null;
         for (CartesTirage c : this.getCartesEnMain()) {
-            if (c.getNom() == nom && c instanceof CarteHelicoptere) {
+            if (c.getNom() == nom && c instanceof CarteSpecial) {
                 c1 = c;
                 //c1 = new CarteHelicoptere();
             } else {

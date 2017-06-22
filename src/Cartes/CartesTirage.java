@@ -14,14 +14,14 @@ import Grille.Tuile;
  * @author chaulaic
  */
 public abstract class CartesTirage extends Cartes {
-   /* private Aventurier aventurierPossesseur;
-    private String nom;
+   private Aventurier aventurierPossesseur;
+    String nom;
 
     public CartesTirage() {
         super();
     }
     
-    
+    /* 
     
     public void ajouterPocesseur(Aventurier j) {
         if (this.getAventurierPocesseur() == null) {

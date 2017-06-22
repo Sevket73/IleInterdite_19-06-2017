@@ -16,10 +16,13 @@ import static Grille.EtatEnum.Coulee;
  *
  * @author chaulaic
  */
-public class Pilote extends Aventurier {
+public class Pilote extends Aventurier {  
+    private boolean actionSpe = true ;
     public Pilote(String nom, Boolean vivant, int nbAction, CouleursEnum couleur){
         super(nom, vivant, nbAction, couleur);
     }
+
+    
     
     @Override
     public ArrayList<Tuile> deplacementPossible(Grille g) {
@@ -33,5 +36,19 @@ public class Pilote extends Aventurier {
         }
            
         return tuilesAdj;
+    }
+
+    /**
+     * @return the actionSpe
+     */
+    public boolean isActionSpe() {
+        return actionSpe;
+    }
+
+    /**
+     * @param actionSpe the actionSpe to set
+     */
+    public void setActionSpe(boolean actionSpe) {
+        this.actionSpe = actionSpe;
     }
 }

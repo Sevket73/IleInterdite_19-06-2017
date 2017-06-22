@@ -2,18 +2,19 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
-package Cartes;
+ 
+package comment;
 
 import Aventuriers.Aventurier;
+import Cartes.CartesTirage;
 import Grille.Grille;
 import Grille.Tuile;
 
 /**
  *
  * @author chaulaic
- */
-public class CarteHelicoptere extends CartesTirage {
+ 
+public class CarteHelicoptere  {
 
     public CarteHelicoptere() {
         super();
@@ -63,3 +64,4 @@ public class CarteHelicoptere extends CartesTirage {
     }
 
 }
+ */

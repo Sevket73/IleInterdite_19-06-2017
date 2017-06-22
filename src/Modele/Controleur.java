@@ -5,6 +5,8 @@
  */
 package Modele;
 
+//import comment.CarteSacDeSable;
+//import comment.CarteHelicoptere;
 import Modele.CouleursEnum;
 import Grille.*;
 import Grille.TuileEnum;
@@ -138,11 +140,11 @@ public class Controleur /*implements Observateur*/ {
                 }
             }
         }
-
+/*
         System.out.println("");
         for (Tuile t : g.getHmGrille().values()) {
             System.out.println(t.getNom());
-        }
+        }*/
         System.out.println("");
 
         g.getTuiles("LaPorteDeBronze").changerCouleur(CouleursEnum.Rouge);
@@ -183,7 +185,68 @@ public class Controleur /*implements Observateur*/ {
     }
 
     public void jouer(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, Grille g) {
-        String passez;
+        this.creerGrille(grille, j1, j2, j3, j4);
+        this.creerPiocheTirage();
+        this.creerPiocheInon();
+        System.out.println("A quelle niveau d eau souhaitez vous commencer ? (1/2/3/4/5)");
+        String eau;
+        Scanner repEau = new Scanner(System.in);
+        eau = repEau.nextLine();
+        this.initPartie(j1, j2, j3, j4, Integer.parseInt(eau));
+        while (!this.partiePerdue()) {
+            while (!this.partieGagnée()) {
+                for (Aventurier j : this.joueurs) {
+                    j.resetActions();
+                    System.out.println(j.getNom());
+                    while(j.getNombreActions()>=0){
+                    if (!this.partieGagnée()) {
+                        if (!this.partiePerdue()) {
+                            if (j.getCartesEnMain().size() > 5) {
+                                System.out.println("Vous ne devez avoir que 5 cartes maximum ! Defaussez-vous !");
+                                //this.defausser();
+                            } else {
+                               //for (CartesTirage c : j.getCartesEnMain()) {
+                                //   if(c!=null) System.out.println(c.getNom());
+                                //}
+                                System.out.println("Quelle action souhaitez vous faire ? (deplacer/assecher/donner une carte/coup special/passer)");
+                                Scanner repAction = new Scanner(System.in);
+                                String action;
+                                action = repAction.nextLine();
+                                
+                                if (action.equals("deplacer")) {
+                                    j.deplacement(g);
+                                } else if (action.equals("assecher")) {
+                                    j.assechement(g);
+                                } else if (action.equals("donner une carte")) {
+                                    System.out.println("A quel aventurier souhaitez vous donner une carte ?");
+                                    Scanner aventurier = new Scanner(System.in);
+                                    String repAv;
+                                    repAv =  aventurier.nextLine();
+                                    System.out.println("Quelle carte souhaitez vous donner ?");
+                                    Scanner carte = new Scanner(System.in);
+                                    String repCarte;
+                                    repCarte =  carte.nextLine();
+                                    j.donnerCarteTresor(j.getCarte(repCarte), this.getJoueur(repAv));
+                                } else if (action.equals("coup special")){
+                                    
+                                } else if (action.equals("passer")){
+                                    break;
+                                }
+                                
+                            }
+                        }
+                    } j.actionEffectuer();
+                    }this.donnerCarteTresEtInon(j);
+                }
+            }
+        }
+        
+        
+        
+        
+        
+        
+        /*String passez;
 
         this.creerGrille(grille, j1, j2, j3, j4);
         this.creerPiocheTirage();
@@ -196,7 +259,7 @@ public class Controleur /*implements Observateur*/ {
         for (CarteInondations c : this.cartesInon) {
             System.out.println(c.getCible().getNom());
         }
-        System.out.println("");*/
+        System.out.println("");
         System.out.println("A quelle niveau d eau souhaitez vous commencer ? (1/2/3/4/5)");
         String eau;
         Scanner repEau = new Scanner(System.in);
@@ -205,7 +268,7 @@ public class Controleur /*implements Observateur*/ {
 
         /* for (Tuiles t : g.getAze().values()) {
             System.out.println(t.getNom());
-        }*/
+        }
         if (this.verifNbJoueurs()) {
             while (!this.partiePerdue()) {
                 while (!this.partieGagnée()) {
@@ -368,23 +431,24 @@ public class Controleur /*implements Observateur*/ {
     
         else {
             System.out.println("Il n'y a pas assez de joueurs !");
-    }
+    }*/
 }
 
 private void donnerCarteTresEtInon(Aventurier j) {
-        this.piocherCarte(j);
-        this.piocherCarte(j);
-        for (CartesTirage t : j.getCartesEnMain()) {
-            System.out.println(t.getNom());
-        }
+        this.piocherCarte(j);System.out.println("Je lui donne une carte T");
+        this.piocherCarte(j);System.out.println("Je lui donne une carte T");
+        //for (CartesTirage t : j.getCartesEnMain()) {
+        //     System.out.println(t.getNom());
+         // }
         System.out.println("Le niveau de l'eau est de : " + niveauEaux);
         for (int i = 0; i < niveauEaux; i++) {
             this.piocherCarteInon();
+            System.out.println("Je lui donne une carte I");
 
         }
-        for (CarteInondation c : cartesInon) {
-            System.out.println(c.getCible().getNom());
-        }
+        //for (CarteInondation c : cartesInon) {
+        //   System.out.println(c.getCible().getNom());
+        //}
     }
 
 
@@ -422,10 +486,10 @@ private void donnerCarteTresEtInon(Aventurier j) {
             cartesPioche.push(new CarteTresor(TresorsEnum.Pierre_Sacree));
         }
         for (int i = 0; i < 3; i++) {
-            cartesPioche.push(new CarteHelicoptere());
+            cartesPioche.push(new CarteSpecial("Helicoptere"));
         }
         for (int i = 0; i < 2; i++) {
-            cartesPioche.push(new CarteSacDeSable());
+            cartesPioche.push(new CarteSpecial("SacDeSable"));
             cartesPioche.push(new CarteMonteeDesEaux());
         }
 
