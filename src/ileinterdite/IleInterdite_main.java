@@ -41,10 +41,10 @@ public class IleInterdite_main {
         //System.out.println(g.getTuiles(14).getEtat());
         //System.out.println(g.getTuiles(3).getEtat());
         
-       j1.setPositionCourante(3, 2);
+       /*j1.setPositionCourante(3, 2);
         j2.setPositionCourante(3, 4);
         j3.setPositionCourante(3, 0);
-        j4.setPositionCourante(2, 1);
+        j4.setPositionCourante(2, 1);*/
         
         c.jouer(j1, j2, j3, j4,g);
         
