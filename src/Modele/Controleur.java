@@ -307,10 +307,16 @@ public class Controleur /*implements Observateur*/ {
         //    System.out.println(c.getCible().getNom());
         //}
         
-        System.out.println("Je tire une carte");
-        // System.out.println(cartesInon.pop().getCible().getNom());
+      //  System.out.println("Je tire une carte");
+        
+        
         CarteInondations cI = cartesInon.pop();
         Tuiles t = cI.getCible();
+        
+        for( CarteInondations c : cartesInon){
+            System.out.println(c.getCible().getNom());
+        }
+             //   System.out.println(t.getNom());
 
         if (t.getEtat() == Assechee) {
             t.changerEtat(Inondee);
@@ -318,7 +324,7 @@ public class Controleur /*implements Observateur*/ {
 
         } else if (t.getEtat() == Inondee) {
             t.changerEtat(coulee);
-
+            
         }
     }
 
