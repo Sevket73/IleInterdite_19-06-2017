@@ -803,18 +803,15 @@ public class Controleur /*implements Observateur*/ {
                 System.out.print(t.getNom() + ' ');
             }
         }
+        System.out.println();
         System.out.println("Saisissez une tuile : ");
         Scanner repTuile = new Scanner(System.in);
         String t = repTuile.nextLine();
         Tuile tu = g.getTuiles(t);
-        if(tu == null){
-            System.out.println(" cest null");
-        }else{
-        
         System.out.println(tu.getNom());
         tu.changerEtat(Assechee);
         }
-    }
+    
     
     private void DeplacerJoueur(Aventurier a, Tuile t) {
         a.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
