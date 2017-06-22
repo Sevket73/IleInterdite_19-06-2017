@@ -80,7 +80,7 @@ public class Controleur /*implements Observateur*/ {
         
          */
     }
-
+/*
     private void initJoueurs() {
         ArrayList<String> nomJoueurs = new ArrayList<>();
         nomJoueurs = vueMenu.getJoueur();
@@ -89,7 +89,7 @@ public class Controleur /*implements Observateur*/ {
         this.joueurs.add(new Aventurier(nomJoueurs.get(2), true, 3, CouleursEnum.Rouge));
         this.joueurs.add(new Aventurier(nomJoueurs.get(3), true, 3, CouleursEnum.Noir));
         this.joueurs.add(new Aventurier(nomJoueurs.get(0), true, 3, CouleursEnum.Jaune));
-    }
+    }*/
 
     /*private String listeTuile[]= {null,null,"LePontDesAbimes","LaPorteDeBronze",null,null,
                           null,"LaCaverneDesOmbres","LaPorteDeFer","LaPorteDOr","LesFalaisesDeLOubli",null,
@@ -186,10 +186,9 @@ public class Controleur /*implements Observateur*/ {
         this.creerGrille(grille, j1, j2, j3, j4);
         this.creerPiocheTirage();
         this.creerPiocheInon();
-        for(CartesTirage c : cartesPioche){
-            System.out.println(c.getNom());
-
-        }
+     //   for(CartesTirage c : cartesPioche){
+       //     System.out.println(c.getNom());
+      //  }
         System.out.println("A quelle niveau d eau souhaitez vous commencer ? (1/2/3/4/5)");
         String eau;
         Scanner repEau = new Scanner(System.in);
