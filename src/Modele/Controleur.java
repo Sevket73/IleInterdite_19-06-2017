@@ -438,11 +438,14 @@ public class Controleur /*implements Observateur*/ {
            System.out.println(c.getNom());
         }
         Scanner repCarte = new Scanner(System.in);
-        String carte = repCarte.nextLine();
-        System.out.println("Vous avez choisi " + j.getCarte(carte));
+        String carte = repCarte.nextLine().toString();
+        //carte = "Helicoptere";
+        System.out.println("Vous avez choisi " + j.getCarte(carte).getNom());
         //j.getCartesEnMain().remove(j.getCarte(carte));
         j.getCartesEnMain().remove(j.getCarte(carte));
-        
+        for(CartesTirage c : j.getCartesEnMain()){
+           System.out.println(c.getNom());
+        }
     }
 
     private void donnerCarteTresEtInon(Aventurier j) {
