@@ -96,13 +96,17 @@ public class Controleur /*implements Observateur*/ {
                           null,"LeTempleDuSoleil","LeTempleDeLaLune","LePalaisDesMarees","LeValDuCrepuscule",null,
                           null,null,"LaTourDuGuet","LeJardinDesMurmures",null,null};*/
     public void creerGrille(Grille g, Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) {
+        Stack<Tuile> reverseListeTuiles = new Stack();
         for (Tuile t : EnumSet.allOf(Tuile.class)) {
             listeTuiles.push(t);
         }
-        for (Tuile t : this.listeTuiles) {
-            System.out.println(t.toString());
-
+        for (int i = listeTuiles.size(); i >0;i--) {
+            reverseListeTuiles.push(listeTuiles.pop());
         }
+        /*for (Tuile t : reverseListeTuiles) {
+            System.out.println("Tuiles : ");
+            System.out.println(t.toString());
+        }*/
         /*System.out.println("");
         System.out.println(listeTuiles.peek().toString());
         this.listeTuiles.remove(listeTuiles.peek());
@@ -118,8 +122,10 @@ public class Controleur /*implements Observateur*/ {
             for (int c = 0; c <= 5; c++) {
                 if ((l == 0 && ((c == 0 || c == 1) || c == 4 || c == 5)) || (l == 1 && c == 0) || (l == 1 && c == 5) || ((l == 4 && c == 0) || (l == 4 && c == 5)) || (l == 5 && ((c == 0 || c == 1) || c == 4 || c == 5))) {
                     Tuiles t = new Tuiles(null, new CoorD(c, l), null);
+                    g.addTuiles((l * 6 + c), t);
+                    
                 } else {
-                    Tuiles t = new Tuiles(listeTuiles.pop().toString(), new CoorD(c, l), null);
+                    Tuiles t = new Tuiles(reverseListeTuiles.pop().toString(), new CoorD(c, l), null);
                     /*this.listeTuiles.remove(listeTuiles.peek());
                     System.out.println("");
                     System.out.println(t.getNom());*/
@@ -128,9 +134,10 @@ public class Controleur /*implements Observateur*/ {
                 }
             }
         }
-
-        for (Map.Entry<Integer, Tuiles> t : g.getAze().entrySet()) {
-            System.out.println(t.getValue().getNom());
+        
+       System.out.println("") ;
+        for (Tuiles t : g.getAze().values()) {
+            System.out.println(t.getNom());
         }
         System.out.println("");
 
@@ -186,8 +193,12 @@ public class Controleur /*implements Observateur*/ {
             System.out.println(c.getCible().getNom());
         }
         System.out.println("");*/
-        this.initJoueurs(j1, j2, j3, j4);
-        this.niveauEaux = 1;
+        System.out.println("A quelle niveau d eau souhaitez vous commencer ? (1/2/3/4/5)");
+        String eau;
+        Scanner repEau = new Scanner(System.in);
+        eau = repEau.nextLine();
+        this.initPartie(j1, j2, j3, j4, Integer.parseInt(eau));
+
         /* for (Tuiles t : g.getAze().values()) {
             System.out.println(t.getNom());
         }*/
@@ -251,7 +262,7 @@ public class Controleur /*implements Observateur*/ {
         for (CartesTirage t : j.getCartesEnMain()) {
             System.out.println(t.getNom());
         }
-        System.out.println(niveauEaux);
+        System.out.println("Le niveau de l'eau est de : " + niveauEaux);
         for (int i = 0; i < niveauEaux; i++) {
             this.piocherCarteInon();
 
@@ -373,7 +384,7 @@ public class Controleur /*implements Observateur*/ {
     }
 
     private void monterEau() {
-        niveauEaux += 0.5;
+        niveauEaux = niveauEaux + 1;
     }
 
     private void initCartes(Aventurier j) {
@@ -382,7 +393,7 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private void initJoueurs(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) {
+    private void initPartie(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, int niveauEauxDep) {
         if (j1 != null) {
             this.joueurs.add(j1);
             this.initCartes(j1);
@@ -399,6 +410,7 @@ public class Controleur /*implements Observateur*/ {
             this.joueurs.add(j4);
             this.initCartes(j4);
         }
+        this.niveauEaux = niveauEauxDep;
     }
 
     private boolean verifNbJoueurs() {
@@ -460,13 +472,10 @@ public class Controleur /*implements Observateur*/ {
         }
         if (niveauEaux < 6) {
             if (allAlive) {
-                if (this.niveauEaux < 6) {
-                    if (allHelico) {
-                        if (this.tresorsAcquis.size() == 4) {
-                            return true;
-                        } else {
-                            return false;
-                        }
+
+                if (allHelico) {
+                    if (this.tresorsAcquis.size() == 4) {
+                        return true;
                     } else {
                         return false;
                     }
