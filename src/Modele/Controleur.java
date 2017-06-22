@@ -439,7 +439,8 @@ public class Controleur /*implements Observateur*/ {
         }
         Scanner repCarte = new Scanner(System.in);
         String carte = repCarte.nextLine();
-        System.out.println("Vous avez choisi " + j.getCarte("Helicoptere").getNom());
+        System.out.println("Vous avez choisi " + j.getCarte(carte));
+        //j.getCartesEnMain().remove(j.getCarte(carte));
         j.getCartesEnMain().remove(j.getCarte(carte));
         
     }
