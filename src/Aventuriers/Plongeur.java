@@ -45,7 +45,7 @@ public class Plongeur extends Aventurier {
                     if(!tuilesPossible.contains(t2))
                     tuilesPossible.add(t2);
                 } else if (t2.getEtat() == Coulee) {
-                    if(!tuilesATest.contains(t2))
+                    if(!tuilesATest.contains(t2)) 
                     tuilesATest.add(t2);
                 }
 

@@ -153,6 +153,7 @@ public class Aventurier {
     public void deplacement(Grille g) {
         ArrayList<Tuile> tuilesAdj = new ArrayList();
         tuilesAdj = this.deplacementPossible(g);
+        
         System.out.println("Où souhaitez-vous aller ?");
 
         for (Tuile t : tuilesAdj){
@@ -183,6 +184,7 @@ public class Aventurier {
 
         ArrayList<Tuile> tuilesAdj = new ArrayList<>();
         ArrayList<Tuile> tuilesPasAssechables = new ArrayList<>();
+
         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
         tuilesAdj.add(g.getTuiles(positionCourante.getCoordonnée().getLigne()*6 + positionCourante.getCoordonnée().getColonne()));
         for (Tuile t : tuilesAdj) {
@@ -224,9 +226,4 @@ public class Aventurier {
         t.changerEtat(EtatEnum.Assechee);
         System.out.println("La tuile " + t.getNom() + " est maintenant assechee!");
     }
-            
-    
-
-    
-
 }
