@@ -23,35 +23,35 @@ public class Plongeur extends Aventurier {
 
     @Override
     public ArrayList<Tuile> deplacementPossible(Grille g) {
-        ArrayList<Tuile> tuilesAdj = new ArrayList<>();
+        ArrayList<Tuile> tuilesPossible = new ArrayList<>();
         ArrayList<Tuile> tuilesATest = new ArrayList<>();
-        ArrayList<Tuile> aze = new ArrayList<>();
+        ArrayList<Tuile> collecTuileadj = new ArrayList<>();
         tuilesATest.add(positionCourante);
 
         for (int i = 0; i < tuilesATest.size(); i++) {
             Tuile t = tuilesATest.get(i);
-            aze = g.getTuilesAdjacentes(t);
-            for (int x = 0; x < aze.size(); x++) {
-                Tuile t2 = aze.get(x);
+            collecTuileadj = g.getTuilesAdjacentes(t);
+            for (int x = 0; x < collecTuileadj.size(); x++) {
+                Tuile t2 = collecTuileadj.get(x);
                 System.out.println(t2.getEtat());
                 if (t2.getEtat() == (Assechee)){
                     System.out.println("coucou");
-                    if (!tuilesAdj.contains(t2)) {
-                        tuilesAdj.add(t2);
+                    if (!tuilesPossible.contains(t2)) {
+                        tuilesPossible.add(t2);
                     }
                 } else if (t2.getEtat() == Inondee) {
                     if(!tuilesATest.contains(t2))
                     tuilesATest.add(t2);
-                    if(!tuilesAdj.contains(t2))
-                    tuilesAdj.add(t2);
+                    if(!tuilesPossible.contains(t2))
+                    tuilesPossible.add(t2);
                 } else if (t2.getEtat() == Coulee) {
-                    if(!tuilesATest.contains(t2))
+                    if(!tuilesATest.contains(t2)) 
                     tuilesATest.add(t2);
                 }
 
             }
         }
-        tuilesAdj.remove(positionCourante);
-        return tuilesAdj;
+        tuilesPossible.remove(positionCourante);
+        return tuilesPossible;
     }
 }

@@ -321,15 +321,7 @@ if(cartesInon.isEmpty()){
         }
     }
 
-    private void initJoueurs(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) {
-        if (j1 != null) {
-            this.joueurs.add(j1);
-            this.initCartes(j1);
-        }
-        if (j2 != null) {
-            this.joueurs.add(j2);
-            this.initCartes(j2);
-        }
+    private void initJoueurs(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) { 
         if (j3 != null) {
             this.joueurs.add(j3);
             this.initCartes(j3);

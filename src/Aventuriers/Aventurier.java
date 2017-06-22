@@ -152,7 +152,7 @@ public class Aventurier {
 
     public void deplacement(Grille g) {
         ArrayList<Tuile> tuilesAdj = new ArrayList();
-
+        tuilesAdj = deplacementPossible(g);
         System.out.println("Où souhaitez-vous aller ?");
 
         for (Tuile t : tuilesAdj){
@@ -182,16 +182,16 @@ public class Aventurier {
     public ArrayList<Tuile> tuilesAssechables(Grille g){
 
         ArrayList<Tuile> tuilesAdj = new ArrayList<>();
-        ArrayList<Tuile> tuilesAssechables = new ArrayList<>();
+        ArrayList<Tuile> tuilesPasAssechables   = new ArrayList<>();
         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
         tuilesAdj.add(g.getTuiles(positionCourante.getCoordonnée().getLigne()*6 + positionCourante.getCoordonnée().getColonne()));
         for (Tuile t : tuilesAdj) {
             if (t.getEtat() != EtatEnum.Inondee) {
-                tuilesAssechables.add(t);
+                tuilesPasAssechables.add(t);
             } 
         }
         
-        tuilesAdj.removeAll(tuilesAssechables);
+        tuilesAdj.removeAll(tuilesPasAssechables);
         return tuilesAdj;
         
     }

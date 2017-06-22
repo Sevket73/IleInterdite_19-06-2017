@@ -28,7 +28,7 @@ public class Explorateur extends Aventurier {
          ArrayList<Tuile>tuilesDiag = new ArrayList();
          ArrayList<Tuile>tuilesAll = new ArrayList();
          tuilesAdj = g.getTuilesAdjacentes(positionCourante);
-         tuilesDiag=getTuilesDiag(g,positionCourante);
+         tuilesDiag=getTuilesDiag(g);
          tuilesAll.addAll(tuilesAdj);
          tuilesAll.addAll(tuilesDiag);
         
@@ -40,12 +40,12 @@ public class Explorateur extends Aventurier {
          ArrayList<Tuile>tuilesDiag = new ArrayList();
          ArrayList<Tuile>tuilesAll = new ArrayList();
          tuilesAdj = g.getTuilesAdjacentes(positionCourante);
-         tuilesDiag=getTuilesDiag(g,positionCourante);
+         tuilesDiag=getTuilesDiag(g);
          tuilesAll.addAll(tuilesAdj);
          tuilesAll.addAll(tuilesDiag);
          return tuilesAdj;
     }
-    private ArrayList<Tuile> getTuilesDiag(Grille g,Tuile positionCourante){
+    private ArrayList<Tuile> getTuilesDiag(Grille g){
         ArrayList<Tuile>tuilesDiag = new ArrayList();
         
         int l = positionCourante.getCoordonnée().getLigne();
