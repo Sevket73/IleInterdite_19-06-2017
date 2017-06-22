@@ -19,4 +19,10 @@ public class Navigateur extends Aventurier {
         super(nom, vivant, nbAction, couleur);
     }
     
+    @Override
+    public void resetActions()
+    {
+        nombreActions = 4;
+    }
+    
 }

@@ -31,17 +31,12 @@ public class IleInterdite_main {
         Aventurier j1 = new Pilote("Michel", true, 3, CouleursEnum.Bleu);
         Aventurier j2 = new Ingenieur("Paul", true, 3, CouleursEnum.Jaune);
         Aventurier j3 = new Explorateur("Sandrine", true, 3, CouleursEnum.Rouge);
-        
         Aventurier j4 = new Plongeur("Annie", true, 3, CouleursEnum.Noir);
         Grille g = new Grille();
         Controleur c = new Controleur(2,g);
+
         
-        
-        
-        //System.out.println(g.getTuiles(14).getEtat());
-        //System.out.println(g.getTuiles(3).getEtat());
-        
-       j1.setPositionCourante(3, 2);
+        j1.setPositionCourante(3, 2);
         j2.setPositionCourante(3, 4);
         j3.setPositionCourante(3, 0);
         j4.setPositionCourante(2, 1);
