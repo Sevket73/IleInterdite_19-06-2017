@@ -9,9 +9,9 @@ package Grille;
  *
  * @author cault
  */
-public enum Etat {
+public enum EtatEnum {
     Assechee,
     Inondee,
-    coulee
+    Coulee
     
 }

@@ -6,8 +6,8 @@
 package Aventuriers;
 
 import Grille.Grille;
-import Grille.Tuiles;
-import Modele.Couleur;
+import Grille.Tuile;
+import Modele.CouleursEnum;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,13 +17,13 @@ import java.util.Scanner;
  */
 public class Ingenieur extends Aventurier{
     
-    public Ingenieur(String nom, Boolean vivant, int nbAction, Couleur couleur) {
+    public Ingenieur(String nom, Boolean vivant, int nbAction, CouleursEnum couleur) {
         super(nom, vivant, nbAction, couleur);
     }
 
     @Override
     public void assechement(Grille g) { // faire en sorte qu'il ne soit pas obliger d'assecher 2 tuiles en une fois ** souhaitez vous assecher 1 ou 2 tuiles?
-        ArrayList<Tuiles> tuilesAssechables = new ArrayList<>();
+        ArrayList<Tuile> tuilesAssechables = new ArrayList<>();
         
         System.out.println("Vous pouvez assecher " + this.tuilesAssechables(g).size() + " tuile(s) en une fois");
         System.out.println("");
@@ -39,13 +39,13 @@ public class Ingenieur extends Aventurier{
 
             if (nbTuileAss.equals("1")) {
                 System.out.println("Quelle tuile souhaitez vous assecher ? ");
-                for (Tuiles t : tuilesAssechables) {
+                for (Tuile t : tuilesAssechables) {
                     System.out.println(t.getNom());
                 }
 
                 String ass;
                 ass = repAss.nextLine();
-                for (Tuiles t : tuilesAssechables) {
+                for (Tuile t : tuilesAssechables) {
                     if (ass.equals(t.getNom())) {
                         this.assecher(t);
                     } else {
@@ -60,12 +60,12 @@ public class Ingenieur extends Aventurier{
                         break;
                     } else {
                         System.out.println("Quelle tuile souhaitez vous assecher ? (" + i + ")");
-                        for (Tuiles t : tuilesAssechables) {
+                        for (Tuile t : tuilesAssechables) {
                             System.out.println(t.getNom());
                         }
                         String ass;
                         ass = repAss.nextLine();
-                        for (Tuiles t : tuilesAssechables) {
+                        for (Tuile t : tuilesAssechables) {
                             if (ass.equals(t.getNom())) {
                                 this.assecher(t);
                             } else {

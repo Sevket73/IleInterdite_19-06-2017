@@ -12,7 +12,7 @@ package Cartes;
 public class CarteTresor extends CartesTirage {
 
 
-    public CarteTresor(Tresor tresor) {
+    public CarteTresor(TresorsEnum tresor) {
         super();
         setNom(tresor.toString());
     }

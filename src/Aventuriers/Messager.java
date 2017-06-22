@@ -7,7 +7,7 @@ package Aventuriers;
 
 import Cartes.CarteTresor;
 import Cartes.CartesTirage;
-import Modele.Couleur;
+import Modele.CouleursEnum;
 import java.util.Scanner;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class Messager extends Aventurier {
     
-    public Messager(String nom, Boolean vivant, int nbAction, Couleur couleur) {
+    public Messager(String nom, Boolean vivant, int nbAction, CouleursEnum couleur) {
         super(nom, vivant, nbAction, couleur);
     }
     

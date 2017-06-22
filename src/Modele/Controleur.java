@@ -5,23 +5,23 @@
  */
 package Modele;
 
-import Modele.Couleur;
+import Modele.CouleursEnum;
 import Grille.*;
-import Grille.Tuile;
+import Grille.TuileEnum;
 import Aventuriers.*;
 import View.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 import Cartes.*;
-import Cartes.CarteInondations;
-import static Cartes.Tresor.*;
-import static Grille.Etat.*;
+import Cartes.CarteInondation;
+import static Cartes.TresorsEnum.*;
+import static Grille.EtatEnum.*;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Stack;
+import java.util.Map;
 
 /**
  *
@@ -33,11 +33,12 @@ public class Controleur /*implements Observateur*/ {
     private ArrayList<Aventurier> joueurs;
     private Grille grille = new Grille();
     private Stack<CartesTirage> cartesPioche;
-    private HashSet<Tresor> tresorsAcquis;
-    private Stack<Tuile> listeTuiles;
+    private HashSet<TresorsEnum> tresorsAcquis;
+    private Stack<TuileEnum> listeTuiles;
+    private Stack<CartesTirage> cartes;
     private Stack<CartesTirage> defausse;
-    private Stack<CarteInondations> cartesInon;
-    private Stack<CarteInondations> defausseInon;
+    private Stack<CarteInondation> cartesInon;
+    private Stack<CarteInondation> defausseInon;
 
     private VueMenu vueMenu;
     private VueRules vueRules;
@@ -56,6 +57,7 @@ public class Controleur /*implements Observateur*/ {
         this.cartesPioche = new Stack();
         this.tresorsAcquis = new HashSet();
         this.listeTuiles = new Stack();
+        this.cartes = new Stack();
         this.defausse = new Stack();
         this.cartesInon = new Stack();
         this.defausseInon = new Stack();
@@ -83,10 +85,10 @@ public class Controleur /*implements Observateur*/ {
         ArrayList<String> nomJoueurs = new ArrayList<>();
         nomJoueurs = vueMenu.getJoueur();
 
-        this.joueurs.add(new Aventurier(nomJoueurs.get(1), true, 3, Couleur.Bleu));
-        this.joueurs.add(new Aventurier(nomJoueurs.get(2), true, 3, Couleur.Rouge));
-        this.joueurs.add(new Aventurier(nomJoueurs.get(3), true, 3, Couleur.Noir));
-        this.joueurs.add(new Aventurier(nomJoueurs.get(0), true, 3, Couleur.Jaune));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(1), true, 3, CouleursEnum.Bleu));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(2), true, 3, CouleursEnum.Rouge));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(3), true, 3, CouleursEnum.Noir));
+        this.joueurs.add(new Aventurier(nomJoueurs.get(0), true, 3, CouleursEnum.Jaune));
     }
 
     /*private String listeTuile[]= {null,null,"LePontDesAbimes","LaPorteDeBronze",null,null,
@@ -96,8 +98,8 @@ public class Controleur /*implements Observateur*/ {
                           null,"LeTempleDuSoleil","LeTempleDeLaLune","LePalaisDesMarees","LeValDuCrepuscule",null,
                           null,null,"LaTourDuGuet","LeJardinDesMurmures",null,null};*/
     public void creerGrille(Grille g, Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) {
-        Stack<Tuile> reverseListeTuiles = new Stack();
-        for (Tuile t : EnumSet.allOf(Tuile.class)) {
+        Stack<TuileEnum> reverseListeTuiles = new Stack();
+        for (TuileEnum t : EnumSet.allOf(TuileEnum.class)) {
             listeTuiles.push(t);
         }
         for (int i = listeTuiles.size(); i > 0; i--) {
@@ -121,11 +123,11 @@ public class Controleur /*implements Observateur*/ {
         for (int l = 0; l <= 5; l++) {
             for (int c = 0; c <= 5; c++) {
                 if ((l == 0 && ((c == 0 || c == 1) || c == 4 || c == 5)) || (l == 1 && c == 0) || (l == 1 && c == 5) || ((l == 4 && c == 0) || (l == 4 && c == 5)) || (l == 5 && ((c == 0 || c == 1) || c == 4 || c == 5))) {
-                    Tuiles t = new Tuiles(null, new CoorD(c, l), null);
+                    Tuile t = new Tuile(null, new Coordonnee(c, l), null);
                     g.addTuiles((l * 6 + c), t);
 
                 } else {
-                    Tuiles t = new Tuiles(reverseListeTuiles.pop().toString(), new CoorD(c, l), null);
+                    Tuile t = new Tuile(reverseListeTuiles.pop().toString(), new Coordonnee(c, l), null);
                     /*this.listeTuiles.remove(listeTuiles.peek());
                     System.out.println("");
                     System.out.println(t.getNom());*/
@@ -136,17 +138,17 @@ public class Controleur /*implements Observateur*/ {
         }
 
         System.out.println("");
-        for (Tuiles t : g.getAze().values()) {
+        for (Tuile t : g.getHmGrille().values()) {
             System.out.println(t.getNom());
         }
         System.out.println("");
 
-        g.getTuiles("LaPorteDeBronze").changerCouleur(Couleur.Rouge);
-        g.getTuiles("LaPorteDOr").changerCouleur(Couleur.Jaune);
-        g.getTuiles("LaPorteDeFer").changerCouleur(Couleur.Noir);
-        g.getTuiles("LaPorteDArgent").changerCouleur(Couleur.Orange);
-        g.getTuiles("LaPorteDeCuivre").changerCouleur(Couleur.Vert);
-        g.getTuiles("Heliport").changerCouleur(Couleur.Bleu);
+        g.getTuiles("LaPorteDeBronze").changerCouleur(CouleursEnum.Rouge);
+        g.getTuiles("LaPorteDOr").changerCouleur(CouleursEnum.Jaune);
+        g.getTuiles("LaPorteDeFer").changerCouleur(CouleursEnum.Noir);
+        g.getTuiles("LaPorteDArgent").changerCouleur(CouleursEnum.Orange);
+        g.getTuiles("LaPorteDeCuivre").changerCouleur(CouleursEnum.Vert);
+        g.getTuiles("Heliport").changerCouleur(CouleursEnum.Bleu);
 
         g.getTuiles("LePalaisDeCorail").setTresor(Calice_de_l_onde);
         g.getTuiles("LePalaisDesMarees").setTresor(Calice_de_l_onde);
@@ -157,7 +159,7 @@ public class Controleur /*implements Observateur*/ {
         g.getTuiles("LaCaverneDuBrasier").setTresor(Cristal_Ardent);
         g.getTuiles("LaCaverneDesOmbres").setTresor(Cristal_Ardent);
 
-        for (Tuiles t : g.getAze().values()) {
+        for (Tuile t : g.getHmGrille().values()) {
             if (t.getCouleur() == j1.getCouleur()) {
                 t.setDepartAventurier(j1);
                 t.addPossedeAventurier(j1);
@@ -296,7 +298,7 @@ public class Controleur /*implements Observateur*/ {
             this.piocherCarteInon();
 
         }
-        for (CarteInondations c : cartesInon) {
+        for (CarteInondation c : cartesInon) {
             System.out.println(c.getCible().getNom());
         }
     }
@@ -330,10 +332,10 @@ public class Controleur /*implements Observateur*/ {
      */
     private void creerPiocheTirage() {
         for (int i = 0; i < 5; i++) {
-            cartesPioche.push(new CarteTresor(Tresor.Statue_du_Zephyr));
-            cartesPioche.push(new CarteTresor(Tresor.Calice_de_l_onde));
-            cartesPioche.push(new CarteTresor(Tresor.Cristal_Ardent));
-            cartesPioche.push(new CarteTresor(Tresor.Pierre_Sacree));
+            cartesPioche.push(new CarteTresor(TresorsEnum.Statue_du_Zephyr));
+            cartesPioche.push(new CarteTresor(TresorsEnum.Calice_de_l_onde));
+            cartesPioche.push(new CarteTresor(TresorsEnum.Cristal_Ardent));
+            cartesPioche.push(new CarteTresor(TresorsEnum.Pierre_Sacree));
         }
         for (int i = 0; i < 3; i++) {
             cartesPioche.push(new CarteHelicoptere());
@@ -347,7 +349,7 @@ public class Controleur /*implements Observateur*/ {
     }
 
     private void creerPiocheInon() {
-        for (Tuiles t : grille.getAze().values()) {
+        for (Tuile t : grille.getHmGrille().values()) {
             /* int l = grille.getTuiles(i).getCoordonnée().getLigne();
             int c = grille.getTuiles(i).getCoordonnée().getColonne();
             switch(l*6+c){
@@ -357,7 +359,7 @@ public class Controleur /*implements Observateur*/ {
                 
             }*/
             if (t.getNom() != null) {
-                CarteInondations cI = new CarteInondations(t);
+                CarteInondation cI = new CarteInondation(t);
                 cartesInon.push(cI);
             }
 
@@ -366,7 +368,7 @@ public class Controleur /*implements Observateur*/ {
 
     private void piocherCarteInon() {
         if (cartesInon.empty()) {
-            for (CarteInondations c : this.defausseInon) {
+            for (CarteInondation c : this.defausseInon) {
                 this.cartesInon.push(c);
             }
             //cartesInon.addAll(defausseInon);
@@ -378,8 +380,8 @@ public class Controleur /*implements Observateur*/ {
             //}
 
             //  System.out.println("Je tire une carte");
-            CarteInondations cI = cartesInon.pop();
-            Tuiles t = cI.getCible();
+            CarteInondation cI = cartesInon.pop();
+            Tuile t = cI.getCible();
 
             //   System.out.println(t.getNom());
             if (t.getEtat() == Assechee) {
@@ -387,7 +389,7 @@ public class Controleur /*implements Observateur*/ {
                 defausseInon.push(cI);
 
             } else if (t.getEtat() == Inondee) {
-                t.changerEtat(coulee);
+                t.changerEtat(Coulee);
 
             }
         }
@@ -450,7 +452,7 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private boolean peutPrendreTresor(Aventurier j, Tresor tresor) {
+    private boolean peutPrendreTresor(Aventurier j, TresorsEnum tresor) {
         int i = 0;
         for (CartesTirage c : j.getCartesEnMain()) {
             if (c instanceof CarteTresor) {
@@ -474,7 +476,7 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private void prendreTresor(Tresor tresor, Aventurier j) {
+    private void prendreTresor(TresorsEnum tresor, Aventurier j) {
         if (this.peutPrendreTresor(j, tresor)) {
             this.tresorsAcquis.add(tresor);
         }

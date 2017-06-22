@@ -6,7 +6,7 @@
 package Aventuriers;
 
 import Grille.Grille;
-import Modele.Couleur;
+import Modele.CouleursEnum;
 import java.util.Scanner;
 
 /**
@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class Navigateur extends Aventurier {
     
-    public Navigateur(String nom, Boolean vivant, int nbAction, Couleur couleur) {
+    public Navigateur(String nom, Boolean vivant, int nbAction, CouleursEnum couleur) {
         super(nom, vivant, nbAction, couleur);
     }
     
