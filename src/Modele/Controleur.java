@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 import Cartes.*;
-import Cartes.CarteInondations;
+import Cartes.CarteInondation;
 import static Cartes.Tresor.*;
 import static Grille.Etat.*;
 import java.util.Collections;
@@ -36,8 +36,8 @@ public class Controleur /*implements Observateur*/ {
     private Stack<Tuile> listeTuiles;
     private Stack<CartesTirage> cartes;
     private Stack<CartesTirage> defausse;
-    private Stack<CarteInondations> cartesInon;
-    private Stack<CarteInondations> defausseInon;
+    private Stack<CarteInondation> cartesInon;
+    private Stack<CarteInondation> defausseInon;
 
     private VueMenu vueMenu;
     private VueRules vueRules;
@@ -273,7 +273,7 @@ public class Controleur /*implements Observateur*/ {
     private void creerPiocheInon() {
         for (int i = 0; i < grille.getHmGrille().size(); i++) {
             Tuiles t = grille.getTuiles(i);
-            CarteInondations cI = new CarteInondations(t);
+            CarteInondation cI = new CarteInondation(t);
             cartesInon.push(cI);
         }
     }
@@ -282,7 +282,7 @@ public class Controleur /*implements Observateur*/ {
 if(cartesInon.isEmpty()){
     cartesInon.addAll(defausseInon);
 }
-        CarteInondations cI = cartesInon.pop();
+        CarteInondation cI = cartesInon.pop();
         Tuiles t = cI.getCible();
 
         if (t.getEtat() == Assechee) {
