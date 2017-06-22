@@ -130,7 +130,7 @@ public class Controleur /*implements Observateur*/ {
         g.getTuiles("LaCaverneDuBrasier").setTresor(Cristal_Ardent);
         g.getTuiles("LaCaverneDesOmbres").setTresor(Cristal_Ardent);
 
-        /*
+        
         for(Tuiles t : g.getAze().values()){
             if(t.getCouleur()==j1.getCouleur()){
                 t.setDepartAventurier(j1);
@@ -145,7 +145,7 @@ public class Controleur /*implements Observateur*/ {
                 t.setDepartAventurier(j4);
                 t.addPossedeAventurier(j4); }
         }
-         */
+         
     }
 
     public void jouer(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, Grille g) {
