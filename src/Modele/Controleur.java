@@ -80,6 +80,7 @@ public class Controleur /*implements Observateur*/ {
         
          */
     }
+
     /*
     private void initJoueurs() {
         ArrayList<String> nomJoueurs = new ArrayList<>();
@@ -105,7 +106,7 @@ public class Controleur /*implements Observateur*/ {
         //Collections.shuffle(listeTuiles); //Permet de mélanger les tuiles, on ne s'en sert pas pour la demo
 
         for (int i = listeTuiles.size(); i > 0; i--) {   //Afin d'avoir les tuiles dans le bonne ordre par rapport à la grille donnée, on parcours listeTuiles 
-                                                        //à l'envers et on met les valeurs dans une collection différente
+            //à l'envers et on met les valeurs dans une collection différente
             reverseListeTuiles.push(listeTuiles.pop());
         }
         /*for (Tuile t : reverseListeTuiles) {
@@ -147,7 +148,7 @@ public class Controleur /*implements Observateur*/ {
             System.out.println(t.getNom());
         }*/
         System.out.println("");
-        
+
         //On définit les différents départs des aventuriers en fonctions de la couleurs des pions
         g.getTuiles("LaPorteDeBronze").changerCouleur(CouleursEnum.Rouge);
         g.getTuiles("LaPorteDOr").changerCouleur(CouleursEnum.Jaune);
@@ -161,15 +162,15 @@ public class Controleur /*implements Observateur*/ {
                 t.setDepartAventurier(j1);
                 t.addPossedeAventurier(j1);
             }
-            if ((j2 != null) &&(t.getCouleur() == j2.getCouleur())) {
+            if ((j2 != null) && (t.getCouleur() == j2.getCouleur())) {
                 t.setDepartAventurier(j2);
                 t.addPossedeAventurier(j2);
             }
-            if ((j3 != null) &&(t.getCouleur() == j3.getCouleur())) {
+            if ((j3 != null) && (t.getCouleur() == j3.getCouleur())) {
                 t.setDepartAventurier(j3);
                 t.addPossedeAventurier(j3);
             }
-            if ((j4 != null) &&(t.getCouleur() == j4.getCouleur())) {
+            if ((j4 != null) && (t.getCouleur() == j4.getCouleur())) {
                 t.setDepartAventurier(j4);
                 t.addPossedeAventurier(j4);
             }
@@ -202,7 +203,7 @@ public class Controleur /*implements Observateur*/ {
             while (!this.partieGagnée()) {
                 for (Aventurier j : this.joueurs) {
                     j.resetActions();
-                    System.out.println(j.getNom()+" c'est à votre tour");
+                    System.out.println(j.getNom() + " c'est à votre tour");
                     while (j.getNombreActions() >= 0) {
                         if (!this.partieGagnée()) {
                             if (!this.partiePerdue()) {
@@ -216,8 +217,8 @@ public class Controleur /*implements Observateur*/ {
                                     //   if(c!=null) System.out.println(c.getNom());
                                     //}
                                     System.out.println("Position des joueurs :");
-                                    for ( Aventurier joueur : joueurs){
-                                        System.out.println(joueur.getNom()+" : "+joueur.getPositionCourante().getNom());
+                                    for (Aventurier joueur : joueurs) {
+                                        System.out.println(joueur.getNom() + " : " + joueur.getPositionCourante().getNom());
                                     }
                                     System.out.println("Les tuiles inondées sont : ");
                                     for (Tuile t : g.getHmGrille().values()) {
@@ -235,9 +236,9 @@ public class Controleur /*implements Observateur*/ {
                                     System.out.println();
                                     System.out.println("Cartes en main : ");
                                     for (CartesTirage c : j.getCartesEnMain()) {
-                                         
-                                            System.out.print(c.getNom()+' ');
-                                        
+
+                                        System.out.print(c.getNom() + ' ');
+
                                     }
                                     System.out.println();
                                     System.out.println("Quelle action souhaitez vous faire ? (deplacer/assecher/donner une carte/coup special/passer)");
@@ -264,19 +265,21 @@ public class Controleur /*implements Observateur*/ {
                                         Scanner coupS = new Scanner(System.in);
                                         String repCoupS;
                                         repCoupS = coupS.nextLine();
-                                                                               
-                                    
-                                            if (j.getCarte(repCoupS) instanceof CarteSpecial) {
-                                                if (((CarteSpecial)j.getCarte(repCoupS) ).getType() == "Helicoptere") {
-                                                    this.coupSpecialHelico(j,g);
-                                                } else if(((CarteSpecial)((CarteSpecial)j.getCarte(repCoupS) ) ).getType() == "SacDeSable"){
-                                                    this.coupSpecialSacDeSable(g);
-                                                } else {
-                                                    System.out.println("Ce n'est pas une carte special tant pis pour vous !");
-                                                }
-                                            }   else { System.out.println("Vous en avez ");
+
+                                        if (j.getCarte(repCoupS) instanceof CarteSpecial) {
+                                            if (((CarteSpecial) j.getCarte(repCoupS)).getType() == "Helicoptere") {
+                                                this.coupSpecialHelico(j, g);
+                                                j.enleverCarte(j.getCarte(repCoupS));
+                                            } else if (((CarteSpecial) ((CarteSpecial) j.getCarte(repCoupS))).getType() == "SacDeSable") {
+                                                this.coupSpecialSacDeSable(g);
+                                                j.enleverCarte(j.getCarte(repCoupS));
+                                            } else {
+                                                System.out.println("Ce n'est pas une carte special tant pis pour vous !");
+                                            }
+                                        } else {
+                                            System.out.println("Vous en avez ");
                                         }
-                                    }else if (action.equals("passer")) {
+                                    } else if (action.equals("passer")) {
                                         break;
                                     }
 
@@ -290,193 +293,6 @@ public class Controleur /*implements Observateur*/ {
             }
         }
 
-        /*String passez;
-
-        this.creerGrille(grille, j1, j2, j3, j4);
-        this.creerPiocheTirage();
-        this.creerPiocheInon();
-
-        /*for (Map.Entry<Integer, Tuiles> t : g.getAze().entrySet()) {
-            System.out.println(t.getValue().getNom());
-        }
-        System.out.println("");
-        for (CarteInondations c : this.cartesInon) {
-            System.out.println(c.getCible().getNom());
-        }
-        System.out.println("");
-        System.out.println("A quelle niveau d eau souhaitez vous commencer ? (1/2/3/4/5)");
-        String eau;
-        Scanner repEau = new Scanner(System.in);
-        eau = repEau.nextLine();
-        this.initPartie(j1, j2, j3, j4, Integer.parseInt(eau));
-
-        /* for (Tuiles t : g.getAze().values()) {
-            System.out.println(t.getNom());
-        }
-        if (this.verifNbJoueurs()) {
-            while (!this.partiePerdue()) {
-                while (!this.partieGagnée()) {
-                    for (Aventurier j : joueurs) {
-                        System.out.println(j.getNom() + " à vous de jouer!");
-                        System.out.println("");
-                        j.resetActions();
-
-                        while (j.getNombreActions() > 0) {
-                            System.out.println("Vous êtes sur la tuile : " + g.getNomTuiles(j.getPositionCourante().getCoordonnée().getLigne(), j.getPositionCourante().getCoordonnée().getColonne()));
-                            System.out.println("Souhaitez-vous passez ? (o/n)");
-                            Scanner repPasse = new Scanner(System.in);
-                            passez = repPasse.nextLine();
-
-                            if (passez.equals("n")) {
-
-                                System.out.println("Que souhaitez-vous faire? (deplacer/assecher/donner une carte/special)");
-                                String action;
-                                Scanner repAction = new Scanner(System.in);
-                                action = repAction.nextLine();
-
-                                switch (action) {
-                                    case "deplacer":
-
-                                        j.deplacement(grille);
-
-                                        break;
-                                    case "assecher":
-                                        j.assechement(grille);
-                                        break;
-                                    case "donner une carte":
-                                        for (CartesTirage c : j.getCartesEnMain()) {
-                                            System.out.println(c.getNom());
-                                        }
-                                        System.out.println("quelle carte voulez vous donnez ?");
-                                        String x;
-                                        Scanner repX = new Scanner(System.in);
-                                        x = repX.nextLine();
-                                        
-                                        System.out.println("A qui voulez vous donner la carte  ?");
-                                        String xj;
-                                        Scanner repxj = new Scanner(System.in);
-                                        xj = repxj.nextLine();
-                                        for( Aventurier jx :j.getPositionCourante().getPossedeAventurier()){
-                                            System.out.println(jx.getNom());
-                                        }
-                                        j.donnerCarteTresor(j.getCarte(x), getJoueur(xj));
-                                        break;
-                                    case "Coup Special":
-                                        for (CartesTirage c : j.getCartesEnMain()) {
-                                            if (c instanceof CarteHelicoptere || c.getNom() == "SacDeSable") {
-                                                System.out.println(c.getNom());
-                                            }
-
-                                        }
-
-                                        System.out.println("quelle carte voulez vous utiliser?");
-                                        String x1;
-                                        Scanner repX1 = new Scanner(System.in);
-                                        x1 = repX1.nextLine();
-
-                                        switch (x1) {
-                                            case "helicoptere":
-                                                System.out.println("Combien de joueur voulez vous deplacer ? 1 , 2 , 3 ou 4");
-                                                String x2;
-                                                Scanner repX2 = new Scanner(System.in);
-                                                x2 = repX2.nextLine();
-                                                System.out.println("Sur quel tuile ?");
-                                                String x3;
-                                                Scanner repX3 = new Scanner(System.in);
-                                                x3 = repX3.nextLine();
-                                                switch (Integer.parseInt(x2)) {
-                                                    case 1:
-                                                        System.out.println("Inscrivez un joueur");
-                                                        String x13;
-                                                        Scanner repX13 = new Scanner(System.in);
-                                                        x13 = repX13.nextLine();
-                                                        System.out.println("Sur quel tuile ?");
-                                                        j.getCarte(x1).deplacer1Joueur(this.getJoueur(x13), x3, g);
-                                                        break;
-                                                    case 2:
-                                                        System.out.println("Inscrivez un joueur");
-                                                        String x4;
-                                                        Scanner repX4 = new Scanner(System.in);
-                                                        x4 = repX4.nextLine();
-                                                        System.out.println("Inscrivez un joueur");
-                                                        String x5;
-                                                        Scanner repX5 = new Scanner(System.in);
-                                                        x5 = repX5.nextLine();
-                                                        System.out.println("Sur quel tuile ?");
-                                                        x3 = repX3.nextLine();
-                                                        j.getCarte(x1).deplacer2Joueurs(this.getJoueur(x4), this.getJoueur(x5), x3, g);
-
-                                                        break;
-                                                    case 3:
-                                                        System.out.println("Inscrivez un joueur");
-                                                        String x6;
-                                                        Scanner repX6 = new Scanner(System.in);
-                                                        x6 = repX6.nextLine();
-                                                        System.out.println("Inscrivez un joueur");
-                                                        String x7;
-                                                        Scanner repX7 = new Scanner(System.in);
-                                                        x7 = repX7.nextLine();
-                                                        System.out.println("Inscrivez un joueur");
-                                                        String x8;
-                                                        Scanner repX8 = new Scanner(System.in);
-                                                        x8 = repX8.nextLine();
-
-                                                        j.getCarte(x1).deplacer3Joueurs(this.getJoueur(x6), this.getJoueur(x7), this.getJoueur(x8), x3, g);
-                                                        break;
-                                                    case 4:
-                                                        System.out.println("Inscrivez un joueur");
-                                                        String x9;
-                                                        Scanner repX9 = new Scanner(System.in);
-                                                        x9 = repX9.nextLine();
-                                                        System.out.println("Inscrivez un joueur");
-                                                        String x10;
-                                                        Scanner repX10 = new Scanner(System.in);
-                                                        x10 = repX10.nextLine();
-                                                        System.out.println("Inscrivez un joueur");
-                                                        String x11;
-                                                        Scanner repX11 = new Scanner(System.in);
-                                                        x11 = repX11.nextLine();
-                                                        System.out.println("Inscrivez un joueur");
-                                                        String x12;
-                                                        Scanner repX12 = new Scanner(System.in);
-                                                        x12 = repX12.nextLine();
-                                                        j.getCarte(x1).deplacer4Joueurs(this.getJoueur(x9), this.getJoueur(x10), this.getJoueur(x11), this.getJoueur(x12), x3, g);
-                                                        break;
-                                                }
-
-                                        }
-
-                                        j.enleverCarte(j.getCarte(x1));
-
-                                }
-                                j.actionEffectuer();
-                            }else{break;}
-                        }
-                               
-                            
-                            this.piocherCarte(j);
-                            this.piocherCarte(j);
-                            for (CartesTirage t : j.getCartesEnMain()) {
-                                System.out.println(t.getClass().toString());
-                            }
-                            for (int i = 0; i <= niveauEaux; i++) {
-                                this.piocherCarteInon();
-                            }
-                        }
-
-                  
-
-                }
-            }
-<<<<<<< HEAD
-        }
-
-    
-
-    
-        else {
-            System.out.println("Il n'y a pas assez de joueurs !");
-    }*/
     }
 
     private void defausser(Aventurier j) {
@@ -763,39 +579,60 @@ public class Controleur /*implements Observateur*/ {
         }
         return a;
     }
-    
+
     private void coupSpecialHelico(Aventurier j, Grille g) {
         int i = 0;
         String nbAventurier[];
-        System.out.println("Combien d'aventurier souhaitez vous déplacer ? (1/2/3//4)" );
+        System.out.println("Combien d'aventurier souhaitez vous déplacer ? (1/2/3//4)");
         Scanner repNbAv = new Scanner(System.in);
         String nbAv = repNbAv.nextLine();
-        Aventurier av = new Aventurier(null,null,3,null);
+        Aventurier av = new Aventurier(null, null, 3, null);
         if (nbAv == "1") {
             i = 1;
-            for (int k = 0; k<1;k++){
-                System.out.println("Saisissez un aventurier : ");
-                Scanner repAventurier = new Scanner(System.in);
-                String a = repAventurier.nextLine();
-                av = this.getJoueur(a);
-            }
-                System.out.println("Saisissez une tuile : ");
-                for (Tuile t : g.getHmGrille().values()) {
+
+            System.out.println("Saisissez un aventurier : ");
+            Scanner repAventurier = new Scanner(System.in);
+            String a = repAventurier.nextLine();
+            av = this.getJoueur(a);
+
+            System.out.println("Saisissez une tuile : ");
+            for (Tuile t : g.getHmGrille().values()) {
+                if (t.getEtat() != Coulee) {
                     System.out.print(t.getNom() + ' ');
                 }
-                Scanner repTuile = new Scanner(System.in);
-                String t = repTuile.nextLine();
-                Tuile tu = g.getTuiles(t);
-                this.DeplacerJoueur(av,tu);
+            }
+            Scanner repTuile = new Scanner(System.in);
+            String t = repTuile.nextLine();
+            Tuile tu = g.getTuiles(t);
+            this.DeplacerJoueur(av, tu);
+
+        } else if (nbAv == "2") {
+            i = 2;
             
-        }/*else if (nbAv == "2") {
-          
-        }else if (nbAv == "3") {
-            
-        }else if (nbAv == "4") {
-            
-        }*/
+            for (int k = 0; k < 2; k++) {
+                System.out.println("Saisissez un aventurier : ");
+                Scanner repAventurier = new Scanner(System.in);
+                String Integer.toString(k);
+                
+                Integer.toString(k)= repAventurier.nextLine();
+                av = this.getJoueur();
+            }
+            System.out.println("Saisissez une tuile : ");
+            for (Tuile t : g.getHmGrille().values()) {
+                System.out.print(t.getNom() + ' ');
+            }
+            Scanner repTuile = new Scanner(System.in);
+            String t = repTuile.nextLine();
+            Tuile tu = g.getTuiles(t);
+            this.DeplacerJoueur(av1,av2, tu);
+
+        } else if (nbAv == "3") {
+
+        } else if (nbAv == "4") {
+
+        }
     }
+
     private void coupSpecialSacDeSable(Grille g) {
         System.out.println("Les tuiles inondées sont : ");
         for (Tuile t : g.getHmGrille().values()) {
@@ -810,145 +647,12 @@ public class Controleur /*implements Observateur*/ {
         Tuile tu = g.getTuiles(t);
         System.out.println(tu.getNom());
         tu.changerEtat(Assechee);
-        }
-    
-    
+    }
+
     private void DeplacerJoueur(Aventurier a, Tuile t) {
         a.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
         t.addPossedeAventurier(a);
 
     }
-    /*
-    private void effectuerTour()
-    {
-        
-        System.out.println("Action " + k);
-        System.out.println("Que souhaitez-vous faire? (deplacer/assecher/donner une carte/special)");
-        String action;
-        Scanner repAction = new Scanner(System.in);
-        action = repAction.nextLine();
 
-        switch(action){
-            case "deplacer":
-
-            j.deplacement(grille);
-
-            break;
-            case "assecher" :
-            j.assechement(grille);
-            break;
-            case "donner une carte":
-                for (CartesTirage c : j.getCartesEnMain()){
-                    System.out.println(c.getNom());
-                }
-                System.out.println("quelle carte voulez vous donnez ?");
-                String x;
-                Scanner repX = new Scanner(System.in);
-                x = repX.nextLine();
-
-                j.donnerCarteTresor(j.getCarte(x), j);
-            break;
-            case"Coup Special" : 
-                for (CartesTirage c : j.getCartesEnMain()){
-                    if(c instanceof CarteHelicoptere ||c.getNom()=="SacDeSable")
-                        System.out.println(c.getNom());
-
-                }
-
-                System.out.println("quelle carte voulez vous utiliser?");
-                String x1;
-                Scanner repX1 = new Scanner(System.in);
-                x1 = repX1.nextLine();
-
-
-                switch(x1){
-                    case"helicoptere" :
-                        System.out.println("Combien de joueur voulez vous deplacer ? 1 , 2 , 3 ou 4");
-                        String x2;
-                        Scanner repX2 = new Scanner(System.in);
-                        x2 = repX2.nextLine();
-                        System.out.println("Sur quel tuile ?");
-                        String x3;
-                        Scanner repX3 = new Scanner(System.in);
-                                x3 = repX3.nextLine();
-                        switch(Integer.parseInt(x2)){
-                            case 1 : 
-                                System.out.println("Inscrivez un joueur");
-                                String x13;
-                                Scanner repX13 = new Scanner(System.in);
-                                x13 = repX13.nextLine();
-                                System.out.println("Sur quel tuile ?");
-                                j.getCarte(x1).deplacer1Joueur(this.getJoueur(x13), x3,g);
-                                break;
-                            case 2 :
-                                System.out.println("Inscrivez un joueur");
-                                String x4;
-                                Scanner repX4 = new Scanner(System.in);
-                                x4 = repX4.nextLine();
-                                System.out.println("Inscrivez un joueur");
-                                String x5;
-                                Scanner repX5 = new Scanner(System.in);
-                                x5 = repX5.nextLine();
-                                System.out.println("Sur quel tuile ?");
-                                x3 = repX3.nextLine();
-                                j.getCarte(x1).deplacer2Joueurs(this.getJoueur(x4), this.getJoueur(x5),x3, g);
-
-                                break;  
-                            case 3 : 
-                                System.out.println("Inscrivez un joueur");
-                                String x6;
-                                Scanner repX6 = new Scanner(System.in);
-                                x6 = repX6.nextLine();
-                                System.out.println("Inscrivez un joueur");
-                                String x7;
-                                Scanner repX7 = new Scanner(System.in);
-                                x7 = repX7.nextLine();
-                                System.out.println("Inscrivez un joueur");
-                                String x8;
-                                Scanner repX8 = new Scanner(System.in);
-                                x8 = repX8.nextLine();
-
-                                 j.getCarte(x1).deplacer3Joueurs(this.getJoueur(x6),this.getJoueur(x7), this.getJoueur(x8),x3, g);
-                                break;
-                            case 4 : 
-                                System.out.println("Inscrivez un joueur");
-                                String x9;
-                                Scanner repX9 = new Scanner(System.in);
-                                x9 = repX9.nextLine();
-                                System.out.println("Inscrivez un joueur");
-                                String x10;
-                                Scanner repX10 = new Scanner(System.in);
-                                x10 = repX10.nextLine();
-                                System.out.println("Inscrivez un joueur");
-                                String x11;
-                                Scanner repX11 = new Scanner(System.in);
-                                x11 = repX11.nextLine();
-                                System.out.println("Inscrivez un joueur");
-                                String x12;
-                                Scanner repX12 = new Scanner(System.in);
-                                x12 = repX12.nextLine();
-                                j.getCarte(x1).deplacer4Joueurs(this.getJoueur(x9),this.getJoueur(x10),this.getJoueur(x11),this.getJoueur(x12),x3,g);
-                                break;  
-                        }
-
-                    }
-
-                        j.enleverCarte(j.getCarte(x1));
-
-                }
-
-
-        if (k == 3) {
-            break;
-        } else {
-            System.out.println("Souhaitez-vous passez ? (o/n)");
-            repPasse = new Scanner(System.in);
-            passez = repPasse.nextLine();
-
-            if (passez.equals("o")) {
-                break;
-            }
-        }
-    }
-     */
 }
