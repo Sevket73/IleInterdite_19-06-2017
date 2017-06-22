@@ -257,7 +257,7 @@ public class Aventurier {
     public CartesTirage getCarte(String nom) {
         CartesTirage c1 = null;
         for (CartesTirage c : this.getCartesEnMain()) {
-            if (c.getNom() == nom && c instanceof CarteSpecial) {
+            if (c.getNom() == nom /*&& c instanceof CarteSpecial*/) {
                 c1 = c;
                 //c1 = new CarteHelicoptere();
             } else {
