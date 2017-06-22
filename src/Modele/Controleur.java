@@ -428,8 +428,7 @@ public class Controleur /*implements Observateur*/ {
                                                             String x5;
                                                             Scanner repX5 = new Scanner(System.in);
                                                             x5 = repX5.nextLine();
-                                                            System.out.println("Sur quel tuile ?");
-                                                            x3 = repX3.nextLine();
+                                                            System.out.println(j.getCarte(x1).getNom());
                                                             j.getCarte(x1).deplacer2Joueurs(this.getJoueur(x4), this.getJoueur(x5),x3, g);
                                                              
                                                             break;  
