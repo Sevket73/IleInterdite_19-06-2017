@@ -20,6 +20,7 @@ import static Grille.Etat.*;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -98,7 +99,19 @@ public class Controleur /*implements Observateur*/ {
         for (Tuile t : EnumSet.allOf(Tuile.class)) {
             listeTuiles.push(t);
         }
+        for (Tuile t : this.listeTuiles) {
+            System.out.println(t.toString());
 
+        }
+        /*System.out.println("");
+        System.out.println(listeTuiles.peek().toString());
+        this.listeTuiles.remove(listeTuiles.peek());
+        System.out.println(listeTuiles.peek().toString());
+        System.out.println("");
+        for (Tuile t : this.listeTuiles) {
+            System.out.println(t.toString());
+            
+        }*/
         //Collections.shuffle(listeTuiles);
 
         for (int l = 0; l <= 5; l++) {
@@ -107,12 +120,19 @@ public class Controleur /*implements Observateur*/ {
                     Tuiles t = new Tuiles(null, new CoorD(c, l), null);
                 } else {
                     Tuiles t = new Tuiles(listeTuiles.pop().toString(), new CoorD(c, l), null);
+                    /*this.listeTuiles.remove(listeTuiles.peek());
+                    System.out.println("");
+                    System.out.println(t.getNom());*/
                     t.changerEtat(Assechee);
                     g.addTuiles((l * 6 + c), t);
-
                 }
             }
         }
+
+        for (Map.Entry<Integer, Tuiles> t : g.getAze().entrySet()) {
+            System.out.println(t.getValue().getNom());
+        }
+        System.out.println("");
 
         g.getTuiles("LaPorteDeBronze").changerCouleur(Couleur.Rouge);
         g.getTuiles("LaPorteDOr").changerCouleur(Couleur.Jaune);
@@ -158,10 +178,14 @@ public class Controleur /*implements Observateur*/ {
         this.creerPiocheTirage();
         this.creerPiocheInon();
 
+        /*for (Map.Entry<Integer, Tuiles> t : g.getAze().entrySet()) {
+            System.out.println(t.getValue().getNom());
+        }
+        System.out.println("");
         for (CarteInondations c : this.cartesInon) {
             System.out.println(c.getCible().getNom());
         }
-        System.out.println("");
+        System.out.println("");*/
         this.initJoueurs(j1, j2, j3, j4);
         this.niveauEaux = 1;
         /* for (Tuiles t : g.getAze().values()) {
@@ -204,7 +228,7 @@ public class Controleur /*implements Observateur*/ {
                                         break;
                                     }
                                 }
-                               
+
                             }
                             this.donnerCarteTresEtInon(j);
 
@@ -231,6 +255,9 @@ public class Controleur /*implements Observateur*/ {
         for (int i = 0; i < niveauEaux; i++) {
             this.piocherCarteInon();
 
+        }
+        for (CarteInondations c : cartesInon) {
+            System.out.println(c.getCible().getNom());
         }
     }
 
@@ -299,37 +326,36 @@ public class Controleur /*implements Observateur*/ {
 
     private void piocherCarteInon() {
         if (cartesInon.empty()) {
-            cartesInon.addAll(defausseInon);
+            for (CarteInondations c : this.defausseInon) {
+                this.cartesInon.push(c);
+            }
+            //cartesInon.addAll(defausseInon);
             defausseInon.removeAllElements();
             Collections.shuffle(cartesInon);
-        }
-        //for (CarteInondations c : cartesInon) {
-        //    System.out.println(c.getCible().getNom());
-        //}
-        
-      //  System.out.println("Je tire une carte");
-        
-        
-        CarteInondations cI = cartesInon.pop();
-        Tuiles t = cI.getCible();
-        
-        for( CarteInondations c : cartesInon){
-            System.out.println(c.getCible().getNom());
-        }
-             //   System.out.println(t.getNom());
+        } else {
+            //for (CarteInondations c : cartesInon) {
+            //    System.out.println(c.getCible().getNom());
+            //}
 
-        if (t.getEtat() == Assechee) {
-            t.changerEtat(Inondee);
-            defausseInon.push(cI);
+            //  System.out.println("Je tire une carte");
+            CarteInondations cI = cartesInon.pop();
+            Tuiles t = cI.getCible();
 
-        } else if (t.getEtat() == Inondee) {
-            t.changerEtat(coulee);
-            
+            //   System.out.println(t.getNom());
+            if (t.getEtat() == Assechee) {
+                t.changerEtat(Inondee);
+                defausseInon.push(cI);
+
+            } else if (t.getEtat() == Inondee) {
+                t.changerEtat(coulee);
+
+            }
         }
     }
 
     private void piocherCarte(Aventurier j) {
-        if (cartesPioche.isEmpty()) {
+        if (cartesPioche.empty()) {
+
             cartesPioche.addAll(this.defausse);
             defausse.removeAllElements();
         }
@@ -338,16 +364,16 @@ public class Controleur /*implements Observateur*/ {
         if (carte instanceof CarteMonteeDesEaux) {
             this.monterEau();
             defausse.push(carte);
-            this.cartesInon.addAll(this.defausseInon);
+            /* this.cartesInon.addAll(this.defausseInon);
             defausseInon.removeAllElements();
-            Collections.shuffle(cartesInon);
+            Collections.shuffle(cartesInon);*/
         } else {
             j.addCarteEnMain(carte);
         }
     }
 
     private void monterEau() {
-        niveauEaux += 1;
+        niveauEaux += 0.5;
     }
 
     private void initCartes(Aventurier j) {
@@ -434,9 +460,13 @@ public class Controleur /*implements Observateur*/ {
         }
         if (niveauEaux < 6) {
             if (allAlive) {
-                if (allHelico) {
-                    if (this.tresorsAcquis.size() == 4) {
-                        return true;
+                if (this.niveauEaux < 6) {
+                    if (allHelico) {
+                        if (this.tresorsAcquis.size() == 4) {
+                            return true;
+                        } else {
+                            return false;
+                        }
                     } else {
                         return false;
                     }
@@ -446,7 +476,6 @@ public class Controleur /*implements Observateur*/ {
             } else {
                 return false;
             }
-
         } else {
             return false;
         }
@@ -454,18 +483,20 @@ public class Controleur /*implements Observateur*/ {
     }
 
     private Boolean partiePerdue() {
-        Boolean allAlive = true;
+        Boolean perdue = true;
         for (Aventurier j : this.joueurs) {
             if (j.getVivant()) {
-                allAlive = false;
+                perdue = false;
+                if (this.niveauEaux < 6) {
+                    perdue = false;
+                } else {
+                    perdue = true;
+                }
             } else {
-                allAlive = true;
+                perdue = true;
                 break;
             }
         }
-        if(niveauEaux>=6){
-            allAlive = false;
-        }
-        return allAlive;
+        return perdue;
     }
 }
