@@ -35,7 +35,7 @@ public class Plongeur extends Aventurier {
                 Tuile t2 = collecTuileadj.get(x);
                 System.out.println(t2.getEtat());
                 if (t2.getEtat() == (Assechee)){
-                    System.out.println("coucou");
+                    //System.out.println("coucou");
                     if (!tuilesPossible.contains(t2)) {
                         tuilesPossible.add(t2);
                     }

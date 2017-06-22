@@ -13,8 +13,8 @@ public class CarteSpecial extends CartesTirage {
     private String type;
     
     public CarteSpecial(String type) {
-        setType(type);
-        this.nom = type;
+        super(type);
+        this.setType(type);
     }
 
     /**

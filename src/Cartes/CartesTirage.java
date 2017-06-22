@@ -13,15 +13,15 @@ import Grille.Tuile;
  *
  * @author chaulaic
  */
-public abstract class CartesTirage extends Cartes {
+public class CartesTirage extends Cartes {
    private Aventurier aventurierPossesseur;
     String nom;
 
-    public CartesTirage() {
-        super();
+    public CartesTirage(String nom) {
+        this.setNom(nom);
     }
     
-    /* 
+    
     
     public void ajouterPocesseur(Aventurier j) {
         if (this.getAventurierPocesseur() == null) {
@@ -29,34 +29,29 @@ public abstract class CartesTirage extends Cartes {
         } 
     }
 
-    /**
-     * @return the aventurierPocesseur
+
      
     public Aventurier getAventurierPocesseur() {
         return aventurierPossesseur;
     }
 
-    /**
-     * @param aventurierPocesseur the aventurierPocesseur to set
      
     public void setAventurierPocesseur(Aventurier aventurierPocesseur) {
         this.aventurierPossesseur = aventurierPocesseur;
     }
 
-    /**
-     * @return the nom
-     
+   
+       
     public String getNom() {
         return nom;
     }
 
-    /**
-     * @param nom the nom to set
+
      
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
+    /*
     
     public void deplacer1Joueur(Aventurier j1,String tuile,Grille g){
 

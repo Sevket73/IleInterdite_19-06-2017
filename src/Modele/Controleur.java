@@ -37,7 +37,6 @@ public class Controleur /*implements Observateur*/ {
     private Stack<CartesTirage> cartesPioche;
     private HashSet<TresorsEnum> tresorsAcquis;
     private Stack<TuileEnum> listeTuiles;
-    private Stack<CartesTirage> cartes;
     private Stack<CartesTirage> defausse;
     private Stack<CarteInondation> cartesInon;
     private Stack<CarteInondation> defausseInon;
@@ -59,7 +58,6 @@ public class Controleur /*implements Observateur*/ {
         this.cartesPioche = new Stack();
         this.tresorsAcquis = new HashSet();
         this.listeTuiles = new Stack();
-        this.cartes = new Stack();
         this.defausse = new Stack();
         this.cartesInon = new Stack();
         this.defausseInon = new Stack();
@@ -134,13 +132,13 @@ public class Controleur /*implements Observateur*/ {
                     /*this.listeTuiles.remove(listeTuiles.peek());
                     System.out.println("");
                     System.out.println(t.getNom());*/
-                    t.changerEtat(Assechee);
+                    t.changerEtat(Inondee);
                     g.addTuiles((l * 6 + c), t);
 
                 }
             }
         }
-/*
+        /*
         System.out.println("");
         for (Tuile t : g.getHmGrille().values()) {
             System.out.println(t.getNom());
@@ -188,6 +186,10 @@ public class Controleur /*implements Observateur*/ {
         this.creerGrille(grille, j1, j2, j3, j4);
         this.creerPiocheTirage();
         this.creerPiocheInon();
+        for(CartesTirage c : cartesPioche){
+            System.out.println(c.getNom());
+
+        }
         System.out.println("A quelle niveau d eau souhaitez vous commencer ? (1/2/3/4/5)");
         String eau;
         Scanner repEau = new Scanner(System.in);
@@ -198,54 +200,51 @@ public class Controleur /*implements Observateur*/ {
                 for (Aventurier j : this.joueurs) {
                     j.resetActions();
                     System.out.println(j.getNom());
-                    while(j.getNombreActions()>=0){
-                    if (!this.partieGagnée()) {
-                        if (!this.partiePerdue()) {
-                            if (j.getCartesEnMain().size() > 5) {
-                                System.out.println("Vous ne devez avoir que 5 cartes maximum ! Defaussez-vous !");
-                                //this.defausser();
-                            } else {
-                               //for (CartesTirage c : j.getCartesEnMain()) {
-                                //   if(c!=null) System.out.println(c.getNom());
-                                //}
-                                System.out.println("Quelle action souhaitez vous faire ? (deplacer/assecher/donner une carte/coup special/passer)");
-                                Scanner repAction = new Scanner(System.in);
-                                String action;
-                                action = repAction.nextLine();
-                                
-                                if (action.equals("deplacer")) {
-                                    j.deplacement(g);
-                                } else if (action.equals("assecher")) {
-                                    j.assechement(g);
-                                } else if (action.equals("donner une carte")) {
-                                    System.out.println("A quel aventurier souhaitez vous donner une carte ?");
-                                    Scanner aventurier = new Scanner(System.in);
-                                    String repAv;
-                                    repAv =  aventurier.nextLine();
-                                    System.out.println("Quelle carte souhaitez vous donner ?");
-                                    Scanner carte = new Scanner(System.in);
-                                    String repCarte;
-                                    repCarte =  carte.nextLine();
-                                    j.donnerCarteTresor(j.getCarte(repCarte), this.getJoueur(repAv));
-                                } else if (action.equals("coup special")){
-                                    
-                                } else if (action.equals("passer")){
-                                    break;
+                    while (j.getNombreActions() >= 0) {
+                        if (!this.partieGagnée()) {
+                            if (!this.partiePerdue()) {
+                                if (j.getCartesEnMain().size() > 5) {
+                                    System.out.println("Vous ne devez avoir que 5 cartes maximum ! Defaussez-vous !");
+                                    this.defausser(j);
+                                } else {
+                                    //for (CartesTirage c : j.getCartesEnMain()) {
+                                    //   if(c!=null) System.out.println(c.getNom());
+                                    //}
+                                    System.out.println("Quelle action souhaitez vous faire ? (deplacer/assecher/donner une carte/coup special/passer)");
+                                    Scanner repAction = new Scanner(System.in);
+                                    String action;
+                                    action = repAction.nextLine();
+
+                                    if (action.equals("deplacer")) {
+                                        j.deplacement(g);
+                                    } else if (action.equals("assecher")) {
+                                        j.assechement(g);
+                                    } else if (action.equals("donner une carte")) {
+                                        System.out.println("A quel aventurier souhaitez vous donner une carte ?");
+                                        Scanner aventurier = new Scanner(System.in);
+                                        String repAv;
+                                        repAv = aventurier.nextLine();
+                                        System.out.println("Quelle carte souhaitez vous donner ?");
+                                        Scanner carte = new Scanner(System.in);
+                                        String repCarte;
+                                        repCarte = carte.nextLine();
+                                        j.donnerCarteTresor(j.getCarte(repCarte), this.getJoueur(repAv));
+                                    } else if (action.equals("coup special")) {
+
+                                    } else if (action.equals("passer")) {
+                                        break;
+                                    }
+
                                 }
-                                
                             }
                         }
-                    } j.actionEffectuer();
-                    }this.donnerCarteTresEtInon(j);
+                        j.actionEffectuer();
+                    }
+                    this.donnerCarteTresEtInon(j);
                 }
             }
         }
-        
-        
-        
-        
-        
-        
+
         /*String passez;
 
         this.creerGrille(grille, j1, j2, j3, j4);
@@ -432,14 +431,27 @@ public class Controleur /*implements Observateur*/ {
         else {
             System.out.println("Il n'y a pas assez de joueurs !");
     }*/
-}
+    }
 
-private void donnerCarteTresEtInon(Aventurier j) {
-        this.piocherCarte(j);System.out.println("Je lui donne une carte T");
-        this.piocherCarte(j);System.out.println("Je lui donne une carte T");
+    private void defausser(Aventurier j) {
+        System.out.println(" Veuillez choisir une carte a défausser");
+        for(CartesTirage c : j.getCartesEnMain()){
+           System.out.println(c.getNom());
+        }
+        Scanner repCarte = new Scanner(System.in);
+        String carte = repCarte.nextLine();
+        j.enleverCarte(j.getCarte(carte));
+        
+    }
+
+    private void donnerCarteTresEtInon(Aventurier j) {
+        this.piocherCarte(j);
+        System.out.println("Je lui donne une carte T");
+        this.piocherCarte(j);
+        System.out.println("Je lui donne une carte T");
         //for (CartesTirage t : j.getCartesEnMain()) {
         //     System.out.println(t.getNom());
-         // }
+        // }
         System.out.println("Le niveau de l'eau est de : " + niveauEaux);
         for (int i = 0; i < niveauEaux; i++) {
             this.piocherCarteInon();
@@ -477,23 +489,24 @@ private void donnerCarteTresEtInon(Aventurier j) {
 
         }
     }
-*/
+     */
     private void creerPiocheTirage() {
         for (int i = 0; i < 5; i++) {
-            cartesPioche.push(new CarteTresor(TresorsEnum.Statue_du_Zephyr));
-            cartesPioche.push(new CarteTresor(TresorsEnum.Calice_de_l_onde));
-            cartesPioche.push(new CarteTresor(TresorsEnum.Cristal_Ardent));
-            cartesPioche.push(new CarteTresor(TresorsEnum.Pierre_Sacree));
+            cartesPioche.push(new CarteTresor(Statue_du_Zephyr.toString()));
+            cartesPioche.push(new CarteTresor(Calice_de_l_onde.toString()));
+            cartesPioche.push(new CarteTresor(Cristal_Ardent.toString()));
+            cartesPioche.push(new CarteTresor(Pierre_Sacree.toString()));
+       
         }
         for (int i = 0; i < 3; i++) {
             cartesPioche.push(new CarteSpecial("Helicoptere"));
         }
         for (int i = 0; i < 2; i++) {
             cartesPioche.push(new CarteSpecial("SacDeSable"));
-            cartesPioche.push(new CarteMonteeDesEaux());
+            cartesPioche.push(new CarteMonteeDesEaux("MonteeDesEaux"));
         }
 
-        Collections.shuffle(cartesPioche);
+        //Collections.shuffle(cartesPioche);
     }
 
     private void creerPiocheInon() {
@@ -512,7 +525,7 @@ private void donnerCarteTresEtInon(Aventurier j) {
             }
         }
     }
-    
+
     private void piocherCarteInon() {
         if (cartesInon.empty()) {
             for (CarteInondation c : this.defausseInon) {
@@ -569,7 +582,7 @@ private void donnerCarteTresEtInon(Aventurier j) {
             this.piocherCarte(j);
         }
     }
-    
+
     private void initPartie(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, int niveauEauxDep) {
         if (j1 != null) {
             this.joueurs.add(j1);
@@ -647,7 +660,7 @@ private void donnerCarteTresEtInon(Aventurier j) {
                 break;
             }
         }
-        
+
         if (niveauEaux < 6) {
             if (allAlive) {
 
@@ -685,17 +698,19 @@ private void donnerCarteTresEtInon(Aventurier j) {
                 break;
             }
         }
-        
+
         return perdue;
 
     }
-    private Aventurier getJoueur(String nom){
+
+    private Aventurier getJoueur(String nom) {
         Aventurier a = null;
-        for(Aventurier j : joueurs){
-            if(j.getNom()==nom){
+        for (Aventurier j : joueurs) {
+            if (j.getNom() == nom) {
                 a = j;
             }
-        }return a;
+        }
+        return a;
     }
     /*
     private void effectuerTour()
@@ -829,5 +844,5 @@ private void donnerCarteTresEtInon(Aventurier j) {
             }
         }
     }
-    */
+     */
 }

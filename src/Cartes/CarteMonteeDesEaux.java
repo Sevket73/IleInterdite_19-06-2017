@@ -11,8 +11,9 @@ package Cartes;
  */
 public class CarteMonteeDesEaux extends CartesTirage {
 
-    public CarteMonteeDesEaux() {
-        super();
+    public CarteMonteeDesEaux(String nom) {
+        super(nom);
+   
     }
 
     

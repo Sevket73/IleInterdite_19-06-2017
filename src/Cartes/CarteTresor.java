@@ -13,9 +13,9 @@ public class CarteTresor extends CartesTirage {
 
        private TresorsEnum typeTresor;
        
-    public CarteTresor(TresorsEnum tresor) {
+    public CarteTresor(String tresor) {
+        super(tresor);
         this.setTypeTresor(typeTresor);
-        this.nom = tresor.toString();
     }
 
     /**

@@ -5,6 +5,7 @@
  */
 package Aventuriers;
 
+import Grille.EtatEnum;
 import Grille.Grille;
 import Grille.Tuile;
 import Modele.CouleursEnum;
@@ -22,19 +23,37 @@ public class Pilote extends Aventurier {
         super(nom, vivant, nbAction, couleur);
     }
 
-    
+    @Override
+    public void resetActions()
+    {
+        nombreActions = 3;
+        this.setActionSpe(true);
+    }
     
     @Override
     public ArrayList<Tuile> deplacementPossible(Grille g) {
         Collection<Tuile> tteLesTuiles = new ArrayList<>();
         ArrayList<Tuile> tuilesAdj = new ArrayList();
+        ArrayList<Tuile> tuilesAdjBis = new ArrayList();
+        if(this.isActionSpe()){
+        
         
         tteLesTuiles = g.getHmGrille().values();
         for( Tuile t : tteLesTuiles){
             if(t.getEtat()!=Coulee)
                 tuilesAdj.add(t);
         }
-           
+        this.setActionSpe(false);
+        }else{
+             tuilesAdj = g.getTuilesAdjacentes(positionCourante);
+
+        for (Tuile t : tuilesAdj) {
+            if (t.getEtat() == EtatEnum.Coulee) {
+                tuilesAdjBis.add(t);
+            }
+        }
+        tuilesAdj.removeAll(tuilesAdjBis);
+        }
         return tuilesAdj;
     }
 
