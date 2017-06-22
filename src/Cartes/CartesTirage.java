@@ -6,12 +6,14 @@
 package Cartes;
 
 import Aventuriers.Aventurier;
+import Grille.Grille;
+import Grille.Tuile;
 
 /**
  *
  * @author chaulaic
  */
-public class CartesTirage extends Cartes {
+public abstract class CartesTirage extends Cartes {
     private Aventurier aventurierPossesseur;
     private String nom;
 
@@ -54,6 +56,23 @@ public class CartesTirage extends Cartes {
     public void setNom(String nom) {
         this.nom = nom;
     }
+    
+    
+    public void deplacer1Joueur(Aventurier j1,String tuile,Grille g){
+
+    }
+    
+    public void deplacer2Joueurs(Aventurier j1,Aventurier j2,String tuile,Grille g){
+
+    }
+    
+    public void deplacer3Joueurs(Aventurier j1,Aventurier j2,Aventurier j3,String tuile,Grille g){
+
+    }
+    public void deplacer4Joueurs(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4,String tuile,Grille g){
+
+    }
+   
     
     
     

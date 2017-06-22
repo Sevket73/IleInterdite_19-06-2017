@@ -5,6 +5,7 @@
  */
 package Aventuriers;
 
+import Cartes.CarteHelicoptere;
 import Cartes.CartesTirage;
 import Grille.Coordonnee;
 import Grille.EtatEnum;
@@ -226,4 +227,25 @@ public class Aventurier {
         t.changerEtat(EtatEnum.Assechee);
         System.out.println("La tuile " + t.getNom() + " est maintenant assechee!");
     }
+    
+    public void donnerCarteTresor(CartesTirage c,Aventurier j) {
+       
+        if(this.getPositionCourante()==j.getPositionCourante()){
+            j.addCarteEnMain(c);
+            this.enleverCarte(c);
+        }else{
+            System.out.println(" vous n'etes pas sur la meme tuile");
+        }
+    }
+    public CartesTirage getCarte(String nom){
+        CarteHelicoptere c1=null;
+     for (CartesTirage c : this.getCartesEnMain()){
+         if (c.getNom()==nom && c instanceof CarteHelicoptere){
+             c1 = new CarteHelicoptere();
+            }else{
+             c1 = null;
+             }
+    }return c1;
+    }
+    
 }

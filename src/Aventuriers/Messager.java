@@ -19,7 +19,7 @@ public class Messager extends Aventurier {
     public Messager(String nom, Boolean vivant, int nbAction, CouleursEnum couleur) {
         super(nom, vivant, nbAction, couleur);
     }
-    
+    @Override
     public void donnerCarteTresor(CartesTirage c,Aventurier j) {
        j.addCarteEnMain(c);
        this.enleverCarte(c);
