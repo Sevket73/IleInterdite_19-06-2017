@@ -257,8 +257,9 @@ public class Aventurier {
     public CartesTirage getCarte(String nom) {
         CartesTirage c1 = null;
         for (CartesTirage c : this.getCartesEnMain()) {
+
             if (c.getNom().equals(nom)  /*&& c instanceof CarteSpecial*/) {
-                //System.out.println("On a trouvé la carte");
+
                 c1 = c;
                 break;
                 //c1 = new CarteHelicoptere();

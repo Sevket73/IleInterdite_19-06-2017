@@ -80,7 +80,7 @@ public class Controleur /*implements Observateur*/ {
         
          */
     }
-/*
+    /*
     private void initJoueurs() {
         ArrayList<String> nomJoueurs = new ArrayList<>();
         nomJoueurs = vueMenu.getJoueur();
@@ -91,7 +91,7 @@ public class Controleur /*implements Observateur*/ {
         this.joueurs.add(new Aventurier(nomJoueurs.get(0), true, 3, CouleursEnum.Jaune));
     }*/
 
-    /*private String listeTuile[]= {null,null,"LePontDesAbimes","LaPorteDeBronze",null,null,
+ /*private String listeTuile[]= {null,null,"LePontDesAbimes","LaPorteDeBronze",null,null,
                           null,"LaCaverneDesOmbres","LaPorteDeFer","LaPorteDOr","LesFalaisesDeLOubli",null,
                           "LePalaisDeCorail","LaPorteDArgent","LesDunesDeLIllusion","Heliport","LaPorteDeCuivre","LeJardinDesHurlements",
                           "LaForetPourpre","LeLagonPerdu","LeMaraisBrumeux","Observatoire","LeRocherFantome","LaCaverneDuBrasier",
@@ -186,9 +186,9 @@ public class Controleur /*implements Observateur*/ {
         this.creerGrille(grille, j1, j2, j3, j4);
         this.creerPiocheTirage();
         this.creerPiocheInon();
-     //   for(CartesTirage c : cartesPioche){
-       //     System.out.println(c.getNom());
-      //  }
+        //   for(CartesTirage c : cartesPioche){
+        //     System.out.println(c.getNom());
+        //  }
         System.out.println("A quelle niveau d eau souhaitez vous commencer ? (1/2/3/4/5)");
         String eau;
         Scanner repEau = new Scanner(System.in);
@@ -206,7 +206,9 @@ public class Controleur /*implements Observateur*/ {
                                     System.out.println("Vous ne devez avoir que 5 cartes maximum ! Defaussez-vous !");
                                     this.defausser(j);
                                 } else {
+
                                     //for (CartesTirage c : j.getCartesEnMain()) {null
+                                    //for (CartesTirage c : j.getCartesEnMain()) {
                                     //   if(c!=null) System.out.println(c.getNom());
                                     //}
                                     System.out.println("Quelle action souhaitez vous faire ? (deplacer/assecher/donner une carte/coup special/passer)");
@@ -422,6 +424,7 @@ public class Controleur /*implements Observateur*/ {
 
                 }
             }
+<<<<<<< HEAD
         }
 
     
@@ -434,8 +437,8 @@ public class Controleur /*implements Observateur*/ {
 
     private void defausser(Aventurier j) {
         System.out.println(" Veuillez choisir une carte a défausser");
-        for(CartesTirage c : j.getCartesEnMain()){
-           System.out.println(c.getNom());
+        for (CartesTirage c : j.getCartesEnMain()) {
+            System.out.println(c.getNom());
         }
         Scanner repCarte = new Scanner(System.in);
         String carte = repCarte.nextLine().toString();
@@ -443,8 +446,8 @@ public class Controleur /*implements Observateur*/ {
         System.out.println("Vous avez choisi " + j.getCarte(carte).getNom());
         //j.getCartesEnMain().remove(j.getCarte(carte));
         j.getCartesEnMain().remove(j.getCarte(carte));
-        for(CartesTirage c : j.getCartesEnMain()){
-           System.out.println(c.getNom());
+        for (CartesTirage c : j.getCartesEnMain()) {
+            System.out.println(c.getNom());
         }
     }
 
@@ -500,7 +503,7 @@ public class Controleur /*implements Observateur*/ {
             cartesPioche.push(new CarteTresor(Calice_de_l_onde.toString()));
             cartesPioche.push(new CarteTresor(Cristal_Ardent.toString()));
             cartesPioche.push(new CarteTresor(Pierre_Sacree.toString()));
-       
+
         }
         for (int i = 0; i < 3; i++) {
             cartesPioche.push(new CarteSpecial("Helicoptere"));
