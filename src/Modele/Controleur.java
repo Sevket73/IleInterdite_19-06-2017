@@ -1,4 +1,3 @@
-salut
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -250,7 +249,15 @@ public class Controleur /*implements Observateur*/ {
                                         repCarte = carte.nextLine();
                                         j.donnerCarteTresor(j.getCarte(repCarte), this.getJoueur(repAv));
                                     } else if (action.equals("coup special")) {
-
+                                        for (CartesTirage c : j.getCartesEnMain()) {
+                                            if (c instanceof CarteSpecial) {
+                                                if (((CarteSpecial) c).getType() == "Helicoptere") {
+                                                    this.coupSpecialHelico(j,g);
+                                                } else {
+                                                    System.out.println("Vous n'avez pas de carte helicoptere");
+                                                }
+                                            }
+                                        }
                                     } else if (action.equals("passer")) {
                                         break;
                                     }
@@ -737,6 +744,45 @@ public class Controleur /*implements Observateur*/ {
             }
         }
         return a;
+    }
+    
+    private void coupSpecialHelico(Aventurier j, Grille g) {
+        int i = 0;
+        String nbAventurier[];
+        System.out.println("Combien d'aventurier souhaitez vous déplacer ? (1/2/3//4)" );
+        Scanner repNbAv = new Scanner(System.in);
+        String nbAv = repNbAv.nextLine();
+        Aventurier av = new Aventurier(null,null,3,null);
+        if (nbAv == "1") {
+            i = 1;
+            for (int k = 0; k<1;k++){
+                System.out.println("Saisissez un aventurier : ");
+                Scanner repAventurier = new Scanner(System.in);
+                String a = repAventurier.nextLine();
+                av = this.getJoueur(a);
+            }
+                System.out.println("Saisissez une tuile : ");
+                for (Tuile t : g.getHmGrille().values()) {
+                    System.out.print(t.getNom() + ' ');
+                }
+                Scanner repTuile = new Scanner(System.in);
+                String t = repTuile.nextLine();
+                Tuile tu = g.getTuiles(t);
+                this.DeplacerJoueur(av,tu);
+            
+        }/*else if (nbAv == "2") {
+          
+        }else if (nbAv == "3") {
+            
+        }else if (nbAv == "4") {
+            
+        }*/
+    }
+    
+    private void DeplacerJoueur(Aventurier a, Tuile t) {
+        a.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
+        t.addPossedeAventurier(a);
+
     }
     /*
     private void effectuerTour()
