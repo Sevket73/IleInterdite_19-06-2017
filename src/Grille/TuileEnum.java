@@ -9,7 +9,7 @@ package Grille;
  *
  * @author cault
  */
-public enum TuilesEnum {
+public enum TuileEnum {
     LePontDesAbimes,
     LaPorteDeBronze, // pion rouge
     LaCaverneDesOmbres,

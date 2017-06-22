@@ -7,7 +7,7 @@ package Modele;
 
 import Modele.CouleursEnum;
 import Grille.*;
-import Grille.TuilesEnum;
+import Grille.TuileEnum;
 import Aventuriers.*;
 import View.*;
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Stack;
+import java.util.Map;
 
 /**
  *
@@ -33,7 +34,7 @@ public class Controleur /*implements Observateur*/ {
     private Grille grille = new Grille();
     private Stack<CartesTirage> cartesPioche;
     private HashSet<TresorsEnum> tresorsAcquis;
-    private Stack<TuilesEnum> listeTuiles;
+    private Stack<TuileEnum> listeTuiles;
     private Stack<CartesTirage> cartes;
     private Stack<CartesTirage> defausse;
     private Stack<CarteInondation> cartesInon;
@@ -96,26 +97,57 @@ public class Controleur /*implements Observateur*/ {
                           "LaForetPourpre","LeLagonPerdu","LeMaraisBrumeux","Observatoire","LeRocherFantome","LaCaverneDuBrasier",
                           null,"LeTempleDuSoleil","LeTempleDeLaLune","LePalaisDesMarees","LeValDuCrepuscule",null,
                           null,null,"LaTourDuGuet","LeJardinDesMurmures",null,null};*/
-    public void creerGrille(Grille g,Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) {
-        for (TuilesEnum t : EnumSet.allOf(TuilesEnum.class)) {
+
+    public void creerGrille(Grille g, Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) {
+        Stack<TuileEnum> reverseListeTuiles = new Stack();
+        for (TuileEnum t : EnumSet.allOf(TuileEnum.class)) {
             listeTuiles.push(t);
         }
+        //Collections.shuffle(listeTuiles);
 
-        Collections.shuffle(listeTuiles);
+        for (int i = listeTuiles.size(); i > 0; i--) {
+            reverseListeTuiles.push(listeTuiles.pop());
+        }
+        /*for (Tuile t : reverseListeTuiles) {
+            System.out.println("Tuiles : ");
+            System.out.println(t.toString());
+        }*/
+ /*System.out.println("");
+        System.out.println(listeTuiles.peek().toString());
+        this.listeTuiles.remove(listeTuiles.peek());
+        System.out.println(listeTuiles.peek().toString());
+        System.out.println("");
+        for (Tuile t : this.listeTuiles) {
+            System.out.println(t.toString());
+            
+        }*/
+        //Collections.shuffle(listeTuiles);
+
 
         for (int l = 0; l <= 5; l++) {
             for (int c = 0; c <= 5; c++) {
                 if ((l == 0 && ((c == 0 || c == 1) || c == 4 || c == 5)) || (l == 1 && c == 0) || (l == 1 && c == 5) || ((l == 4 && c == 0) || (l == 4 && c == 5)) || (l == 5 && ((c == 0 || c == 1) || c == 4 || c == 5))) {
                     Tuile t = new Tuile(null, new Coordonnee(c, l), null);
+                    g.addTuiles((l * 6 + c), t);
                 } else {
-                    Tuile t = new Tuile(listeTuiles.pop().toString(), new Coordonnee(c, l), null);
+                    Tuile t = new Tuile(reverseListeTuiles.pop().toString(), new Coordonnee(c, l), null);
+                    /*this.listeTuiles.remove(listeTuiles.peek());
+                    System.out.println("");
+                    System.out.println(t.getNom());*/
                     t.changerEtat(Assechee);
                     g.addTuiles((l * 6 + c), t);
-                   
+
                 }
             }
         }
-        
+
+        System.out.println("");
+        for (Tuile t : g.getHmGrille().values()) {
+            System.out.println(t.getNom());
+        }
+        System.out.println("");
+
+
         g.getTuiles("LaPorteDeBronze").changerCouleur(CouleursEnum.Rouge);
         g.getTuiles("LaPorteDOr").changerCouleur(CouleursEnum.Jaune);
         g.getTuiles("LaPorteDeFer").changerCouleur(CouleursEnum.Noir);
@@ -132,9 +164,9 @@ public class Controleur /*implements Observateur*/ {
         g.getTuiles("LaCaverneDuBrasier").setTresor(Cristal_Ardent);
         g.getTuiles("LaCaverneDesOmbres").setTresor(Cristal_Ardent);
 
-        /*
-        for(Tuiles t : g.getAze().values()){
-            if(t.getCouleur()==j1.getCouleur()){
+        
+        for (Tuile t : g.getHmGrille().values()) {
+            if (t.getCouleur() == j1.getCouleur()) {
                 t.setDepartAventurier(j1);
                 t.addPossedeAventurier(j1); }
             if(t.getCouleur()==j2.getCouleur()){
@@ -147,7 +179,7 @@ public class Controleur /*implements Observateur*/ {
                 t.setDepartAventurier(j4);
                 t.addPossedeAventurier(j4); }
         }
-        */
+        
     }
 
     public void jouer(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, Grille g) {
@@ -157,8 +189,25 @@ public class Controleur /*implements Observateur*/ {
         this.creerGrille(grille,j1,j2,j3,j4);
         this.creerPiocheTirage();
         this.creerPiocheInon();
-        this.initJoueurs(j1, j2, j3, j4);
-        this.niveauEaux = 1;
+
+        /*for (Map.Entry<Integer, Tuiles> t : g.getAze().entrySet()) {
+            System.out.println(t.getValue().getNom());
+        }
+        System.out.println("");
+        for (CarteInondations c : this.cartesInon) {
+            System.out.println(c.getCible().getNom());
+        }
+        System.out.println("");*/
+        System.out.println("A quelle niveau d eau souhaitez vous commencer ? (1/2/3/4/5)");
+        String eau;
+        Scanner repEau = new Scanner(System.in);
+        eau = repEau.nextLine();
+        this.initPartie(j1, j2, j3, j4, Integer.parseInt(eau));
+
+        /* for (Tuiles t : g.getAze().values()) {
+            System.out.println(t.getNom());
+        }*/
+        
         if (this.verifNbJoueurs()) {
             while (!this.partiePerdue()) {
                 while (!this.partieGagnée()) {
@@ -171,29 +220,31 @@ public class Controleur /*implements Observateur*/ {
                         passez = repPasse.nextLine();
 
                         if (passez.equals("n")) {
-                            for (int k = 1; k < 4; k++) {
-                                System.out.println("Action " + k);
-                                System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
-                                String action;
-                                Scanner repAction = new Scanner(System.in);
-                                action = repAction.nextLine();
+                            if (j instanceof Navigateur) {
+                                for (int k = 1; k < 5; k++) {
+                                    System.out.println("Action " + k);
+                                    System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
+                                    String action;
+                                    Scanner repAction = new Scanner(System.in);
+                                    action = repAction.nextLine();
 
-                                if (action.equals("deplacer")) {
-                                    j.deplacement(grille);
+                                    if (action.equals("deplacer")) {
+                                        j.deplacement(grille);
 
-                                } else if (action.equals("assecher")) {
-                                    j.assechement(grille);
-                                }
+                                    } else if (action.equals("assecher")) {
+                                        j.assechement(grille);
+                                    }
 
-                                if (k == 3) {
-                                    break;
-                                } else {
-                                    System.out.println("Souhaitez-vous passez ? (o/n)");
-                                    repPasse = new Scanner(System.in);
-                                    passez = repPasse.nextLine();
-
-                                    if (passez.equals("o")) {
+                                    if (k == 3) {
                                         break;
+                                    } else {
+                                        System.out.println("Souhaitez-vous passez ? (o/n)");
+                                        repPasse = new Scanner(System.in);
+                                        passez = repPasse.nextLine();
+
+                                        if (passez.equals("o")) {
+                                            break;
+                                        }
                                     }
                                 }
                                 this.piocherCarte(j);
@@ -203,6 +254,33 @@ public class Controleur /*implements Observateur*/ {
                                 }
                                 for (int i = 0; i <= niveauEaux; i++) {
                                     this.piocherCarteInon();
+                                }
+                            } else {
+                                for (int k = 1; k < 4; k++) {
+                                    System.out.println("Action " + k);
+                                    System.out.println("Que souhaitez-vous faire? (deplacer/assecher)");
+                                    String action;
+                                    Scanner repAction = new Scanner(System.in);
+                                    action = repAction.nextLine();
+
+                                    if (action.equals("deplacer")) {
+                                        j.deplacement(grille);
+
+                                    } else if (action.equals("assecher")) {
+                                        j.assechement(grille);
+                                    }
+
+                                    if (k == 3) {
+                                        break;
+                                    } else {
+                                        System.out.println("Souhaitez-vous passez ? (o/n)");
+                                        repPasse = new Scanner(System.in);
+                                        passez = repPasse.nextLine();
+
+                                        if (passez.equals("o")) {
+                                            break;
+                                        }
+                                    }
                                 }
                             }
                         } else {
@@ -225,8 +303,25 @@ public class Controleur /*implements Observateur*/ {
             System.out.println("Il n'y a pas assez de joueurs !");
         }
     }
-/*
-    @Override
+
+    private void donnerCarteTresEtInon(Aventurier j) {
+        this.piocherCarte(j);
+        this.piocherCarte(j);
+        for (CartesTirage t : j.getCartesEnMain()) {
+            System.out.println(t.getNom());
+        }
+        System.out.println("Le niveau de l'eau est de : " + niveauEaux);
+        for (int i = 0; i < niveauEaux; i++) {
+            this.piocherCarteInon();
+
+        }
+        for (CarteInondation c : cartesInon) {
+            System.out.println(c.getCible().getNom());
+        }
+    }
+
+
+    /*@Override
     public void click(Message message) {
 
         Grille grille = new Grille();
@@ -271,48 +366,71 @@ public class Controleur /*implements Observateur*/ {
     }
 
     private void creerPiocheInon() {
-        for (int i = 0; i < grille.getHmGrille().size(); i++) {
-            Tuile t = grille.getTuiles(i);
-            CarteInondation cI = new CarteInondation(t);
-            cartesInon.push(cI);
+        for (Tuile t : grille.getHmGrille().values()) {
+            /* int l = grille.getTuiles(i).getCoordonnée().getLigne();
+            int c = grille.getTuiles(i).getCoordonnée().getColonne();
+            switch(l*6+c){
+                case 0:case1:case4:case5:case6:case11:case24:case29:case30:case31:case34:case35 :
+                
+                break;
+                
+            }*/
+            if (t.getNom() != null) {
+                CarteInondation cI = new CarteInondation(t);
+                cartesInon.push(cI);
+            }
         }
     }
+    
+    private void piocherCarteInon() {
+        if (cartesInon.empty()) {
+            for (CarteInondation c : this.defausseInon) {
+                this.cartesInon.push(c);
+            }
+            //cartesInon.addAll(defausseInon);
+            defausseInon.removeAllElements();
+            Collections.shuffle(cartesInon);
+        } else {
+            //for (CarteInondations c : cartesInon) {
+            //    System.out.println(c.getCible().getNom());
+            //
 
-    private void piocherCarteInon() { 
-if(cartesInon.isEmpty()){
-    cartesInon.addAll(defausseInon);
-}
-        CarteInondation cI = cartesInon.pop();
-        Tuile t = cI.getCible();
+            //  System.out.println("Je tire une carte");
+            CarteInondation cI = cartesInon.pop();
+            Tuile t = cI.getCible();
+            //   System.out.println(t.getNom());
+            if (t.getEtat() == Assechee) {
+                t.changerEtat(Inondee);
+                defausseInon.push(cI);
 
-        if (t.getEtat() == Assechee) {
-            t.changerEtat(Inondee);
-            defausseInon.push(cI);
+            } else if (t.getEtat() == Inondee) {
+                t.changerEtat(Coulee);
 
-        } else if (t.getEtat() == Inondee) {
-            t.changerEtat(Coulee);
+            }
 
         }
     }
 
     private void piocherCarte(Aventurier j) {
-        if(cartesPioche.isEmpty()){
+        if (cartesPioche.empty()) {
             cartesPioche.addAll(this.defausse);
+            defausse.removeAllElements();
         }
         CartesTirage carte = new CartesTirage();
         carte = cartesPioche.pop();
         if (carte instanceof CarteMonteeDesEaux) {
             monterEau();
             defausse.push(carte);
-            this.cartesInon.addAll(this.defausseInon);
-            Collections.shuffle(cartesInon);
+            /* this.cartesInon.addAll(this.defausseInon);
+            defausseInon.removeAllElements();
+            Collections.shuffle(cartesInon);*/
         } else {
             j.addCarteEnMain(carte);
         }
     }
 
     private void monterEau() {
-        niveauEaux += 1;
+        niveauEaux = niveauEaux + 1;
     }
 
     private void initCartes(Aventurier j) {
@@ -320,8 +438,16 @@ if(cartesInon.isEmpty()){
             this.piocherCarte(j);
         }
     }
-
-    private void initJoueurs(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) { 
+    
+    private void initPartie(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, int niveauEauxDep) {
+        if (j1 != null) {
+            this.joueurs.add(j1);
+            this.initCartes(j1);
+        }
+        if (j2 != null) {
+            this.joueurs.add(j2);
+            this.initCartes(j2);
+        }
         if (j3 != null) {
             this.joueurs.add(j3);
             this.initCartes(j3);
@@ -330,6 +456,7 @@ if(cartesInon.isEmpty()){
             this.joueurs.add(j4);
             this.initCartes(j4);
         }
+        this.niveauEaux = niveauEauxDep;
     }
 
     private boolean verifNbJoueurs() {
@@ -389,11 +516,17 @@ if(cartesInon.isEmpty()){
                 break;
             }
         }
+        
+        if (niveauEaux < 6) {
+            if (allAlive) {
 
-        if (allAlive) {
-            if (allHelico) {
-                if (this.tresorsAcquis.size() == 4) {
-                    return true;
+                if (allHelico) {
+                    if (this.tresorsAcquis.size() == 4) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+
                 } else {
                     return false;
                 }
@@ -407,15 +540,22 @@ if(cartesInon.isEmpty()){
     }
 
     private Boolean partiePerdue() {
-        Boolean allAlive = true;
+        Boolean perdue = true;
         for (Aventurier j : this.joueurs) {
             if (j.getVivant()) {
-                allAlive = false;
+                perdue = false;
+                if (this.niveauEaux < 6) {
+                    perdue = false;
+                } else {
+                    perdue = true;
+                }
             } else {
-                allAlive = true;
+                perdue = true;
                 break;
             }
         }
-        return allAlive;
+        
+        return perdue;
+
     }
 }

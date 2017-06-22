@@ -24,6 +24,7 @@ public class CarteHelicoptere extends CartesTirage {
     
     public void deplacer1Joueur(Aventurier j1,String tuile,Grille g){
             Tuile t1 = g.getTuiles(tuile);
+
         j1.setPositionCourante(t1.getCoordonnée().getColonne(),t1.getCoordonnée().getLigne());
     }
     public void deplacer2Joueurs(Aventurier j1,Aventurier j2,String tuile,Grille g){

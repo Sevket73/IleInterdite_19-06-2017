@@ -152,7 +152,8 @@ public class Aventurier {
 
     public void deplacement(Grille g) {
         ArrayList<Tuile> tuilesAdj = new ArrayList();
-        tuilesAdj = deplacementPossible(g);
+        tuilesAdj = this.deplacementPossible(g);
+        
         System.out.println("Où souhaitez-vous aller ?");
 
         for (Tuile t : tuilesAdj){
