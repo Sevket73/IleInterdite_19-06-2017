@@ -612,10 +612,7 @@ public class Controleur /*implements Observateur*/ {
             for (int k = 0; k < 2; k++) {
                 System.out.println("Saisissez un aventurier : ");
                 Scanner repAventurier = new Scanner(System.in);
-                String Integer.toString(k);
-                
-                Integer.toString(k)= repAventurier.nextLine();
-                av = this.getJoueur();
+                 Integer.toString(k);
             }
             System.out.println("Saisissez une tuile : ");
             for (Tuile t : g.getHmGrille().values()) {
@@ -624,7 +621,7 @@ public class Controleur /*implements Observateur*/ {
             Scanner repTuile = new Scanner(System.in);
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
-            this.DeplacerJoueur(av1,av2, tu);
+            //this.DeplacerJoueur(av1,av2, tu);
 
         } else if (nbAv == "3") {
 
