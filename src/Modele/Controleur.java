@@ -202,7 +202,7 @@ public class Controleur /*implements Observateur*/ {
             while (!this.partieGagnée()) {
                 for (Aventurier j : this.joueurs) {
                     j.resetActions();
-                    System.out.println(j.getNom());
+                    System.out.println(j.getNom()+" c'est à votre tour");
                     while (j.getNombreActions() >= 0) {
                         if (!this.partieGagnée()) {
                             if (!this.partiePerdue()) {
@@ -215,6 +215,10 @@ public class Controleur /*implements Observateur*/ {
                                     //for (CartesTirage c : j.getCartesEnMain()) {
                                     //   if(c!=null) System.out.println(c.getNom());
                                     //}
+                                    System.out.println("Position des joueurs :");
+                                    for ( Aventurier joueur : joueurs){
+                                        System.out.println(joueur.getNom()+" : "+joueur.getPositionCourante().getNom());
+                                    }
                                     System.out.println("Les tuiles inondées sont : ");
                                     for (Tuile t : g.getHmGrille().values()) {
                                         if (t.getEtat() == EtatEnum.Inondee) {
@@ -227,6 +231,13 @@ public class Controleur /*implements Observateur*/ {
                                         if (t.getEtat() == EtatEnum.Coulee) {
                                             System.out.print(t.getNom() + ' ');
                                         }
+                                    }
+                                    System.out.println();
+                                    System.out.println("Cartes en main : ");
+                                    for (CartesTirage c : j.getCartesEnMain()) {
+                                         
+                                            System.out.print(c.getNom()+' ');
+                                        
                                     }
                                     System.out.println();
                                     System.out.println("Quelle action souhaitez vous faire ? (deplacer/assecher/donner une carte/coup special/passer)");
@@ -249,16 +260,23 @@ public class Controleur /*implements Observateur*/ {
                                         repCarte = carte.nextLine();
                                         j.donnerCarteTresor(j.getCarte(repCarte), this.getJoueur(repAv));
                                     } else if (action.equals("coup special")) {
-                                        for (CartesTirage c : j.getCartesEnMain()) {
-                                            if (c instanceof CarteSpecial) {
-                                                if (((CarteSpecial) c).getType() == "Helicoptere") {
+                                        System.out.println("Quelle coup special voulez vous faire ?(SacDeSable/Helicoptere");
+                                        Scanner coupS = new Scanner(System.in);
+                                        String repCoupS;
+                                        repCoupS = coupS.nextLine();
+                                                                               
+                                    
+                                            if (j.getCarte(repCoupS) instanceof CarteSpecial) {
+                                                if (((CarteSpecial)j.getCarte(repCoupS) ).getType() == "Helicoptere") {
                                                     this.coupSpecialHelico(j,g);
+                                                } else if(((CarteSpecial)((CarteSpecial)j.getCarte(repCoupS) ) ).getType() == "SacDeSable"){
+                                                    this.coupSpecialSacDeSable(g);
                                                 } else {
-                                                    System.out.println("Vous n'avez pas de carte helicoptere");
+                                                    System.out.println("Ce n'est pas une carte special tant pis pour vous !");
                                                 }
-                                            }
+                                            }   else { System.out.println("Vous en avez ");
                                         }
-                                    } else if (action.equals("passer")) {
+                                    }else if (action.equals("passer")) {
                                         break;
                                     }
 
@@ -777,6 +795,21 @@ public class Controleur /*implements Observateur*/ {
         }else if (nbAv == "4") {
             
         }*/
+    }
+    private void coupSpecialSacDeSable(Grille g) {
+        System.out.println("Les tuiles inondées sont : ");
+        for (Tuile t : g.getHmGrille().values()) {
+            if (t.getEtat() == EtatEnum.Inondee) {
+                System.out.print(t.getNom() + ' ');
+            }
+        }
+        System.out.println("Saisissez une tuile : ");
+        Scanner repTuile = new Scanner(System.in);
+        String t = repTuile.nextLine();
+        Tuile tu = g.getTuiles(t);
+        System.out.println(tu.getNom());
+        tu.changerEtat(Assechee);
+        
     }
     
     private void DeplacerJoueur(Aventurier a, Tuile t) {

@@ -115,13 +115,14 @@ public class Grille {
 
 
     public Tuile getTuiles(String nomTuiles) {
-
+        Tuile t1 = null;
         for (Tuile t : hmGrille.values()) {
             if (t.getNom() == nomTuiles) {
-                return t;
+                t1 = t;
+                break;
             }
         }
-        return null;
+        return t1;
     }
 
 
