@@ -97,14 +97,15 @@ public class Controleur /*implements Observateur*/ {
                           "LaForetPourpre","LeLagonPerdu","LeMaraisBrumeux","Observatoire","LeRocherFantome","LaCaverneDuBrasier",
                           null,"LeTempleDuSoleil","LeTempleDeLaLune","LePalaisDesMarees","LeValDuCrepuscule",null,
                           null,null,"LaTourDuGuet","LeJardinDesMurmures",null,null};*/
-    public void creerGrille(Grille g, Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) {
-        Stack<TuileEnum> reverseListeTuiles = new Stack();
-        for (TuileEnum t : EnumSet.allOf(TuileEnum.class)) {
+    public void creerGrille(Grille g, Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) { //Creation de la grille selon la grille donnée sur papier
+        Stack<TuileEnum> reverseListeTuiles = new Stack(); //Collection permettant d'avoir les tuiles dans le bon ordre lorsque l'on va pop()
+        for (TuileEnum t : EnumSet.allOf(TuileEnum.class)) { //on parcours l'enumération afin de recupérer ces valeurs dans la collection tuile
             listeTuiles.push(t);
         }
-        //Collections.shuffle(listeTuiles);
+        //Collections.shuffle(listeTuiles); //Permet de mélanger les tuiles, on ne s'en sert pas pour la demo
 
-        for (int i = listeTuiles.size(); i > 0; i--) {
+        for (int i = listeTuiles.size(); i > 0; i--) {   //Afin d'avoir les tuiles dans le bonne ordre par rapport à la grille donnée, on parcours listeTuiles 
+                                                        //à l'envers et on met les valeurs dans une collection différente
             reverseListeTuiles.push(listeTuiles.pop());
         }
         /*for (Tuile t : reverseListeTuiles) {
@@ -122,17 +123,19 @@ public class Controleur /*implements Observateur*/ {
         }*/
         //Collections.shuffle(listeTuiles);
 
-        for (int l = 0; l <= 5; l++) {
-            for (int c = 0; c <= 5; c++) {
+        for (int l = 0; l <= 5; l++) { //Disposition des tuiles selon les lignes
+            for (int c = 0; c <= 5; c++) { //Disposition des tuiles selon les colonnes
                 if ((l == 0 && ((c == 0 || c == 1) || c == 4 || c == 5)) || (l == 1 && c == 0) || (l == 1 && c == 5) || ((l == 4 && c == 0) || (l == 4 && c == 5)) || (l == 5 && ((c == 0 || c == 1) || c == 4 || c == 5))) {
+                    //Création des Tuiles null dans les coins de la grille
                     Tuile t = new Tuile(null, new Coordonnee(c, l), null);
                     g.addTuiles((l * 6 + c), t);
                 } else {
+                    //Création des Tuiles existantes
                     Tuile t = new Tuile(reverseListeTuiles.pop().toString(), new Coordonnee(c, l), null);
                     /*this.listeTuiles.remove(listeTuiles.peek());
                     System.out.println("");
                     System.out.println(t.getNom());*/
-                    t.changerEtat(Inondee);
+                    t.changerEtat(Inondee); //On les asseches par défaut
                     g.addTuiles((l * 6 + c), t);
 
                 }
@@ -144,7 +147,8 @@ public class Controleur /*implements Observateur*/ {
             System.out.println(t.getNom());
         }*/
         System.out.println("");
-
+        
+        //On définit les différents départs des aventuriers en fonctions de la couleurs des pions
         g.getTuiles("LaPorteDeBronze").changerCouleur(CouleursEnum.Rouge);
         g.getTuiles("LaPorteDOr").changerCouleur(CouleursEnum.Jaune);
         g.getTuiles("LaPorteDeFer").changerCouleur(CouleursEnum.Noir);
@@ -152,6 +156,25 @@ public class Controleur /*implements Observateur*/ {
         g.getTuiles("LaPorteDeCuivre").changerCouleur(CouleursEnum.Vert);
         g.getTuiles("Heliport").changerCouleur(CouleursEnum.Bleu);
 
+        for (Tuile t : g.getHmGrille().values()) {
+            if ((j1 != null) && (t.getCouleur() == j1.getCouleur())) {
+                t.setDepartAventurier(j1);
+                t.addPossedeAventurier(j1);
+            }
+            if ((j2 != null) &&(t.getCouleur() == j2.getCouleur())) {
+                t.setDepartAventurier(j2);
+                t.addPossedeAventurier(j2);
+            }
+            if ((j3 != null) &&(t.getCouleur() == j3.getCouleur())) {
+                t.setDepartAventurier(j3);
+                t.addPossedeAventurier(j3);
+            }
+            if ((j4 != null) &&(t.getCouleur() == j4.getCouleur())) {
+                t.setDepartAventurier(j4);
+                t.addPossedeAventurier(j4);
+            }
+        }
+        //On définit les tresors sur les tuiles qui en possedent
         g.getTuiles("LePalaisDeCorail").setTresor(Calice_de_l_onde);
         g.getTuiles("LePalaisDesMarees").setTresor(Calice_de_l_onde);
         g.getTuiles("LeJardinDesHurlements").setTresor(Statue_du_Zephyr);
@@ -160,25 +183,6 @@ public class Controleur /*implements Observateur*/ {
         g.getTuiles("LeTempleDuSoleil").setTresor(Pierre_Sacree);
         g.getTuiles("LaCaverneDuBrasier").setTresor(Cristal_Ardent);
         g.getTuiles("LaCaverneDesOmbres").setTresor(Cristal_Ardent);
-
-        for (Tuile t : g.getHmGrille().values()) {
-            if (t.getCouleur() == j1.getCouleur()) {
-                t.setDepartAventurier(j1);
-                t.addPossedeAventurier(j1);
-            }
-            if (t.getCouleur() == j2.getCouleur()) {
-                t.setDepartAventurier(j2);
-                t.addPossedeAventurier(j2);
-            }
-            if (t.getCouleur() == j3.getCouleur()) {
-                t.setDepartAventurier(j3);
-                t.addPossedeAventurier(j3);
-            }
-            if (t.getCouleur() == j4.getCouleur()) {
-                t.setDepartAventurier(j4);
-                t.addPossedeAventurier(j4);
-            }
-        }
 
     }
 
