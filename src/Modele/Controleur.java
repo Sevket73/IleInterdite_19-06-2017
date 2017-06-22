@@ -573,8 +573,9 @@ public class Controleur /*implements Observateur*/ {
     private Aventurier getJoueur(String nom) {
         Aventurier a = null;
         for (Aventurier j : joueurs) {
-            if (j.getNom() == nom) {
+            if (j.getNom().equals(nom)) {
                 a = j;
+                break;
             }
         }
         return a;
@@ -585,9 +586,9 @@ public class Controleur /*implements Observateur*/ {
         System.out.println("Combien d'aventurier souhaitez vous déplacer ? (1/2/3//4)");
         Scanner repNbAv = new Scanner(System.in);
         String nbAv = repNbAv.nextLine();
-        Aventurier av = null;
-        if (nbAv == "1") {
-            
+        
+        if (Integer.parseInt(nbAv) == 1) {
+           Aventurier av = null;   
             System.out.println("Saisissez un aventurier : ");
             Scanner repAventurier = new Scanner(System.in);
             String a = repAventurier.nextLine();
@@ -602,9 +603,10 @@ public class Controleur /*implements Observateur*/ {
             Scanner repTuile = new Scanner(System.in);
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
+            System.out.println(av.getNom());
             this.DeplacerJoueur(av, tu);
 
-        } else if (nbAv == "2") {
+        } else if (Integer.parseInt(nbAv) == 2) {
             
             Aventurier variable[] = null;
             
@@ -624,7 +626,7 @@ public class Controleur /*implements Observateur*/ {
             this.DeplacerJoueur(variable[0], tu);
             this.DeplacerJoueur(variable[1], tu);
 
-        } else if (nbAv == "3") {
+        } else if (Integer.parseInt(nbAv) == 3) {
             
             Aventurier variable[] = null;
             
@@ -644,7 +646,7 @@ public class Controleur /*implements Observateur*/ {
             this.DeplacerJoueur(variable[0], tu);
             this.DeplacerJoueur(variable[1], tu);
             this.DeplacerJoueur(variable[2], tu);
-        } else if (nbAv == "4") {
+        } else if (Integer.parseInt(nbAv) == 4) {
             Aventurier variable[] = null;
             
             for (int k = 0; k < 2; k++) {
