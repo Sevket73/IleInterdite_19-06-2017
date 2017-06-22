@@ -24,23 +24,23 @@ import Modele.CouleursEnum;
  * @author chaulaic
  */
 public class Aventurier {
+
     protected String nom;
     protected Boolean vivant;
     protected int nbAction;
     protected CouleursEnum couleur;
     protected ArrayList<CartesTirage> cartesEnMain;
     protected Tuile positionCourante;
-    
-    
+
     public Aventurier(String nom, Boolean vivant, int nbAction, CouleursEnum couleur) {
         this.nom = nom;
         this.vivant = vivant;
         this.nbAction = nbAction;
         this.couleur = couleur;
         this.cartesEnMain = new ArrayList<>();
-        this.positionCourante = new Tuile(null, new Coordonnee(0,0),null);
+        this.positionCourante = new Tuile(null, new Coordonnee(0, 0), null);
     }
-    
+
     //getteurs et setteurs :
     /**
      * @return the nom
@@ -112,14 +112,14 @@ public class Aventurier {
         this.cartesEnMain = cartesEnMain;
     }
 
-    public void addCarteEnMain(CartesTirage c){
+    public void addCarteEnMain(CartesTirage c) {
         this.cartesEnMain.add(c);
     }
-    
+
     public void enleverCarte(CartesTirage c) {
         this.cartesEnMain.remove(c);
     }
-    
+
     /**
      * @return the positionCourante
      */
@@ -134,32 +134,33 @@ public class Aventurier {
         this.getPositionCourante().getCoordonnée().setColonne(c);
         this.getPositionCourante().getCoordonnée().setLigne(l);
     }
-    
+
     public ArrayList<Tuile> deplacementPossible(Grille g) {
-        
+
         ArrayList<Tuile> tuilesAdj = new ArrayList<>();
         ArrayList<Tuile> tuilesAdjBis = new ArrayList<>();
         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
 
         for (Tuile t : tuilesAdj) {
-            if (t.getEtat() == EtatEnum.Coulee ) {
+            if (t.getEtat() == EtatEnum.Coulee) {
                 tuilesAdjBis.add(t);
             }
         }
         tuilesAdj.removeAll(tuilesAdjBis);
 
         return tuilesAdj;
-        }
+    }
 
     public void deplacement(Grille g) {
         ArrayList<Tuile> tuilesAdj = new ArrayList();
         tuilesAdj = this.deplacementPossible(g);
-        
+
         System.out.println("Où souhaitez-vous aller ?");
 
-        for (Tuile t : tuilesAdj){
-            if (t != null)
-                System.out.println(t.getNom());   
+        for (Tuile t : tuilesAdj) {
+            if (t != null) {
+                System.out.println(t.getNom());
+            }
         }
         Scanner repDep = new Scanner(System.in);
         String dep;
@@ -172,39 +173,39 @@ public class Aventurier {
             }
         }
     }
-    
+
     public void seDeplacer(Tuile t) {
         this.getPositionCourante().removePossedeAventurier(this);
         this.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
         System.out.println("Vous êtes maintenant sur la tuile :" + t.getNom());
         t.addPossedeAventurier(this);
-        
+
     }
-                
-    public ArrayList<Tuile> tuilesAssechables(Grille g){
+
+    public ArrayList<Tuile> tuilesAssechables(Grille g) {
 
         ArrayList<Tuile> tuilesAdj = new ArrayList<>();
         ArrayList<Tuile> tuilesPasAssechables = new ArrayList<>();
 
         tuilesAdj = g.getTuilesAdjacentes(positionCourante);
-        tuilesAdj.add(g.getTuiles(positionCourante.getCoordonnée().getLigne()*6 + positionCourante.getCoordonnée().getColonne()));
+        tuilesAdj.add(g.getTuiles(positionCourante.getCoordonnée().getLigne() * 6 + positionCourante.getCoordonnée().getColonne()));
         for (Tuile t : tuilesAdj) {
             if (t.getEtat() != EtatEnum.Inondee) {
                 tuilesPasAssechables.add(t);
-            } 
+            }
         }
-        
+
         tuilesAdj.removeAll(tuilesPasAssechables);
         return tuilesAdj;
-        
+
     }
-    
-    public void assechement(Grille g){ 
+
+    public void assechement(Grille g) {
         ArrayList<Tuile> tuilesAssechables = new ArrayList<>();
         tuilesAssechables = this.tuilesAssechables(g);
         if (tuilesAssechables.isEmpty()) {
             System.out.println("Il n'y a aucune tuile à assecher !");
-                    
+
         } else {
             System.out.println("Quelle tuile souhaitez vous assecher ?");
             for (Tuile t : tuilesAssechables) {
@@ -222,30 +223,33 @@ public class Aventurier {
             }
         }
     }
-    
+
     public void assecher(Tuile t) {
         t.changerEtat(EtatEnum.Assechee);
         System.out.println("La tuile " + t.getNom() + " est maintenant assechee!");
     }
-    
-    public void donnerCarteTresor(CartesTirage c,Aventurier j) {
-       
-        if(this.getPositionCourante()==j.getPositionCourante()){
+
+    public void donnerCarteTresor(CartesTirage c, Aventurier j) {
+
+        if (this.getPositionCourante() == j.getPositionCourante()) {
             j.addCarteEnMain(c);
             this.enleverCarte(c);
-        }else{
+        } else {
             System.out.println(" vous n'etes pas sur la meme tuile");
         }
     }
-    public CartesTirage getCarte(String nom){
-        CarteHelicoptere c1=null;
-     for (CartesTirage c : this.getCartesEnMain()){
-         if (c.getNom()==nom && c instanceof CarteHelicoptere){
-             c1 = new CarteHelicoptere();
-            }else{
-             c1 = null;
-             }
-    }return c1;
+
+    public CartesTirage getCarte(String nom) {
+        CartesTirage c1 = null;
+        for (CartesTirage c : this.getCartesEnMain()) {
+            if (c.getNom() == nom && c instanceof CarteHelicoptere) {
+                c1 = c;
+                //c1 = new CarteHelicoptere();
+            } else {
+                c1 = null;
+            }
+        }
+        return c1;
     }
-    
+
 }
