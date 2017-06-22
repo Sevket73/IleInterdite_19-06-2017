@@ -16,7 +16,8 @@ public class CarteInondation extends Cartes {
     private Tuile cible;
 
     public CarteInondation(Tuile cible) {
-        this.cible = cible;
+        this.nom = cible.getNom();
+        this.setCible(cible);
 
     }
 

@@ -5,7 +5,8 @@
  */
 package Aventuriers;
 
-import Cartes.CarteHelicoptere;
+import Cartes.CarteSpecial;
+//import comment.CarteHelicoptere;
 import Cartes.CartesTirage;
 import Grille.Coordonnee;
 import Grille.EtatEnum;
@@ -31,6 +32,7 @@ public class Aventurier {
     protected CouleursEnum couleur;
     protected ArrayList<CartesTirage> cartesEnMain;
     protected Tuile positionCourante;
+    protected int nombreActions;
 
     public Aventurier(String nom, Boolean vivant, int nbAction, CouleursEnum couleur) {
         this.nom = nom;
@@ -40,7 +42,17 @@ public class Aventurier {
         this.cartesEnMain = new ArrayList<>();
         this.positionCourante = new Tuile(null, new Coordonnee(0, 0), null);
     }
-
+    
+    public void resetActions() {
+        nombreActions = 3;
+    }
+    public int getNombreActions()
+    {
+        return nombreActions;
+    }
+    public void actionEffectuer(){
+        nombreActions--;
+    }
     //getteurs et setteurs :
     /**
      * @return the nom
@@ -131,8 +143,11 @@ public class Aventurier {
      * @param positionCourante the positionCourante to set
      */
     public void setPositionCourante(int c, int l) {
+        this.positionCourante.removePossedeAventurier(this);
         this.getPositionCourante().getCoordonnée().setColonne(c);
         this.getPositionCourante().getCoordonnée().setLigne(l);
+        this.positionCourante.addPossedeAventurier(this);
+        
     }
 
     public ArrayList<Tuile> deplacementPossible(Grille g) {
@@ -158,7 +173,7 @@ public class Aventurier {
         System.out.println("Où souhaitez-vous aller ?");
 
         for (Tuile t : tuilesAdj) {
-            if (t != null) {
+            if (t.getNom() != null) {
                 System.out.println(t.getNom());
             }
         }
@@ -175,10 +190,10 @@ public class Aventurier {
     }
 
     public void seDeplacer(Tuile t) {
-        this.getPositionCourante().removePossedeAventurier(this);
+
         this.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
         System.out.println("Vous êtes maintenant sur la tuile :" + t.getNom());
-        t.addPossedeAventurier(this);
+
 
     }
 
@@ -242,14 +257,16 @@ public class Aventurier {
     public CartesTirage getCarte(String nom) {
         CartesTirage c1 = null;
         for (CartesTirage c : this.getCartesEnMain()) {
-            if (c.getNom() == nom && c instanceof CarteHelicoptere) {
+            if (c.getNom() == nom /*&& c instanceof CarteSpecial*/) {
+                //System.out.println("On a trouvé la carte");
                 c1 = c;
+                break;
                 //c1 = new CarteHelicoptere();
             } else {
                 c1 = null;
             }
         }
-        return c1;
+        return (CartesTirage)c1;
     }
 
 }

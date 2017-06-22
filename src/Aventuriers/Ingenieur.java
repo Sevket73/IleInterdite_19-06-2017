@@ -25,7 +25,7 @@ public class Ingenieur extends Aventurier{
     public void assechement(Grille g) { // faire en sorte qu'il ne soit pas obliger d'assecher 2 tuiles en une fois ** souhaitez vous assecher 1 ou 2 tuiles?
         ArrayList<Tuile> tuilesAssechables = new ArrayList<>();
         
-        System.out.println("Vous pouvez assecher " + this.tuilesAssechables(g).size() + " tuile(s) en une fois");
+        System.out.println("Vous pouvez assecher " + this.tuilesAssechables(g).size() + " tuile(s) differentes");
         System.out.println("");
         
             
