@@ -11,4 +11,9 @@ package Cartes;
  */
 public abstract class Cartes {
 
+    protected String nom;
+
+    public String getNom() {
+        return this.nom;
+    }
 }

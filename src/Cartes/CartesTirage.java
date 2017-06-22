@@ -14,11 +14,11 @@ import Grille.Tuile;
  * @author chaulaic
  */
 public abstract class CartesTirage extends Cartes {
-    private Aventurier aventurierPossesseur;
+   /* private Aventurier aventurierPossesseur;
     private String nom;
 
     public CartesTirage() {
-        this.aventurierPossesseur = null;
+        super();
     }
     
     
@@ -31,28 +31,28 @@ public abstract class CartesTirage extends Cartes {
 
     /**
      * @return the aventurierPocesseur
-     */
+     
     public Aventurier getAventurierPocesseur() {
         return aventurierPossesseur;
     }
 
     /**
      * @param aventurierPocesseur the aventurierPocesseur to set
-     */
+     
     public void setAventurierPocesseur(Aventurier aventurierPocesseur) {
         this.aventurierPossesseur = aventurierPocesseur;
     }
 
     /**
      * @return the nom
-     */
+     
     public String getNom() {
         return nom;
     }
 
     /**
      * @param nom the nom to set
-     */
+     
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -72,7 +72,7 @@ public abstract class CartesTirage extends Cartes {
     public void deplacer4Joueurs(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4,String tuile,Grille g){
 
     }
-   
+   */
     
     
     
