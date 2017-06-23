@@ -137,9 +137,32 @@ public class Controleur /*implements Observateur*/ {
                     /*this.listeTuiles.remove(listeTuiles.peek());
                     System.out.println("");
                     System.out.println(t.getNom());*/
-                    t.changerEtat(Inondee); //On les asseches par défaut
+                    t.changerEtat(Assechee); //On les asseches par défaut
                     g.addTuiles((l * 6 + c), t);
-
+                    if ((l==0 && c==3)||(l==3 && ((c==1||c==3)||c==5))||l==5 && c ==3){
+                        g.getTuiles(l*6+c).changerEtat(Inondee);
+                        }       
+                        else if ((c==2 && (((l==2 || l == 3 )|| l == 4) ))|| c == 4 && l == 3){
+                            g.getTuiles(l*6+c).changerEtat(Coulee);  
+                    }
+                    if (l==0 && c==3 ){
+                         g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Rouge);
+                        }
+                        else if (l==1&&c == 2){
+                              g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Noir);  
+                        } 
+                        else if (l==1&& c == 3){
+                              g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Jaune);  
+                        } 
+                        else if (l==2&& c == 1){
+                              g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Orange);  
+                        }
+                        else if (l==2&& c == 3){
+                              g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Bleu);  
+                        }
+                        else if (l==2 && c == 4){
+                              g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Vert);  
+                    }
                 }
             }
         }
@@ -482,18 +505,24 @@ public class Controleur /*implements Observateur*/ {
             if ((j1 != null) && (t.getCouleur() == j1.getCouleur())) {
                 t.setDepartAventurier(j1);
                 t.addPossedeAventurier(j1);
+                j1.setPositionCourante(t.getCoordonnée().getColonne(),t.getCoordonnée().getLigne(), g);
             }
             if ((j2 != null) && (t.getCouleur() == j2.getCouleur())) {
                 t.setDepartAventurier(j2);
                 t.addPossedeAventurier(j2);
+                j2.setPositionCourante(t.getCoordonnée().getColonne(),t.getCoordonnée().getLigne(), g);
             }
             if ((j3 != null) && (t.getCouleur() == j3.getCouleur())) {
                 t.setDepartAventurier(j3);
                 t.addPossedeAventurier(j3);
+                j3.setPositionCourante(t.getCoordonnée().getColonne(),t.getCoordonnée().getLigne(), g);
+
             }
             if ((j4 != null) && (t.getCouleur() == j4.getCouleur())) {
                 t.setDepartAventurier(j4);
                 t.addPossedeAventurier(j4);
+                j4.setPositionCourante(t.getCoordonnée().getColonne(),t.getCoordonnée().getLigne(), g);
+
             }
         }
     }
@@ -535,10 +564,15 @@ public class Controleur /*implements Observateur*/ {
             this.tresorsAcquis.add(tresor);
             for (String t : this.tresorsAcquis){
                 System.out.println(t);
+           
             }
-            
-            
+            for(int i=0; i <=4;i++){
+            j.enleverCarte(j.getCarte(tresor));
+            j.enleverCarte(j.getCarte(tresor));
+            j.enleverCarte(j.getCarte(tresor));
+            j.enleverCarte(j.getCarte(tresor));
         }
+    }
     }
 
     private boolean partieGagnée() {
