@@ -290,7 +290,7 @@ public class Controleur /*implements Observateur*/ {
 
     }
 
-    private void defausser(Aventurier j) {
+    private void defausser(Aventurier j) {// quand le joueur a trop de carte dans son jeu, cette mthode permet de le defausser d'une carte
         System.out.println(" Veuillez choisir une carte a défausser");
         for (CartesTirage c : j.getCartesEnMain()) {
             System.out.println(c.getNom());
@@ -306,7 +306,7 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private void donnerCarteTresEtInon(Aventurier j) {
+    private void donnerCarteTresEtInon(Aventurier j) {//donne 2 cartes tresor et des cartes inondations en fonction du niveau d'eau
         this.piocherCarte(j);
         System.out.println("Je lui donne une carte T");
         this.piocherCarte(j);
@@ -320,12 +320,10 @@ public class Controleur /*implements Observateur*/ {
             System.out.println("Je lui donne une carte I");
 
         }
-        //for (CarteInondation c : cartesInon) {
-        //   System.out.println(c.getCible().getNom());
-        //}
+        
     }
 
-
+    //bout de code conçu pour l'ihm mais dans cette version nous jouons en textuel (car ihm incomplète et inutilisable)
     /*@Override
     public void click(Message message) {
 
@@ -348,11 +346,10 @@ public class Controleur /*implements Observateur*/ {
                 vueGrille.afficher();
                 vueStatue.afficher();
                 vueMenu.fermer();
-
         }
     }
      */
-    private void creerPiocheTirage() {
+    private void creerPiocheTirage() {//cette methode creer la pioche de CarteTirage(carte tresor, montee des eaux, special )
         for (int i = 0; i < 5; i++) {
             cartesPioche.push(new CarteTresor(Statue_du_Zephyr.toString()));
             cartesPioche.push(new CarteTresor(Calice_de_l_onde.toString()));
@@ -371,7 +368,7 @@ public class Controleur /*implements Observateur*/ {
         //Collections.shuffle(cartesPioche);
     }
 
-    private void creerPiocheInon() {
+    private void creerPiocheInon() {//cette methode creer la pioche de CarteInondation
         for (Tuile t : grille.getHmGrille().values()) {
             /* int l = grille.getTuiles(i).getCoordonnée().getLigne();
             int c = grille.getTuiles(i).getCoordonnée().getColonne();
@@ -388,7 +385,7 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private void piocherCarteInon() {
+    private void piocherCarteInon() {//on pioche une carte inondation, s'il n'y a plus de cartes dans la pioche, on met la defausse dans la pioche
         if (cartesInon.empty()) {
             for (CarteInondation c : this.defausseInon) {
                 this.cartesInon.push(c);
@@ -397,14 +394,9 @@ public class Controleur /*implements Observateur*/ {
             defausseInon.removeAllElements();
             Collections.shuffle(cartesInon);
         } else {
-            //for (CarteInondations c : cartesInon) {
-            //    System.out.println(c.getCible().getNom());
-            //
-
-            //  System.out.println("Je tire une carte");
+            
             CarteInondation cI = cartesInon.pop();
             Tuile t = cI.getCible();
-            //   System.out.println(t.getNom());
             if (t.getEtat() == Assechee) {
                 t.changerEtat(Inondee);
                 defausseInon.push(cI);
@@ -413,11 +405,10 @@ public class Controleur /*implements Observateur*/ {
                 t.changerEtat(Coulee);
 
             }
-
         }
     }
 
-    private void piocherCarte(Aventurier j) {
+    private void piocherCarte(Aventurier j) {//pioche une carte dans la piocheTirage, s'il n'y a plus de cartes dans la pioche, on met la defausse dans la pioche
         if (cartesPioche.empty()) {
             cartesPioche.addAll(this.defausse);
             defausse.removeAllElements();
@@ -427,25 +418,24 @@ public class Controleur /*implements Observateur*/ {
         if (carte instanceof CarteMonteeDesEaux) {
             monterEau();
             defausse.push(carte);
-            /* this.cartesInon.addAll(this.defausseInon);
-            defausseInon.removeAllElements();
-            Collections.shuffle(cartesInon);*/
+            
         } else {
             j.addCarteEnMain(carte);
         }
     }
 
-    private void monterEau() {
+    private void monterEau() { // augmente le niveau de l'eau 
         niveauEaux = niveauEaux + 1;
     }
 
-    private void initCartes(Aventurier j) {
+    private void initCartes(Aventurier j) {//initialise les cartes d'un aventurier en debut de partie
         for (int i = 0; i < 4; i++) {
             this.piocherCarte(j);
         }
     }
 
-    private void initPartie(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, int niveauEauxDep, Grille g) {
+    private void initPartie(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, int niveauEauxDep, Grille g) { 
+        //on ajoute les différents joueurs dans la collection joueurs, on leur disribue des cartes, on définit le niveau de l'eau au départ et on place les aventurier sur la grille
         if (j1 != null) {
             this.joueurs.add(j1);
 
@@ -490,15 +480,15 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private boolean verifNbJoueurs() {
-        if (this.joueurs.size() < 2) {
+    private boolean verifNbJoueurs() { // verifie qu'il y a au moins 2 joueurs et pas plus de 4
+        if (this.joueurs.size() < 2 || this.joueurs.size()>4) {
             return false;
         } else {
             return true;
         }
     }
 
-    private boolean peutPrendreTresor(Aventurier j, String tresor, Grille g) {
+    private boolean peutPrendreTresor(Aventurier j, String tresor, Grille g) {//Renvoie true si le joueurs a 4 cartes du trésor et est sur une tuile qui possede ce tresor
         int i = 0;
         for (CartesTirage c : j.getCartesEnMain()) {
             if (c instanceof CarteTresor) {
@@ -522,7 +512,7 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private void prendreTresor(String tresor, Aventurier j, Grille g) {
+    private void prendreTresor(String tresor, Aventurier j, Grille g) {//on ajoute le tresor à la collection tresors acquis
         if (this.peutPrendreTresor(j, tresor, g)) {
             this.tresorsAcquis.add(tresor);
             for (String t : this.tresorsAcquis) {
@@ -538,7 +528,7 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private boolean partieGagnée() {
+    private boolean partieGagnée() { //renvoie vraie si le niveau d'eau est inférieur à 6, que tous les joueurs sont vivant, qu'il sont tous sur la tuile heliport et qu'ils ont récupéré les 4 tresors
         Boolean allAlive = true;
         Boolean allHelico = true;
 
@@ -580,7 +570,7 @@ public class Controleur /*implements Observateur*/ {
 
     }
 
-    private Boolean partiePerdue() {
+    private Boolean partiePerdue() {//renvoie vraie si le niveau d'eau >= 6, qu'un des joueurs est mort
         Boolean perdue = true;
         for (Aventurier j : this.joueurs) {
             if (j.getVivant()) {
@@ -600,7 +590,7 @@ public class Controleur /*implements Observateur*/ {
 
     }
 
-    private Aventurier getJoueur(String nom) {
+    private Aventurier getJoueur(String nom) {// recupère un aventurier selon son nom
         Aventurier a = null;
         for (Aventurier j : joueurs) {
             if (j.getNom().equals(nom)) {
@@ -611,7 +601,7 @@ public class Controleur /*implements Observateur*/ {
         return a;
     }
 
-    private void coupSpecialHelico(Aventurier j, Grille g) {
+    private void coupSpecialHelico(Aventurier j, Grille g) {//effectuer le coup special de la carte hélicoptère
 
         System.out.println("Combien d'aventurier souhaitez vous déplacer ? (1/2/3//4)");
         Scanner repNbAv = new Scanner(System.in);
@@ -704,7 +694,7 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private void coupSpecialSacDeSable(Grille g) {
+    private void coupSpecialSacDeSable(Grille g) {//effectuer le coup special de la carte Sac de sable
         System.out.println("Les tuiles inondées sont : ");
         for (Tuile t : g.getHmGrille().values()) {
             if (t.getEtat() == EtatEnum.Inondee) {
