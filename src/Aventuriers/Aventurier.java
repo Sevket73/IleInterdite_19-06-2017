@@ -142,6 +142,14 @@ public class Aventurier {
     /**
      * @param positionCourante the positionCourante to set
      */
+    public void setPositionCourante(int c, int l,Grille g) {
+        this.positionCourante.removePossedeAventurier(this);
+        this.positionCourante.setNom(g.getTuiles(l*6+c).getNom());
+        this.getPositionCourante().getCoordonnée().setColonne(c);
+        this.getPositionCourante().getCoordonnée().setLigne(l);
+        this.positionCourante.addPossedeAventurier(this);
+        
+    }
     public void setPositionCourante(int c, int l) {
         this.positionCourante.removePossedeAventurier(this);
         this.getPositionCourante().getCoordonnée().setColonne(c);
@@ -149,6 +157,7 @@ public class Aventurier {
         this.positionCourante.addPossedeAventurier(this);
         
     }
+
 
     public ArrayList<Tuile> deplacementPossible(Grille g) {
 

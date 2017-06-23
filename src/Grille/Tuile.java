@@ -97,7 +97,7 @@ public class Tuile {
     /**
      * @param nom the nom to set
      */
-    private void setNom(String nom) {
+    public void setNom(String nom) {
         this.nom = nom;
     }
 
