@@ -5,8 +5,6 @@
  */
 package Modele;
 
-//import comment.CarteSacDeSable;
-//import comment.CarteHelicoptere;
 import Modele.CouleursEnum;
 import Grille.*;
 import Grille.TuileEnum;
@@ -24,7 +22,7 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Stack;
 import java.util.Map;
-import java.io.*; 
+import java.io.*;
 
 /**
  *
@@ -41,6 +39,8 @@ public class Controleur /*implements Observateur*/ {
     private Stack<CartesTirage> defausse;
     private Stack<CarteInondation> cartesInon;
     private Stack<CarteInondation> defausseInon;
+
+    //bout de code conçu pour l'ihm mais dans cette version nous jouons en textuel (car ihm incomplète et inutilisable)
 /*
     private VueMenu vueMenu;
     private VueRules vueRules;
@@ -49,7 +49,7 @@ public class Controleur /*implements Observateur*/ {
 
     private Observateur observateur;
     private Message messArrayListage = new Message();
-*/
+     */
     public Controleur(int niveauEaux, Grille g) {
         this.niveauEaux = niveauEaux;
         this.joueurs = new ArrayList<>();
@@ -63,6 +63,7 @@ public class Controleur /*implements Observateur*/ {
         this.cartesInon = new Stack();
         this.defausseInon = new Stack();
 
+        //bout de code conçu pour l'ihm mais dans cette version nous jouons en textuel (car ihm incomplète et inutilisable)
         /*
         vueMenu = new VueMenu();
         vueMenu.setObservateur(this);
@@ -82,6 +83,7 @@ public class Controleur /*implements Observateur*/ {
          */
     }
 
+    //bout de code conçu pour l'ihm mais dans cette version nous jouons en textuel (car ihm incomplète et inutilisable)
     /*
     private void initJoueurs() {
         ArrayList<String> nomJoueurs = new ArrayList<>();
@@ -93,12 +95,6 @@ public class Controleur /*implements Observateur*/ {
         this.joueurs.add(new Aventurier(nomJoueurs.get(0), true, 3, CouleursEnum.Jaune));
     }*/
 
- /*private String listeTuile[]= {null,null,"LePontDesAbimes","LaPorteDeBronze",null,null,
-                          null,"LaCaverneDesOmbres","LaPorteDeFer","LaPorteDOr","LesFalaisesDeLOubli",null,
-                          "LePalaisDeCorail","LaPorteDArgent","LesDunesDeLIllusion","Heliport","LaPorteDeCuivre","LeJardinDesHurlements",
-                          "LaForetPourpre","LeLagonPerdu","LeMaraisBrumeux","Observatoire","LeRocherFantome","LaCaverneDuBrasier",
-                          null,"LeTempleDuSoleil","LeTempleDeLaLune","LePalaisDesMarees","LeValDuCrepuscule",null,
-                          null,null,"LaTourDuGuet","LeJardinDesMurmures",null,null};*/
     public void creerGrille(Grille g, Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4) { //Creation de la grille selon la grille donnée sur papier
         Stack<TuileEnum> reverseListeTuiles = new Stack(); //Collection permettant d'avoir les tuiles dans le bon ordre lorsque l'on va pop()
         for (TuileEnum t : EnumSet.allOf(TuileEnum.class)) { //on parcours l'enumération afin de recupérer ces valeurs dans la collection tuile
@@ -110,20 +106,6 @@ public class Controleur /*implements Observateur*/ {
             //à l'envers et on met les valeurs dans une collection différente
             reverseListeTuiles.push(listeTuiles.pop());
         }
-        /*for (Tuile t : reverseListeTuiles) {
-            System.out.println("Tuiles : ");
-            System.out.println(t.toString());
-        }*/
- /*System.out.println("");
-        System.out.println(listeTuiles.peek().toString());
-        this.listeTuiles.remove(listeTuiles.peek());
-        System.out.println(listeTuiles.peek().toString());
-        System.out.println("");
-        for (Tuile t : this.listeTuiles) {
-            System.out.println(t.toString());
-            
-        }*/
-        //Collections.shuffle(listeTuiles);
 
         for (int l = 0; l <= 5; l++) { //Disposition des tuiles selon les lignes
             for (int c = 0; c <= 5; c++) { //Disposition des tuiles selon les colonnes
@@ -134,43 +116,31 @@ public class Controleur /*implements Observateur*/ {
                 } else {
                     //Création des Tuiles existantes
                     Tuile t = new Tuile(reverseListeTuiles.pop().toString(), new Coordonnee(c, l), null);
-                    /*this.listeTuiles.remove(listeTuiles.peek());
-                    System.out.println("");
-                    System.out.println(t.getNom());*/
+
                     t.changerEtat(Assechee); //On les asseches par défaut
                     g.addTuiles((l * 6 + c), t);
-                    if ((l==0 && c==3)||(l==3 && ((c==1||c==3)||c==5))||l==5 && c ==3){
-                        g.getTuiles(l*6+c).changerEtat(Inondee);
-                        }       
-                        else if ((c==2 && (((l==2 || l == 3 )|| l == 4) ))|| c == 4 && l == 3){
-                            g.getTuiles(l*6+c).changerEtat(Coulee);  
+                    if ((l == 0 && c == 3) || (l == 3 && ((c == 1 || c == 3) || c == 5)) || l == 5 && c == 3) { //on inonde quelques tuiles selon la grille donnée pour la demo
+                        g.getTuiles(l * 6 + c).changerEtat(Inondee);
+                    } else if ((c == 2 && (((l == 2 || l == 3) || l == 4))) || c == 4 && l == 3) {
+                        g.getTuiles(l * 6 + c).changerEtat(Coulee);   //on coule quelques tuiles selon la grille donnée pour la demo
                     }
-                    if (l==0 && c==3 ){
-                         g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Rouge);
-                        }
-                        else if (l==1&&c == 2){
-                              g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Noir);  
-                        } 
-                        else if (l==1&& c == 3){
-                              g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Jaune);  
-                        } 
-                        else if (l==2&& c == 1){
-                              g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Orange);  
-                        }
-                        else if (l==2&& c == 3){
-                              g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Bleu);  
-                        }
-                        else if (l==2 && c == 4){
-                              g.getTuiles(l*6+c).changerCouleur(CouleursEnum.Vert);  
+                    if (l == 0 && c == 3) {
+                        g.getTuiles(l * 6 + c).changerCouleur(CouleursEnum.Rouge);
+                    } else if (l == 1 && c == 2) {
+                        g.getTuiles(l * 6 + c).changerCouleur(CouleursEnum.Noir);
+                    } else if (l == 1 && c == 3) {
+                        g.getTuiles(l * 6 + c).changerCouleur(CouleursEnum.Jaune);
+                    } else if (l == 2 && c == 1) {
+                        g.getTuiles(l * 6 + c).changerCouleur(CouleursEnum.Orange);
+                    } else if (l == 2 && c == 3) {
+                        g.getTuiles(l * 6 + c).changerCouleur(CouleursEnum.Bleu);
+                    } else if (l == 2 && c == 4) {
+                        g.getTuiles(l * 6 + c).changerCouleur(CouleursEnum.Vert);
                     }
                 }
             }
         }
-        /*
-        System.out.println("");
-        for (Tuile t : g.getHmGrille().values()) {
-            System.out.println(t.getNom());
-        }*/
+
         System.out.println("");
 
         //On définit les différents départs des aventuriers en fonctions de la couleurs des pions
@@ -181,7 +151,6 @@ public class Controleur /*implements Observateur*/ {
         g.getTuiles("LaPorteDeCuivre").changerCouleur(CouleursEnum.Vert);
         g.getTuiles("Heliport").changerCouleur(CouleursEnum.Bleu);
 
-       
         //On définit les tresors sur les tuiles qui en possedent
         g.getTuiles("LaPorteDeBronze").setTresor(Calice_de_l_onde.toString());
         g.getTuiles("LePalaisDesMarees").setTresor(Calice_de_l_onde.toString());
@@ -198,50 +167,44 @@ public class Controleur /*implements Observateur*/ {
     }
 
     public void jouer(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, Grille g) {
-        this.creerGrille(grille, j1, j2, j3, j4);
+        this.creerGrille(grille, j1, j2, j3, j4);//on creer la grille
+
+        j1.setPositionCourante(3, 2, g);//on place les joueurs manuellement pour la demo
+        j2.setPositionCourante(3, 4, g);
+        j3.setPositionCourante(3, 0, g);
+        j4.setPositionCourante(2, 1, g);
+
+        this.creerPiocheTirage();//on creer la pioche tirage (carte tresor, montee des eaux, special )
+        this.creerPiocheInon();//on creer la pioche de cartes inondation
         
-        j1.setPositionCourante(3, 2,g);
-        j2.setPositionCourante(3, 4,g);
-        j3.setPositionCourante(3, 0,g);
-        j4.setPositionCourante(2, 1,g);
-        
-        this.creerPiocheTirage();
-        this.creerPiocheInon();
-        //   for(CartesTirage c : cartesPioche){
-        //     System.out.println(c.getNom());
-        //  }
-        System.out.println("A quelle niveau d eau souhaitez vous commencer ? (1/2/3/4/5)");
+        System.out.println("A quelle niveau d eau souhaitez vous commencer ? (1/2/3/4/5)"); // on demande au joueurs d'initialiser le niveau d'eau
         String eau;
         Scanner repEau = new Scanner(System.in);
         eau = repEau.nextLine();
-        this.initPartie(j1, j2, j3, j4, Integer.parseInt(eau),g);
-        while (!this.partiePerdue()) {
-            while (!this.partieGagnée()) {
+        this.initPartie(j1, j2, j3, j4, Integer.parseInt(eau), g); // on initialise la partie
+        while (!this.partiePerdue()) { // on verifie que la paartie n'est pas perdue
+            while (!this.partieGagnée()) {// on verifie que la paartie n'est pas gagnée
                 for (Aventurier j : this.joueurs) {
-                    j.resetActions();
+                    j.resetActions();//on réinitialise le nombre d'actions restantes à effectuer
                     System.out.println(j.getNom() + " c'est à votre tour");
-                    while (j.getNombreActions() >= 0) {
-                        if (!this.partieGagnée()) {
-                            if (!this.partiePerdue()) {
-                                if (j.getCartesEnMain().size() > 5) {
+                    while (j.getNombreActions() >= 0) {//on verifie qu'il n'a pas épuisé son nombre d'action
+                        if (!this.partieGagnée()) {// on verifie que la paartie n'est pas gagnée
+                            if (!this.partiePerdue()) {// on verifie que la paartie n'est pas perdue
+                                if (j.getCartesEnMain().size() > 5) {// si le joueur a plus de 5 cartes dans son jeu, on lui demande de se defausser
                                     System.out.println("Vous ne devez avoir que 5 cartes maximum ! Defaussez-vous !");
                                     this.defausser(j);
                                 } else {
-
-                                    //for (CartesTirage c : j.getCartesEnMain()) {null
-                                    //for (CartesTirage c : j.getCartesEnMain()) {
-                                    //   if(c!=null) System.out.println(c.getNom());
-                                    //}
+                                    //on presente l'etat du jeu
                                     System.out.println("Position des joueurs :");
                                     for (Aventurier joueur : joueurs) {
                                         System.out.println(joueur.getNom() + " : " + joueur.getPositionCourante().getNom());
                                     }
-                                    System.out.println(j.getPositionCourante().getCoordonnée().getColonne()+" "+j.getPositionCourante().getCoordonnée().getLigne());
+                                    System.out.println(j.getPositionCourante().getCoordonnée().getColonne() + " " + j.getPositionCourante().getCoordonnée().getLigne());
                                     System.out.println(" ");
                                     System.out.println("Les tuiles inondées sont : ");
                                     for (Tuile t : g.getHmGrille().values()) {
                                         if (t.getEtat() == EtatEnum.Inondee) {
-                                            System.out.println(t.getNom() );
+                                            System.out.println(t.getNom());
                                         }
                                     }
                                     System.out.println();
@@ -259,16 +222,16 @@ public class Controleur /*implements Observateur*/ {
 
                                     }
                                     System.out.println();
-                                    System.out.println("Quelle action souhaitez vous faire ? (deplacer/assecher/donner une carte/coup special/passer/prendre tresor)");
+                                    System.out.println("Quelle action souhaitez vous faire ? (deplacer/assecher/donner une carte/coup special/passer/prendre tresor)");//on demande au joueur quele action il souhaite faire
                                     Scanner repAction = new Scanner(System.in);
                                     String action;
                                     action = repAction.nextLine();
 
-                                    if (action.equals("deplacer")) {
+                                    if (action.equals("deplacer")) {//s'il souhaite se déplacer, on le déplace
                                         j.deplacement(g);
-                                    } else if (action.equals("assecher")) {
+                                    } else if (action.equals("assecher")) {//s'il souhaite assecher une tuile, on l'asseche
                                         j.assechement(g);
-                                    } else if (action.equals("donner une carte")) {
+                                    } else if (action.equals("donner une carte")) {//s'il souhaite donner une carte, on lui demande à qui il veut la donner, et quelle carte
                                         System.out.println("A quel aventurier souhaitez vous donner une carte ?");
                                         Scanner aventurier = new Scanner(System.in);
                                         String repAv;
@@ -278,7 +241,7 @@ public class Controleur /*implements Observateur*/ {
                                         String repCarte;
                                         repCarte = carte.nextLine();
                                         j.donnerCarteTresor(j.getCarte(repCarte), this.getJoueur(repAv));
-                                    } else if (action.equals("coup special")) {
+                                    } else if (action.equals("coup special")) {//s'il souhaite effectuer une coup special, on lui dmande lequel
                                         System.out.println("Quelle coup special voulez vous faire ?(SacDeSable/Helicoptere");
                                         Scanner coupS = new Scanner(System.in);
                                         String repCoupS;
@@ -297,30 +260,30 @@ public class Controleur /*implements Observateur*/ {
                                         } else {
                                             System.out.println("Vous en avez ");
                                         }
-                                    } else if (action.equals("passer")) {
+                                    } else if (action.equals("passer")) {//S'il souhaite passer, on passe au joueur suivant
                                         break;
-                                    }else if (action.equals("prendre tresor")){
+                                    } else if (action.equals("prendre tresor")) {//s'lsouhaite prendre un tresor, on lui demande lequel et on verifie qu'il a pu le prendre
                                         System.out.println("Quel tresor voulez vous prendre ?");
                                         Scanner nomTres = new Scanner(System.in);
                                         String repNomTres;
                                         repNomTres = nomTres.nextLine();
-                                        if (peutPrendreTresor(j,repNomTres,g)){ 
-                                            prendreTresor(repNomTres,j,g);
+                                        if (peutPrendreTresor(j, repNomTres, g)) {
+                                            prendreTresor(repNomTres, j, g);
                                             System.out.println("Tu l'as eu !");
-                                            
-                                        }else{
+
+                                        } else {
                                             System.out.println("Tu peux pas !");
                                             ;
                                         }
-                                        
+
                                     }
 
                                 }
                             }
                         }
-                        j.actionEffectuer();
+                        j.actionEffectuer();//on décrémente le nombre d'actions restantes à jouer
                     }
-                    this.donnerCarteTresEtInon(j);
+                    this.donnerCarteTresEtInon(j);//à la fin de chaque tour on distribue des cartes
                 }
             }
         }
@@ -482,11 +445,11 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private void initPartie(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, int niveauEauxDep,Grille g) {
+    private void initPartie(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, int niveauEauxDep, Grille g) {
         if (j1 != null) {
             this.joueurs.add(j1);
-            
-           // this.initCartes(j1);
+
+            // this.initCartes(j1);
         }
         if (j2 != null) {
             this.joueurs.add(j2);
@@ -501,27 +464,27 @@ public class Controleur /*implements Observateur*/ {
             this.initCartes(j4);
         }
         this.niveauEaux = niveauEauxDep;
-         for (Tuile t : g.getHmGrille().values()) {
+        for (Tuile t : g.getHmGrille().values()) {
             if ((j1 != null) && (t.getCouleur() == j1.getCouleur())) {
                 t.setDepartAventurier(j1);
                 t.addPossedeAventurier(j1);
-                j1.setPositionCourante(t.getCoordonnée().getColonne(),t.getCoordonnée().getLigne(), g);
+                j1.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne(), g);
             }
             if ((j2 != null) && (t.getCouleur() == j2.getCouleur())) {
                 t.setDepartAventurier(j2);
                 t.addPossedeAventurier(j2);
-                j2.setPositionCourante(t.getCoordonnée().getColonne(),t.getCoordonnée().getLigne(), g);
+                j2.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne(), g);
             }
             if ((j3 != null) && (t.getCouleur() == j3.getCouleur())) {
                 t.setDepartAventurier(j3);
                 t.addPossedeAventurier(j3);
-                j3.setPositionCourante(t.getCoordonnée().getColonne(),t.getCoordonnée().getLigne(), g);
+                j3.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne(), g);
 
             }
             if ((j4 != null) && (t.getCouleur() == j4.getCouleur())) {
                 t.setDepartAventurier(j4);
                 t.addPossedeAventurier(j4);
-                j4.setPositionCourante(t.getCoordonnée().getColonne(),t.getCoordonnée().getLigne(), g);
+                j4.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne(), g);
 
             }
         }
@@ -535,7 +498,7 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private boolean peutPrendreTresor(Aventurier j, String tresor,Grille g) {
+    private boolean peutPrendreTresor(Aventurier j, String tresor, Grille g) {
         int i = 0;
         for (CartesTirage c : j.getCartesEnMain()) {
             if (c instanceof CarteTresor) {
@@ -559,20 +522,20 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private void prendreTresor(String tresor, Aventurier j,Grille g) {
-        if (this.peutPrendreTresor(j, tresor,g)) {
+    private void prendreTresor(String tresor, Aventurier j, Grille g) {
+        if (this.peutPrendreTresor(j, tresor, g)) {
             this.tresorsAcquis.add(tresor);
-            for (String t : this.tresorsAcquis){
+            for (String t : this.tresorsAcquis) {
                 System.out.println(t);
-           
+
             }
-            for(int i=0; i <=4;i++){
-            j.enleverCarte(j.getCarte(tresor));
-            j.enleverCarte(j.getCarte(tresor));
-            j.enleverCarte(j.getCarte(tresor));
-            j.enleverCarte(j.getCarte(tresor));
+            for (int i = 0; i <= 4; i++) {
+                j.enleverCarte(j.getCarte(tresor));
+                j.enleverCarte(j.getCarte(tresor));
+                j.enleverCarte(j.getCarte(tresor));
+                j.enleverCarte(j.getCarte(tresor));
+            }
         }
-    }
     }
 
     private boolean partieGagnée() {
@@ -649,13 +612,13 @@ public class Controleur /*implements Observateur*/ {
     }
 
     private void coupSpecialHelico(Aventurier j, Grille g) {
-        
+
         System.out.println("Combien d'aventurier souhaitez vous déplacer ? (1/2/3//4)");
         Scanner repNbAv = new Scanner(System.in);
         String nbAv = repNbAv.nextLine();
-        
+
         if (Integer.parseInt(nbAv) == 1) {
-           Aventurier av = null;   
+            Aventurier av = null;
             System.out.println("Saisissez un aventurier : ");
             Scanner repAventurier = new Scanner(System.in);
             String a = repAventurier.nextLine();
@@ -671,18 +634,18 @@ public class Controleur /*implements Observateur*/ {
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
             System.out.println(av.getNom());
-            this.DeplacerJoueur(av, tu,g);
+            this.DeplacerJoueur(av, tu, g);
 
         } else if (Integer.parseInt(nbAv) == 2) {
-            
+
             Aventurier variable[] = null;
-            
+
             for (int k = 0; k < 2; k++) {
                 System.out.println("Saisissez un aventurier : ");
                 Scanner repAventurier = new Scanner(System.in);
                 String prout = repAventurier.nextLine();
                 System.out.println(this.getJoueur(prout).getNom());
-                variable[k]= this.getJoueur(prout);
+                variable[k] = this.getJoueur(prout);
             }
             System.out.println("Saisissez une tuile : ");
             for (Tuile t : g.getHmGrille().values()) {
@@ -691,38 +654,39 @@ public class Controleur /*implements Observateur*/ {
             Scanner repTuile = new Scanner(System.in);
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
-            this.DeplacerJoueur(variable[0], tu,g);
-            this.DeplacerJoueur(variable[1], tu,g);
+            this.DeplacerJoueur(variable[0], tu, g);
+            this.DeplacerJoueur(variable[1], tu, g);
 
         } else if (Integer.parseInt(nbAv) == 3) {
-            
+
             Aventurier variable[] = null;
-            
+
             for (int k = 0; k < 2; k++) {
                 System.out.println("Saisissez un aventurier : ");
                 Scanner repAventurier = new Scanner(System.in);
-                variable[k]= this.getJoueur(repAventurier.nextLine());
-     
+                variable[k] = this.getJoueur(repAventurier.nextLine());
+
             }
             System.out.println("Saisissez une tuile : ");
             for (Tuile t : g.getHmGrille().values()) {
-                if(t.getNom()!=null)
-                System.out.print(t.getNom() );
+                if (t.getNom() != null) {
+                    System.out.print(t.getNom());
+                }
             }
             Scanner repTuile = new Scanner(System.in);
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
-            this.DeplacerJoueur(variable[0], tu,g);
-            this.DeplacerJoueur(variable[1], tu,g);
-            this.DeplacerJoueur(variable[2], tu,g);
+            this.DeplacerJoueur(variable[0], tu, g);
+            this.DeplacerJoueur(variable[1], tu, g);
+            this.DeplacerJoueur(variable[2], tu, g);
         } else if (Integer.parseInt(nbAv) == 4) {
             Aventurier variable[] = null;
-            
+
             for (int k = 0; k < 2; k++) {
                 System.out.println("Saisissez un aventurier : ");
                 Scanner repAventurier = new Scanner(System.in);
-                variable[k]= this.getJoueur(repAventurier.nextLine());
-     
+                variable[k] = this.getJoueur(repAventurier.nextLine());
+
             }
             System.out.println("Saisissez une tuile : ");
             for (Tuile t : g.getHmGrille().values()) {
@@ -731,11 +695,11 @@ public class Controleur /*implements Observateur*/ {
             Scanner repTuile = new Scanner(System.in);
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
-            this.DeplacerJoueur(variable[0], tu,g);
-            this.DeplacerJoueur(variable[1], tu,g);
-            this.DeplacerJoueur(variable[2], tu,g);
-            this.DeplacerJoueur(variable[3], tu,g);
-        }else{
+            this.DeplacerJoueur(variable[0], tu, g);
+            this.DeplacerJoueur(variable[1], tu, g);
+            this.DeplacerJoueur(variable[2], tu, g);
+            this.DeplacerJoueur(variable[3], tu, g);
+        } else {
             System.out.println("J'me TIRE !");
         }
     }
@@ -756,10 +720,10 @@ public class Controleur /*implements Observateur*/ {
         tu.changerEtat(Assechee);
     }
 
-    private void DeplacerJoueur(Aventurier a, Tuile t,Grille g) {
-        a.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne(),g);
+    private void DeplacerJoueur(Aventurier a, Tuile t, Grille g) {
+        a.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne(), g);
         t.addPossedeAventurier(a);
-        System.out.println("Le joueur"+a.getNom()+" a été déplacé");
+        System.out.println("Le joueur" + a.getNom() + " a été déplacé");
         System.out.println(a.getPositionCourante());
 
     }
