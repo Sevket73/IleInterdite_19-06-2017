@@ -20,7 +20,7 @@ public class Messager extends Aventurier {
         super(nom, vivant, nbAction, couleur);
     }
     @Override
-    public void donnerCarteTresor(CartesTirage c,Aventurier j) {
+    public void donnerCarteTresor(CartesTirage c,Aventurier j) {//le messager peut donner une carte tresor à un aventurier n'importe où sur la carte
        j.addCarteEnMain(c);
        this.enleverCarte(c);
     }

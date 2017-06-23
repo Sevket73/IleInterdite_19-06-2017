@@ -20,7 +20,7 @@ public class Navigateur extends Aventurier {
     }
     
     @Override
-    public void resetActions()
+    public void resetActions()// Le navigateur à le droit à 4 actions
     {
         nombreActions = 4;
     }

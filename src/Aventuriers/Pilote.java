@@ -31,7 +31,7 @@ public class Pilote extends Aventurier {
     }
     
     @Override
-    public ArrayList<Tuile> deplacementPossible(Grille g) {
+    public ArrayList<Tuile> deplacementPossible(Grille g) {//Le pilote peut se déplacer n'importe où sur la carte 1 fois par tour
         Collection<Tuile> tteLesTuiles = new ArrayList<>();
         ArrayList<Tuile> tuilesAdj = new ArrayList();
         ArrayList<Tuile> tuilesAdjBis = new ArrayList();
@@ -60,7 +60,7 @@ public class Pilote extends Aventurier {
     /**
      * @return the actionSpe
      */
-    public boolean isActionSpe() {
+    public boolean isActionSpe() {//retourne vrai si le joueur utilise son action special
         return actionSpe;
     }
 

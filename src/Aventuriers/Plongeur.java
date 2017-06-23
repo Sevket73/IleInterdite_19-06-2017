@@ -22,7 +22,7 @@ public class Plongeur extends Aventurier {
     }
 
     @Override
-    public ArrayList<Tuile> deplacementPossible(Grille g) {
+    public ArrayList<Tuile> deplacementPossible(Grille g) {//peut se deplacer en traversant plusieurs tuiles coulees ou inondées en 1 fois
         ArrayList<Tuile> tuilesPossible = new ArrayList<>();
         ArrayList<Tuile> tuilesATest = new ArrayList<>();
         ArrayList<Tuile> collecTuileadj = new ArrayList<>();
