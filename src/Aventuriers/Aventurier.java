@@ -43,14 +43,14 @@ public class Aventurier {
         this.positionCourante = new Tuile(null, new Coordonnee(0, 0), null);
     }
     
-    public void resetActions() {
+    public void resetActions() { //Le nombre d'actions restantes du joueur est remis à 0
         nombreActions = 3;
     }
     public int getNombreActions()
     {
         return nombreActions;
     }
-    public void actionEffectuer(){
+    public void actionEffectuer(){ //On décrémente le nombre d'action que le joueur peut encore effectuer
         nombreActions--;
     }
     //getteurs et setteurs :
@@ -124,11 +124,11 @@ public class Aventurier {
         this.cartesEnMain = cartesEnMain;
     }
 
-    public void addCarteEnMain(CartesTirage c) {
+    public void addCarteEnMain(CartesTirage c) { // on ajoute une CartesTirage à la main du joueur
         this.cartesEnMain.add(c);
     }
 
-    public void enleverCarte(CartesTirage c) {
+    public void enleverCarte(CartesTirage c) {// on enleve une CartesTirage à la main du joueur quand il l'a utiliser
         this.cartesEnMain.remove(c);
     }
 
@@ -142,7 +142,7 @@ public class Aventurier {
     /**
      * @param positionCourante the positionCourante to set
      */
-    public void setPositionCourante(int c, int l,Grille g) {
+    public void setPositionCourante(int c, int l,Grille g) {//on définit la position courante du joueur et le retire de sa precede
         this.positionCourante.removePossedeAventurier(this);
         this.positionCourante.setNom(g.getTuiles(l*6+c).getNom());
         this.getPositionCourante().getCoordonnée().setColonne(c);
