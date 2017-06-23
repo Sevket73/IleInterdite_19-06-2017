@@ -519,7 +519,7 @@ public class Controleur /*implements Observateur*/ {
             }
         }
         if (i >= 4) {
-            if (g.getTuiles(j.getPositionCourante().getCoordonnée().getLigne(), j.getPositionCourante().getCoordonnée().getColonne()).getTresor().equals(tresor)) {
+            if (tresor.equals(g.getTuiles(j.getPositionCourante().getCoordonnée().getLigne(), j.getPositionCourante().getCoordonnée().getColonne()).getTresor())) {
                 return true;
             } else {
                 return false;
