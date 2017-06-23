@@ -125,7 +125,7 @@ public class Tuile {
     /**
      * @param departAventurier the departAventurier to set
      */
-    public void setDepartAventurier(Aventurier departAventurier) {
+    public void setDepartAventurier(Aventurier departAventurier) { 
         departAventurier.setPositionCourante(this.getCoordonnée().getColonne(),this.getCoordonnée().getLigne());
     }
 
@@ -135,11 +135,11 @@ public class Tuile {
     public void setPossedeAventurier(ArrayList<Aventurier> possedeAventurier) {
         this.possedeAventurier = possedeAventurier;
     }
-    public void addPossedeAventurier(Aventurier j){
+    public void addPossedeAventurier(Aventurier j){//lorqu'un joueur s'arrete sur une tuile, on ajoute à cette derniere un Aventurier
         this.possedeAventurier.add(departAventurier);
     
     }
-    public void removePossedeAventurier(Aventurier j){
+    public void removePossedeAventurier(Aventurier j){//lorqu'un joueur part d'une tuile, on ajoute à cette derniere un Aventurier
         this.possedeAventurier.remove(j);
     }
     

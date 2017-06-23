@@ -22,47 +22,43 @@ public class Grille {
     }
 
 
-    public void addTuiles(Integer i, Tuile t) {
+    public void addTuiles(Integer i, Tuile t) {//ajout d'une tuile à la HashMap hmGrille
         getHmGrille().put(i, t);
     }
 
 
     
-    public Tuile getTuiles(int lig, int col) {
+    public Tuile getTuiles(int lig, int col) {//on renvoie une tuile selon sa ligne et sa colonne
         return hmGrille.get(lig * 6 + col);
     }
     
-    public Tuile getTuiles(int k ){
+    public Tuile getTuiles(int k ){//on renvoie une tuile selon sa clé dans la hashMap
         return hmGrille.get(k);
     }
     
-
-    
-
-
     public HashMap<Integer,Tuile> getHmGrille() {
         return hmGrille;
     }
 
     
-    public void setAze(HashMap<Integer,Tuile> aze) {
-       aze = new HashMap<Integer,Tuile>();
-       this.hmGrille = aze;
+    public void setHmGrille(HashMap<Integer,Tuile> HmGrille) {
+       HmGrille = new HashMap<Integer,Tuile>();
+       this.hmGrille = HmGrille;
     }
 
     /**
      * @return the tuiles
      */
-    public String getNomTuiles(int lig, int col) {
+    public String getNomTuiles(int lig, int col) {//on renvoie le nom d'une tuile selon sa ligne et sa colonne
         return this.hmGrille.get(lig * 6 + col).getNom();
     }
 
-    public String getNomTuiles(int k) {
+    public String getNomTuiles(int k) {//on renvoie le nom d'une tuile selon sa clé dans la hashmap
         return this.hmGrille.get(k).getNom();
     }
 
     
-    public ArrayList<Tuile> getTuilesAdjacentes(Tuile positionCourante) {
+    public ArrayList<Tuile> getTuilesAdjacentes(Tuile positionCourante) {//on renvoie une collection de Tuile adjacente à la position courante d'un joueur
         
         ArrayList<Tuile> tuilesAdjacentes = new ArrayList<>();
         
@@ -114,7 +110,7 @@ public class Grille {
     }
 
 
-    public Tuile getTuiles(String nomTuiles) {
+    public Tuile getTuiles(String nomTuiles) {//on renvoit une tuile selon son nom
         Tuile t1 = null;
         for (Tuile t : hmGrille.values()) {
             if ((nomTuiles.equals(t.getNom()))) {
@@ -124,11 +120,5 @@ public class Grille {
         }
         return t1;
     }
-
-
-    /*
-    private Tuiles getTuilesAdjacentes(ArrayList<Tuiles> tuilesAdj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-     */
+    
 }
