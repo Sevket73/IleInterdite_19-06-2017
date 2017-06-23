@@ -213,6 +213,7 @@ public class Controleur /*implements Observateur*/ {
                                     for (Aventurier joueur : joueurs) {
                                         System.out.println(joueur.getNom() + " : " + joueur.getPositionCourante().getNom());
                                     }
+                                    System.out.println(j.getPositionCourante().getCoordonnée().getColonne()+" "+j.getPositionCourante().getCoordonnée().getLigne());
                                     System.out.println(" ");
                                     System.out.println("Les tuiles inondées sont : ");
                                     for (Tuile t : g.getHmGrille().values()) {
@@ -280,8 +281,8 @@ public class Controleur /*implements Observateur*/ {
                                         Scanner nomTres = new Scanner(System.in);
                                         String repNomTres;
                                         repNomTres = nomTres.nextLine();
-                                        if (peutPrendreTresor(j,repNomTres)){ 
-                                            prendreTresor(repNomTres,j);
+                                        if (peutPrendreTresor(j,repNomTres,g)){ 
+                                            prendreTresor(repNomTres,j,g);
                                             
                                         }else{
                                             System.out.println("Tu peux pas !");
@@ -504,11 +505,11 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private boolean peutPrendreTresor(Aventurier j, String tresor) {
+    private boolean peutPrendreTresor(Aventurier j, String tresor,Grille g) {
         int i = 0;
         for (CartesTirage c : j.getCartesEnMain()) {
             if (c instanceof CarteTresor) {
-                if (c.getNom() == tresor.toString()) {
+                if (c.getNom().equals(tresor)) {
                     i++;
                 } else {
                     return false;
@@ -517,8 +518,8 @@ public class Controleur /*implements Observateur*/ {
                 return false;
             }
         }
-        if (i <= 4) {
-            if (j.getPositionCourante().getTresor().toString() == tresor) {
+        if (i >= 4) {
+            if (g.getTuiles(j.getPositionCourante().getCoordonnée().getLigne(), j.getPositionCourante().getCoordonnée().getColonne()).getTresor().equals(tresor)) {
                 return true;
             } else {
                 return false;
@@ -528,8 +529,8 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private void prendreTresor(String tresor, Aventurier j) {
-        if (this.peutPrendreTresor(j, tresor)) {
+    private void prendreTresor(String tresor, Aventurier j,Grille g) {
+        if (this.peutPrendreTresor(j, tresor,g)) {
             this.tresorsAcquis.add(tresor);
         }
     }
