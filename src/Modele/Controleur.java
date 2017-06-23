@@ -368,7 +368,7 @@ public class Controleur /*implements Observateur*/ {
         for (int i = 0; i < 3; i++) {
             cartesPioche.push(new CarteSpecial("Helicoptere"));
         }
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
             cartesPioche.push(new CarteSpecial("SacDeSable"));
             cartesPioche.push(new CarteMonteeDesEaux("MonteeDesEaux"));
         }
@@ -573,23 +573,22 @@ public class Controleur /*implements Observateur*/ {
     private Aventurier getJoueur(String nom) {
         Aventurier a = null;
         for (Aventurier j : joueurs) {
-            if (j.getNom() == nom) {
+            if (j.getNom().equals(nom)) {
                 a = j;
+                break;
             }
         }
         return a;
     }
 
     private void coupSpecialHelico(Aventurier j, Grille g) {
-        int i = 0;
-        String nbAventurier[];
+        
         System.out.println("Combien d'aventurier souhaitez vous déplacer ? (1/2/3//4)");
         Scanner repNbAv = new Scanner(System.in);
         String nbAv = repNbAv.nextLine();
-        Aventurier av = new Aventurier(null, null, 3, null);
-        if (nbAv == "1") {
-            i = 1;
-
+        
+        if (Integer.parseInt(nbAv) == 1) {
+           Aventurier av = null;   
             System.out.println("Saisissez un aventurier : ");
             Scanner repAventurier = new Scanner(System.in);
             String a = repAventurier.nextLine();
@@ -604,15 +603,17 @@ public class Controleur /*implements Observateur*/ {
             Scanner repTuile = new Scanner(System.in);
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
+            System.out.println(av.getNom());
             this.DeplacerJoueur(av, tu);
 
-        } else if (nbAv == "2") {
-            i = 2;
+        } else if (Integer.parseInt(nbAv) == 2) {
+            
+            Aventurier variable[] = null;
             
             for (int k = 0; k < 2; k++) {
                 System.out.println("Saisissez un aventurier : ");
                 Scanner repAventurier = new Scanner(System.in);
-                 Integer.toString(k);
+                variable[k]= this.getJoueur(repAventurier.nextLine());
             }
             System.out.println("Saisissez une tuile : ");
             for (Tuile t : g.getHmGrille().values()) {
@@ -621,12 +622,51 @@ public class Controleur /*implements Observateur*/ {
             Scanner repTuile = new Scanner(System.in);
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
-            //this.DeplacerJoueur(av1,av2, tu);
+            this.DeplacerJoueur(variable[0], tu);
+            this.DeplacerJoueur(variable[1], tu);
 
-        } else if (nbAv == "3") {
-
-        } else if (nbAv == "4") {
-
+        } else if (Integer.parseInt(nbAv) == 3) {
+            
+            Aventurier variable[] = null;
+            
+            for (int k = 0; k < 2; k++) {
+                System.out.println("Saisissez un aventurier : ");
+                Scanner repAventurier = new Scanner(System.in);
+                variable[k]= this.getJoueur(repAventurier.nextLine());
+     
+            }
+            System.out.println("Saisissez une tuile : ");
+            for (Tuile t : g.getHmGrille().values()) {
+                System.out.print(t.getNom() + ' ');
+            }
+            Scanner repTuile = new Scanner(System.in);
+            String t = repTuile.nextLine();
+            Tuile tu = g.getTuiles(t);
+            this.DeplacerJoueur(variable[0], tu);
+            this.DeplacerJoueur(variable[1], tu);
+            this.DeplacerJoueur(variable[2], tu);
+        } else if (Integer.parseInt(nbAv) == 4) {
+            Aventurier variable[] = null;
+            
+            for (int k = 0; k < 2; k++) {
+                System.out.println("Saisissez un aventurier : ");
+                Scanner repAventurier = new Scanner(System.in);
+                variable[k]= this.getJoueur(repAventurier.nextLine());
+     
+            }
+            System.out.println("Saisissez une tuile : ");
+            for (Tuile t : g.getHmGrille().values()) {
+                System.out.print(t.getNom() + ' ');
+            }
+            Scanner repTuile = new Scanner(System.in);
+            String t = repTuile.nextLine();
+            Tuile tu = g.getTuiles(t);
+            this.DeplacerJoueur(variable[0], tu);
+            this.DeplacerJoueur(variable[1], tu);
+            this.DeplacerJoueur(variable[2], tu);
+            this.DeplacerJoueur(variable[3], tu);
+        }else{
+            System.out.println("J'me TIRE !");
         }
     }
 
@@ -649,6 +689,7 @@ public class Controleur /*implements Observateur*/ {
     private void DeplacerJoueur(Aventurier a, Tuile t) {
         a.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
         t.addPossedeAventurier(a);
+        System.out.println("Le joueur"+a.getNom()+" a été déplacé");
 
     }
 
