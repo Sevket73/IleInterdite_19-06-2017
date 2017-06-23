@@ -31,5 +31,6 @@ public class CarteTresor extends CartesTirage {
     public void setTypeTresor(TresorsEnum typeTresor) {
         this.typeTresor = typeTresor;
     }
+    
 
 }
