@@ -13,7 +13,7 @@ import Grille.Tuile;
  */
 public class CarteInondation extends Cartes {
 
-    private Tuile cible;
+    private Tuile cible; //tuile que l'on va inonder quand on piochera la carte inondation
 
     public CarteInondation(Tuile cible) {
         this.nom = cible.getNom();

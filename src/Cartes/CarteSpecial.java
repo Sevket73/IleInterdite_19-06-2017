@@ -10,7 +10,7 @@ package Cartes;
  * @author salkims
  */
 public class CarteSpecial extends CartesTirage {
-    private String type;
+    private String type;//de type helicoptere ou sac de sable
     
     public CarteSpecial(String type) {
         super(type);

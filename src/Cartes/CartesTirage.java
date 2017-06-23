@@ -23,7 +23,7 @@ public class CartesTirage extends Cartes {
     
     
     
-    public void ajouterPocesseur(Aventurier j) {
+    public void ajouterPocesseur(Aventurier j) {//Lorqu'un joueur tire une carte tirage, cette derniere est possedée par un aventurier
         if (this.getAventurierPocesseur() == null) {
             this.setAventurierPocesseur(j);
         } 
@@ -51,24 +51,4 @@ public class CartesTirage extends Cartes {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    /*
-    
-    public void deplacer1Joueur(Aventurier j1,String tuile,Grille g){
-
-    }
-    
-    public void deplacer2Joueurs(Aventurier j1,Aventurier j2,String tuile,Grille g){
-
-    }
-    
-    public void deplacer3Joueurs(Aventurier j1,Aventurier j2,Aventurier j3,String tuile,Grille g){
-
-    }
-    public void deplacer4Joueurs(Aventurier j1,Aventurier j2,Aventurier j3,Aventurier j4,String tuile,Grille g){
-
-    }
-   */
-    
-    
-    
 }
