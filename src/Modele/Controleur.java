@@ -532,6 +532,11 @@ public class Controleur /*implements Observateur*/ {
     private void prendreTresor(String tresor, Aventurier j,Grille g) {
         if (this.peutPrendreTresor(j, tresor,g)) {
             this.tresorsAcquis.add(tresor);
+            for (String t : this.tresorsAcquis){
+                System.out.println(t);
+            }
+            
+            
         }
     }
 
