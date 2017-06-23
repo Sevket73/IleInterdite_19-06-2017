@@ -283,6 +283,7 @@ public class Controleur /*implements Observateur*/ {
                                         repNomTres = nomTres.nextLine();
                                         if (peutPrendreTresor(j,repNomTres,g)){ 
                                             prendreTresor(repNomTres,j,g);
+                                            System.out.println("Tu l'as eu !");
                                             
                                         }else{
                                             System.out.println("Tu peux pas !");
