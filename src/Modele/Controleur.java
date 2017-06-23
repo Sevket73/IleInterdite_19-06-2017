@@ -35,12 +35,12 @@ public class Controleur /*implements Observateur*/ {
     private ArrayList<Aventurier> joueurs;
     private Grille grille = new Grille();
     private Stack<CartesTirage> cartesPioche;
-    private HashSet<TresorsEnum> tresorsAcquis;
+    private HashSet<String> tresorsAcquis;
     private Stack<TuileEnum> listeTuiles;
     private Stack<CartesTirage> defausse;
     private Stack<CarteInondation> cartesInon;
     private Stack<CarteInondation> defausseInon;
-
+/*
     private VueMenu vueMenu;
     private VueRules vueRules;
     private VueGrille vueGrille;
@@ -48,7 +48,7 @@ public class Controleur /*implements Observateur*/ {
 
     private Observateur observateur;
     private Message messArrayListage = new Message();
-
+*/
     public Controleur(int niveauEaux, Grille g) {
         this.niveauEaux = niveauEaux;
         this.joueurs = new ArrayList<>();
@@ -157,34 +157,20 @@ public class Controleur /*implements Observateur*/ {
         g.getTuiles("LaPorteDeCuivre").changerCouleur(CouleursEnum.Vert);
         g.getTuiles("Heliport").changerCouleur(CouleursEnum.Bleu);
 
-        for (Tuile t : g.getHmGrille().values()) {
-            if ((j1 != null) && (t.getCouleur() == j1.getCouleur())) {
-                t.setDepartAventurier(j1);
-                t.addPossedeAventurier(j1);
-            }
-            if ((j2 != null) && (t.getCouleur() == j2.getCouleur())) {
-                t.setDepartAventurier(j2);
-                t.addPossedeAventurier(j2);
-            }
-            if ((j3 != null) && (t.getCouleur() == j3.getCouleur())) {
-                t.setDepartAventurier(j3);
-                t.addPossedeAventurier(j3);
-            }
-            if ((j4 != null) && (t.getCouleur() == j4.getCouleur())) {
-                t.setDepartAventurier(j4);
-                t.addPossedeAventurier(j4);
-            }
-        }
+       
         //On définit les tresors sur les tuiles qui en possedent
-        g.getTuiles("LePalaisDeCorail").setTresor(Calice_de_l_onde);
-        g.getTuiles("LePalaisDesMarees").setTresor(Calice_de_l_onde);
-        g.getTuiles("LeJardinDesHurlements").setTresor(Statue_du_Zephyr);
-        g.getTuiles("LeJardinDesMurmures").setTresor(Statue_du_Zephyr);
-        g.getTuiles("LeTempleDeLaLune").setTresor(Pierre_Sacree);
-        g.getTuiles("LeTempleDuSoleil").setTresor(Pierre_Sacree);
-        g.getTuiles("LaCaverneDuBrasier").setTresor(Cristal_Ardent);
-        g.getTuiles("LaCaverneDesOmbres").setTresor(Cristal_Ardent);
-
+        g.getTuiles("LaPorteDeBronze").setTresor(Calice_de_l_onde.toString());
+        g.getTuiles("LePalaisDesMarees").setTresor(Calice_de_l_onde.toString());
+        g.getTuiles("LeJardinDesHurlements").setTresor(Statue_du_Zephyr.toString());
+        g.getTuiles("LeJardinDesMurmures").setTresor(Statue_du_Zephyr.toString());
+        g.getTuiles("LeTempleDeLaLune").setTresor(Pierre_Sacree.toString());
+        g.getTuiles("LeTempleDuSoleil").setTresor(Pierre_Sacree.toString());
+        g.getTuiles("LaCaverneDuBrasier").setTresor(Cristal_Ardent.toString());
+        g.getTuiles("LaCaverneDesOmbres").setTresor(Cristal_Ardent.toString());
+        j1.addCarteEnMain(cartesPioche.push(new CarteTresor(Calice_de_l_onde.toString())));
+        j1.addCarteEnMain(cartesPioche.push(new CarteTresor(Calice_de_l_onde.toString())));
+        j1.addCarteEnMain(cartesPioche.push(new CarteTresor(Calice_de_l_onde.toString())));
+        j1.addCarteEnMain(cartesPioche.push(new CarteTresor(Calice_de_l_onde.toString())));
     }
 
     public void jouer(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, Grille g) {
@@ -198,7 +184,7 @@ public class Controleur /*implements Observateur*/ {
         String eau;
         Scanner repEau = new Scanner(System.in);
         eau = repEau.nextLine();
-        this.initPartie(j1, j2, j3, j4, Integer.parseInt(eau));
+        this.initPartie(j1, j2, j3, j4, Integer.parseInt(eau),g);
         while (!this.partiePerdue()) {
             while (!this.partieGagnée()) {
                 for (Aventurier j : this.joueurs) {
@@ -220,17 +206,18 @@ public class Controleur /*implements Observateur*/ {
                                     for (Aventurier joueur : joueurs) {
                                         System.out.println(joueur.getNom() + " : " + joueur.getPositionCourante().getNom());
                                     }
+                                    System.out.println(" ");
                                     System.out.println("Les tuiles inondées sont : ");
                                     for (Tuile t : g.getHmGrille().values()) {
                                         if (t.getEtat() == EtatEnum.Inondee) {
-                                            System.out.print(t.getNom() + ' ');
+                                            System.out.println(t.getNom() );
                                         }
                                     }
                                     System.out.println();
                                     System.out.println("Les tuiles coulées sont : ");
                                     for (Tuile t : g.getHmGrille().values()) {
                                         if (t.getEtat() == EtatEnum.Coulee) {
-                                            System.out.print(t.getNom() + ' ');
+                                            System.out.println(t.getNom());
                                         }
                                     }
                                     System.out.println();
@@ -241,7 +228,7 @@ public class Controleur /*implements Observateur*/ {
 
                                     }
                                     System.out.println();
-                                    System.out.println("Quelle action souhaitez vous faire ? (deplacer/assecher/donner une carte/coup special/passer)");
+                                    System.out.println("Quelle action souhaitez vous faire ? (deplacer/assecher/donner une carte/coup special/passer/prendre tresor)");
                                     Scanner repAction = new Scanner(System.in);
                                     String action;
                                     action = repAction.nextLine();
@@ -281,6 +268,18 @@ public class Controleur /*implements Observateur*/ {
                                         }
                                     } else if (action.equals("passer")) {
                                         break;
+                                    }else if (action.equals("prendre tresor")){
+                                        System.out.println("Quel tresor voulez vous prendre ?");
+                                        Scanner nomTres = new Scanner(System.in);
+                                        String repNomTres;
+                                        repNomTres = nomTres.nextLine();
+                                        if (peutPrendreTresor(j,repNomTres)){ 
+                                            prendreTresor(repNomTres,j);
+                                            
+                                        }else{
+                                            System.out.println("Tu peux pas !");
+                                        }
+                                        
                                     }
 
                                 }
@@ -450,10 +449,11 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private void initPartie(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, int niveauEauxDep) {
+    private void initPartie(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, int niveauEauxDep,Grille g) {
         if (j1 != null) {
             this.joueurs.add(j1);
-            this.initCartes(j1);
+            
+           // this.initCartes(j1);
         }
         if (j2 != null) {
             this.joueurs.add(j2);
@@ -468,6 +468,24 @@ public class Controleur /*implements Observateur*/ {
             this.initCartes(j4);
         }
         this.niveauEaux = niveauEauxDep;
+         for (Tuile t : g.getHmGrille().values()) {
+            if ((j1 != null) && (t.getCouleur() == j1.getCouleur())) {
+                t.setDepartAventurier(j1);
+                t.addPossedeAventurier(j1);
+            }
+            if ((j2 != null) && (t.getCouleur() == j2.getCouleur())) {
+                t.setDepartAventurier(j2);
+                t.addPossedeAventurier(j2);
+            }
+            if ((j3 != null) && (t.getCouleur() == j3.getCouleur())) {
+                t.setDepartAventurier(j3);
+                t.addPossedeAventurier(j3);
+            }
+            if ((j4 != null) && (t.getCouleur() == j4.getCouleur())) {
+                t.setDepartAventurier(j4);
+                t.addPossedeAventurier(j4);
+            }
+        }
     }
 
     private boolean verifNbJoueurs() {
@@ -478,7 +496,7 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private boolean peutPrendreTresor(Aventurier j, TresorsEnum tresor) {
+    private boolean peutPrendreTresor(Aventurier j, String tresor) {
         int i = 0;
         for (CartesTirage c : j.getCartesEnMain()) {
             if (c instanceof CarteTresor) {
@@ -492,7 +510,7 @@ public class Controleur /*implements Observateur*/ {
             }
         }
         if (i <= 4) {
-            if (j.getPositionCourante().getTresor() == tresor) {
+            if (j.getPositionCourante().getTresor().toString() == tresor) {
                 return true;
             } else {
                 return false;
@@ -502,7 +520,7 @@ public class Controleur /*implements Observateur*/ {
         }
     }
 
-    private void prendreTresor(TresorsEnum tresor, Aventurier j) {
+    private void prendreTresor(String tresor, Aventurier j) {
         if (this.peutPrendreTresor(j, tresor)) {
             this.tresorsAcquis.add(tresor);
         }
@@ -638,7 +656,8 @@ public class Controleur /*implements Observateur*/ {
             }
             System.out.println("Saisissez une tuile : ");
             for (Tuile t : g.getHmGrille().values()) {
-                System.out.print(t.getNom() + ' ');
+                if(t.getNom()!=null)
+                System.out.print(t.getNom() );
             }
             Scanner repTuile = new Scanner(System.in);
             String t = repTuile.nextLine();

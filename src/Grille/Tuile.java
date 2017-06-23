@@ -20,12 +20,12 @@ public class Tuile {
     private String nom;
     private EtatEnum etat; 
     private CouleursEnum couleur;
-    private TresorsEnum tresor;
+    private String tresor;
     private Aventurier departAventurier;
     private ArrayList<Aventurier> possedeAventurier;
     private Coordonnee coordonnées;
     
-    public Tuile(String nom, Coordonnee c, TresorsEnum tresor) {
+    public Tuile(String nom, Coordonnee c, String tresor) {
         this.setNom(nom);
         this.etat = null;
         this.couleur = null;
@@ -69,7 +69,7 @@ public class Tuile {
     /**
      * @return the tresor
      */
-    public TresorsEnum getTresor() {
+    public String getTresor() {
         return tresor;
     }
 
@@ -118,7 +118,7 @@ public class Tuile {
     /**
      * @param tresor the tresor to set
      */
-    public void setTresor(TresorsEnum tresor) {
+    public void setTresor(String tresor) {
         this.tresor = tresor;
     }
 
