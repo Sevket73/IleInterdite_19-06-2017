@@ -24,6 +24,7 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Stack;
 import java.util.Map;
+import java.io.*; 
 
 /**
  *
@@ -175,6 +176,12 @@ public class Controleur /*implements Observateur*/ {
 
     public void jouer(Aventurier j1, Aventurier j2, Aventurier j3, Aventurier j4, Grille g) {
         this.creerGrille(grille, j1, j2, j3, j4);
+        
+        j1.setPositionCourante(3, 2,g);
+        j2.setPositionCourante(3, 4,g);
+        j3.setPositionCourante(3, 0,g);
+        j4.setPositionCourante(2, 1,g);
+        
         this.creerPiocheTirage();
         this.creerPiocheInon();
         //   for(CartesTirage c : cartesPioche){
@@ -278,6 +285,7 @@ public class Controleur /*implements Observateur*/ {
                                             
                                         }else{
                                             System.out.println("Tu peux pas !");
+                                            ;
                                         }
                                         
                                     }
@@ -622,7 +630,7 @@ public class Controleur /*implements Observateur*/ {
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
             System.out.println(av.getNom());
-            this.DeplacerJoueur(av, tu);
+            this.DeplacerJoueur(av, tu,g);
 
         } else if (Integer.parseInt(nbAv) == 2) {
             
@@ -641,8 +649,8 @@ public class Controleur /*implements Observateur*/ {
             Scanner repTuile = new Scanner(System.in);
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
-            this.DeplacerJoueur(variable[0], tu);
-            this.DeplacerJoueur(variable[1], tu);
+            this.DeplacerJoueur(variable[0], tu,g);
+            this.DeplacerJoueur(variable[1], tu,g);
 
         } else if (Integer.parseInt(nbAv) == 3) {
             
@@ -662,9 +670,9 @@ public class Controleur /*implements Observateur*/ {
             Scanner repTuile = new Scanner(System.in);
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
-            this.DeplacerJoueur(variable[0], tu);
-            this.DeplacerJoueur(variable[1], tu);
-            this.DeplacerJoueur(variable[2], tu);
+            this.DeplacerJoueur(variable[0], tu,g);
+            this.DeplacerJoueur(variable[1], tu,g);
+            this.DeplacerJoueur(variable[2], tu,g);
         } else if (Integer.parseInt(nbAv) == 4) {
             Aventurier variable[] = null;
             
@@ -681,10 +689,10 @@ public class Controleur /*implements Observateur*/ {
             Scanner repTuile = new Scanner(System.in);
             String t = repTuile.nextLine();
             Tuile tu = g.getTuiles(t);
-            this.DeplacerJoueur(variable[0], tu);
-            this.DeplacerJoueur(variable[1], tu);
-            this.DeplacerJoueur(variable[2], tu);
-            this.DeplacerJoueur(variable[3], tu);
+            this.DeplacerJoueur(variable[0], tu,g);
+            this.DeplacerJoueur(variable[1], tu,g);
+            this.DeplacerJoueur(variable[2], tu,g);
+            this.DeplacerJoueur(variable[3], tu,g);
         }else{
             System.out.println("J'me TIRE !");
         }
@@ -706,8 +714,8 @@ public class Controleur /*implements Observateur*/ {
         tu.changerEtat(Assechee);
     }
 
-    private void DeplacerJoueur(Aventurier a, Tuile t) {
-        a.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
+    private void DeplacerJoueur(Aventurier a, Tuile t,Grille g) {
+        a.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne(),g);
         t.addPossedeAventurier(a);
         System.out.println("Le joueur"+a.getNom()+" a été déplacé");
 
