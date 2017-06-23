@@ -533,6 +533,11 @@ public class Controleur /*implements Observateur*/ {
     private void prendreTresor(String tresor, Aventurier j,Grille g) {
         if (this.peutPrendreTresor(j, tresor,g)) {
             this.tresorsAcquis.add(tresor);
+            for (String t : this.tresorsAcquis){
+                System.out.println(t);
+            }
+            
+            
         }
     }
 
@@ -641,8 +646,9 @@ public class Controleur /*implements Observateur*/ {
             for (int k = 0; k < 2; k++) {
                 System.out.println("Saisissez un aventurier : ");
                 Scanner repAventurier = new Scanner(System.in);
-                variable[k]= this.getJoueur(repAventurier.nextLine());
-     
+                String prout = repAventurier.nextLine();
+                System.out.println(this.getJoueur(prout).getNom());
+                variable[k]= this.getJoueur(prout);
             }
             System.out.println("Saisissez une tuile : ");
             for (Tuile t : g.getHmGrille().values()) {
@@ -720,6 +726,7 @@ public class Controleur /*implements Observateur*/ {
         a.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne(),g);
         t.addPossedeAventurier(a);
         System.out.println("Le joueur"+a.getNom()+" a été déplacé");
+        System.out.println(a.getPositionCourante());
 
     }
 
