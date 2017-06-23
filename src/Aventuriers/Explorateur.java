@@ -23,7 +23,7 @@ public class Explorateur extends Aventurier {
     
   
     @Override
-    public ArrayList<Tuile> deplacementPossible(Grille g) {
+    public ArrayList<Tuile> deplacementPossible(Grille g) { //deplacement en diagonale possible pour l'explorateur
          ArrayList<Tuile>tuilesAdj = new ArrayList();
          ArrayList<Tuile>tuilesDiag = new ArrayList();
          ArrayList<Tuile>tuilesAll = new ArrayList();
@@ -35,7 +35,7 @@ public class Explorateur extends Aventurier {
          return tuilesAll;
     }
     
-    public ArrayList<Tuile> assechementPossible(Grille g){
+    public ArrayList<Tuile> assechementPossible(Grille g){ //assechement en diagonale possible pour l'explorateur
          ArrayList<Tuile>tuilesAdj = new ArrayList();
          ArrayList<Tuile>tuilesDiag = new ArrayList();
          ArrayList<Tuile>tuilesAll = new ArrayList();
@@ -45,7 +45,7 @@ public class Explorateur extends Aventurier {
          tuilesAll.addAll(tuilesDiag);
          return tuilesAdj;
     }
-    private ArrayList<Tuile> getTuilesDiag(Grille g){
+    private ArrayList<Tuile> getTuilesDiag(Grille g){ //renvoie les tuiles en diagonale de la position courante de l'explorateur
         ArrayList<Tuile>tuilesDiag = new ArrayList();
         
         int l = positionCourante.getCoordonnée().getLigne();

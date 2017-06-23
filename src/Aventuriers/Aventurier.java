@@ -142,7 +142,7 @@ public class Aventurier {
     /**
      * @param positionCourante the positionCourante to set
      */
-    public void setPositionCourante(int c, int l,Grille g) {//on définit la position courante du joueur et le retire de sa precede
+    public void setPositionCourante(int c, int l,Grille g) {//on définit la position courante du joueur et le retire de sa precedente position courante
         this.positionCourante.removePossedeAventurier(this);
         this.positionCourante.setNom(g.getTuiles(l*6+c).getNom());
         this.getPositionCourante().getCoordonnée().setColonne(c);
@@ -150,6 +150,7 @@ public class Aventurier {
         this.positionCourante.addPossedeAventurier(this);
         
     }
+    
     public void setPositionCourante(int c, int l) {
         this.positionCourante.removePossedeAventurier(this);
         this.getPositionCourante().getCoordonnée().setColonne(c);
@@ -159,7 +160,7 @@ public class Aventurier {
     }
 
 
-    public ArrayList<Tuile> deplacementPossible(Grille g) {
+    public ArrayList<Tuile> deplacementPossible(Grille g) {//renvoie une collection de Tuiles où le joueur peut se déplacer
 
         ArrayList<Tuile> tuilesAdj = new ArrayList<>();
         ArrayList<Tuile> tuilesAdjBis = new ArrayList<>();
@@ -175,7 +176,7 @@ public class Aventurier {
         return tuilesAdj;
     }
 
-    public void deplacement(Grille g) {
+    public void deplacement(Grille g) {//on demande au joueur où il veut aller et on l'y déplace si possible
         ArrayList<Tuile> tuilesAdj = new ArrayList();
         tuilesAdj = this.deplacementPossible(g);
 
@@ -199,7 +200,7 @@ public class Aventurier {
         }
     }
 
-    public void seDeplacer(Tuile t) {
+    public void seDeplacer(Tuile t) { //on déplace le joueur
 
         this.setPositionCourante(t.getCoordonnée().getColonne(), t.getCoordonnée().getLigne());
         System.out.println("Vous êtes maintenant sur la tuile :" + t.getNom());
@@ -207,7 +208,7 @@ public class Aventurier {
 
     }
 
-    public ArrayList<Tuile> tuilesAssechables(Grille g) {
+    public ArrayList<Tuile> tuilesAssechables(Grille g) {//renvoie une collection de Tuile qui peuvent être assechée par le joueur
 
         ArrayList<Tuile> tuilesAdj = new ArrayList<>();
         ArrayList<Tuile> tuilesPasAssechables = new ArrayList<>();
@@ -225,7 +226,7 @@ public class Aventurier {
 
     }
 
-    public void assechement(Grille g) {
+    public void assechement(Grille g) { //On demande au Joueur quelle tuile il souhaite assécher, s'il y en a, et on l'asseche si possible
         ArrayList<Tuile> tuilesAssechables = new ArrayList<>();
         tuilesAssechables = this.tuilesAssechables(g);
         if (tuilesAssechables.isEmpty()) {
@@ -250,12 +251,12 @@ public class Aventurier {
         }
     }
 
-    public void assecher(Tuile t) {
+    public void assecher(Tuile t) {//on asseche la tuile t
         t.changerEtat(EtatEnum.Assechee);
         System.out.println("La tuile " + t.getNom() + " est maintenant assechee!");
     }
 
-    public void donnerCarteTresor(CartesTirage c, Aventurier j) {
+    public void donnerCarteTresor(CartesTirage c, Aventurier j) {//methode permettant de donner une carte tresor à un coéquipier présent sur la même tuile 
 
         if (this.getPositionCourante() == j.getPositionCourante()) {
             j.addCarteEnMain(c);
@@ -265,7 +266,7 @@ public class Aventurier {
         }
     }
 
-    public CartesTirage getCarte(String nom) {
+    public CartesTirage getCarte(String nom) { //On renvoie une CartesTirage selon son nom
         CartesTirage c1 = null;
         for (CartesTirage c : this.getCartesEnMain()) {
             if (c.getNom().equals(nom)  /*&& c instanceof CarteSpecial*/) {
